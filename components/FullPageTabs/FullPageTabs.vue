@@ -1,7 +1,7 @@
 <template>
   <div class="border-b border-gray-default">
     <div class="container">
-      <div class=" inline-flex gap-2">
+      <div class="inline-flex flex-wrap gap-2">
         <NuxtLinkLocale
           v-for="link in links"
           :key="link.label"
@@ -29,6 +29,6 @@ const route = useRoute()
 const localePath = useLocalePath()
 
 function isCurrent(href: string) {
-  return localePath(href) === route.fullPath
+  return localePath(href) === route.path
 }
 </script>
