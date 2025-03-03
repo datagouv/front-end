@@ -68,7 +68,7 @@
         + {{ summarize(lastValue, 2) }}
       </strong>
       {{ t(" in ") }}
-      {{ formatDate(lastMonth, 'MMM YYYY') }}
+      {{ formatDate(lastMonth, { dateStyle: undefined, year: 'numeric', month: 'short', day: undefined }) }}
     </p>
   </div>
 </template>

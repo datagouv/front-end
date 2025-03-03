@@ -19,7 +19,6 @@
 <script setup lang="ts">
 import { Chart, type ChartOptions } from 'chart.js/auto'
 import { computed, onMounted, ref, useTemplateRef, watchEffect } from 'vue'
-import { formatDate } from '../main'
 
 const LIGHT_COLOR = '#B6CFFB'
 const COLOR = '#3558A2'
@@ -76,8 +75,14 @@ const additionalDatasetConfig = computed(() => {
   return {}
 })
 
-const startDate = computed(() => months.value.length ? formatDate(months.value[0], 'MM/YY') : null)
-const endDate = computed(() => months.value.length ? formatDate(months.value[months.value.length - 1], 'MM/YY') : null)
+const getMonthYear = (dateAsString: string): string => {
+  const date = new Date(dateAsString)
+
+  return `${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear().toString().slice(-2)}`
+}
+
+const startDate = computed(() => months.value.length ? getMonthYear(months.value[0]) : null)
+const endDate = computed(() => months.value.length ? getMonthYear(months.value[months.value.length - 1]) : null)
 
 const OPTIONS = {
   animation: false,
