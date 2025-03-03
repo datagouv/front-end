@@ -44,14 +44,13 @@
     </details>
     <template #footer="{ close }">
       <div class="fr-btns-group fr-btns-group--right">
-        <button
-          type="button"
-          class="fr-btn"
+        <BrandedButton
+          color="primary"
           data-testid="add-image-button"
           @click="send(close)"
         >
           {{ t('Add image') }}
-        </button>
+        </BrandedButton>
       </div>
     </template>
   </ModalWithButton>

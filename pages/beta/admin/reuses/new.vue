@@ -39,12 +39,12 @@
       @submit="reuseNext"
     >
       <template #button>
-        <button
+        <BrandedButton
           type="submit"
-          class="fr-btn"
+          color="primary"
         >
           {{ $t("Next") }}
-        </button>
+        </BrandedButton>
       </template>
     </DescribeReuse>
 

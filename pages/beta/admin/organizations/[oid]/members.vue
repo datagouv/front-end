@@ -93,23 +93,24 @@
           </template>
 
           <template #footer="{ close }">
-            <div class="fr-btns-group fr-btns-group--right fr-btns-group--sm fr-btns-group--inline-lg fr-btns-group--icon-left">
-              <button
-                class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500"
-                type="button"
+            <div class="space-x-4">
+              <BrandedButton
+                color="secondary"
+                size="xs"
                 :disabled="loading"
                 @click="close"
               >
                 {{ t("Cancel") }}
-              </button>
-              <button
-                class="fr-btn"
+              </BrandedButton>
+              <BrandedButton
+                color="primary"
+                size="xs"
                 type="submit"
                 :form="addFormId"
                 :disabled="loading || !canSubmitNewMember"
               >
                 {{ t("Add to the organization") }}
-              </button>
+              </BrandedButton>
             </div>
           </template>
         </ModalWithButton>

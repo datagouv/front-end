@@ -25,22 +25,22 @@
                 </p>
               </div>
               <div class="flex flex-wrap gap-4">
-                <NuxtLinkLocale
-                  class="fr-btn"
+                <BrandedButton
+                  color="primary"
                   :title="$t('Subscribe to our newsletter')"
-                  :to="config.public.newsletterSubscriptionUrl"
+                  :href="config.public.newsletterSubscriptionUrl"
                   :external="true"
                 >
                   {{ $t("Subscribe") }}
-                </NuxtLinkLocale>
-                <NuxtLinkLocale
-                  class="fr-btn fr-btn--secondary"
+                </BrandedButton>
+                <BrandedButton
+                  color="secondary"
                   :title="$t('Subscribe to our newsletter')"
-                  to="/pages/webinaires/"
+                  href="/pages/webinaires/"
                   :external="true"
                 >
                   {{ $t("See our next events") }}
-                </NuxtLinkLocale>
+                </BrandedButton>
               </div>
             </div>
           </div>

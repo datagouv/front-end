@@ -61,24 +61,24 @@
       </div>
     </article>
     <div class="fr-grid-row fr-grid-row--right gap-3">
-      <NuxtLinkLocale
-        :to="`/beta/admin/organizations/${organization.id}/profile`"
-        class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500"
+      <BrandedButton
+        color="secondary"
+        :href="`/beta/admin/organizations/${organization.id}/profile`"
       >
         {{ $t("Manage the organization") }}
-      </NuxtLinkLocale>
-      <NuxtLinkLocale
-        to="/beta/admin/reuses/new"
-        class="fr-btn"
+      </BrandedButton>
+      <BrandedButton
+        href="/beta/admin/reuses/new"
+        color="primary"
       >
         {{ $t("Publish a reuse") }}
-      </NuxtLinkLocale>
-      <NuxtLinkLocale
-        to="/beta/admin/datasets/new"
-        class="fr-btn"
+      </BrandedButton>
+      <BrandedButton
+        href="/beta/admin/datasets/new"
+        color="primary"
       >
         {{ $t("Publish a dataset") }}
-      </NuxtLinkLocale>
+      </BrandedButton>
     </div>
     <Alert
       v-if="errors?.length"

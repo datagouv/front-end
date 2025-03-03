@@ -67,22 +67,21 @@
     <template #footer="{ close }">
       <div class="w-full flex gap-4 justify-end">
         <div class="fr-col-auto">
-          <button
-            class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500"
-            type="button"
+          <BrandedButton
+            color="secondary"
             @click="close"
           >
             {{ t("Cancel") }}
-          </button>
+          </BrandedButton>
         </div>
         <div class="fr-col-auto">
-          <button
-            class="fr-btn"
+          <BrandedButton
+            color="primary"
             type="submit"
             :form="formId"
           >
             {{ t("Send") }}
-          </button>
+          </BrandedButton>
         </div>
       </div>
     </template>

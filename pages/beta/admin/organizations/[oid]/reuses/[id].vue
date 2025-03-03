@@ -11,12 +11,14 @@
         <h1 class="fr-h3 !mb-0">
           {{ reuse.title }}
         </h1>
-        <a
+        <BrandedButton
           :href="reuse.page"
-          class="fr-btn fr-btn--sm fr-btn--secondary fr-btn--secondary-grey-500 fr-btn--icon-left fr-icon-eye-line"
+          color="secondary"
+          size="xs"
+          :icon="RiEyeLine"
         >
           {{ t('See the reuse page') }}
-        </a>
+        </BrandedButton>
       </div>
 
       <TabLinks
@@ -37,6 +39,7 @@
 
 <script setup lang="ts">
 import type { Reuse } from '@datagouv/components-next'
+import { RiEyeLine } from '@remixicon/vue'
 import AdminBreadcrumb from '~/components/Breadcrumbs/AdminBreadcrumb.vue'
 import BreadcrumbItem from '~/components/Breadcrumbs/BreadcrumbItem.vue'
 import TabLinks from '~/components/TabLinks.vue'

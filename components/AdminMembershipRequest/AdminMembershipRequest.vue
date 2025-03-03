@@ -68,24 +68,22 @@
         <template #footer="{ close }">
           <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--right">
             <div class="fr-col-auto">
-              <button
-                class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500"
-                type="button"
+              <BrandedButton
+                color="secondary"
                 :disabled="loading"
                 @click="close"
               >
                 {{ t("Cancel") }}
-              </button>
+              </BrandedButton>
             </div>
             <div class="fr-col-auto">
-              <button
-                class="fr-btn"
-                type="submit"
+              <BrandedButton
+                color="primary"
                 :disabled="loading || !refuseComment"
                 :form="refuseFormId"
               >
                 {{ t("Refuse request") }}
-              </button>
+              </BrandedButton>
             </div>
           </div>
         </template>

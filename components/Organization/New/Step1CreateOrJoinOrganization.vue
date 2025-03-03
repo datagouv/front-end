@@ -19,12 +19,12 @@
                   {{ t('or') }}
                 </p>
                 <div class="flex-1 ml-3v m-0">
-                  <button
-                    class="fr-btn"
+                  <BrandedButton
+                    color="primary"
                     @click="$emit('start')"
                   >
                     {{ t("Create an organization") }}
-                  </button>
+                  </BrandedButton>
                 </div>
               </div>
             </div>

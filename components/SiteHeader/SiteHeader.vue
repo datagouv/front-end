@@ -46,12 +46,13 @@
                           class="fr-input"
                           :placeholder="$t('Search')"
                           type="search"
-                        > <button
-                          class="fr-btn rounded-0 !rounded-r-[0.25rem]"
+                        > <BrandedButton
+                          color="primary"
+                          class="rounded-l-none rounded-br-none rounded-tr-[0.25rem]"
                           :title="$t('Search')"
                         >
                           {{ $t('Search') }}
-                        </button>
+                        </BrandedButton>
                       </div>
                     </div>
                   </template>

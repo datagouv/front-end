@@ -75,6 +75,7 @@
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit vel corporis molestias exercitationem quod ad facilis laborum officiis nesciunt, rem, deserunt illo delectus tempore distinctio natus sed architecto, reiciendis consectetur.
       </SimpleBanner>
     </div>
+    <div />
     <div class="space-y-8 py-8 pb-64">
       <h2 class="!mb-3">
         Full width content
@@ -87,6 +88,7 @@
 
 <script setup lang="ts">
 import { SimpleBanner } from '@datagouv/components-next'
+import { RiDeleteBinLine, RiDraggable } from '@remixicon/vue'
 import NuxtSearchPage from '~/components/Search/NuxtSearchPage.vue'
 import AdminBadge from '~/design-system/AdminBadge.vue'
 import BannerAction from '~/design-system/BannerAction.vue'

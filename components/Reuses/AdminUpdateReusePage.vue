@@ -7,13 +7,13 @@
       @submit="save"
     >
       <template #button>
-        <button
+        <BrandedButton
           type="submit"
-          class="fr-btn"
+          color="primary"
           :disabled="loading"
         >
           {{ t("Save") }}
-        </button>
+        </BrandedButton>
       </template>
       <div class="mt-5 space-y-5">
         <TransferBanner

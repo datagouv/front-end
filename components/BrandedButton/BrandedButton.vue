@@ -22,6 +22,7 @@
     <span
       v-if="hasText"
       class="whitespace-nowrap"
+      :class="iconOnly ? 'sr-only' : ''"
     ><slot /></span>
   </component>
 </template>
@@ -50,8 +51,10 @@ const props = withDefaults(defineProps<{
   icon?: Component
   href?: string
   newTab?: boolean
+  iconOnly?: boolean
 }>(), {
   newTab: false,
+  iconOnly: false,
 })
 
 const slots = useSlots()
@@ -75,7 +78,7 @@ const color = computed<ColorType>(() => {
 })
 
 const hasText = computed(() => {
-  return hasSlotContent(slots.default)
+  return hasSlotContent(slots.default) && !props.iconOnly
 })
 const bannerActionType = inject(bannerActionTypeKey, null)
 
