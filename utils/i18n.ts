@@ -1,7 +1,7 @@
 import type { Composer } from 'vue-i18n'
 import { createI18nMessage, minLength as vMinLength, required as vRequired } from '@vuelidate/validators'
 
-// Re-export from `shared` to simplify migration, TODO change?
+// Re-export from `datagouv-components` to simplify migration, TODO change?
 export { formatDate, formatFromNow, formatRelativeIfRecentDate } from '@datagouv/components-next'
 
 const t = (message: string) => message
