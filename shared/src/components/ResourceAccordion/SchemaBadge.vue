@@ -73,8 +73,8 @@
         </div>
       </template>
     </Toggletip>
-    <span class="fr-mr-1v text-gray-380">{{ t("Schema:") }}</span>
-    <span class="flex items-center bg-error-950 rounded-sm">
+    <span class="fr-mr-1v text-gray-medium">{{ t("Schema:") }}</span>
+    <span class="flex items-center bg-danger-lightest rounded-sm">
       <span class="fr-tag fr-tag--sm">{{ title }}</span>
       <span
         v-if="validataStatus === 'warnings'"
@@ -85,7 +85,7 @@
       </span>
       <span
         v-if="validataStatus === 'ko'"
-        class="flex items-center text-warning-425 padding-sm"
+        class="flex items-center text-warning-dark padding-sm"
       >
         <span class="fr-icon-error-line fr-icon--sm fr-mr-1v" />
         <span>{{ t("Invalid") }}</span>

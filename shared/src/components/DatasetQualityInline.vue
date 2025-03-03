@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-m-0 fr-grid-row fr-grid-row--middle fr-text--sm text-mention-grey">
+  <div class="m-0 flex flex-wrap items-center text-sm text-gray-medium">
     <div class="fr-grid-row fr-grid-row--middle">
       <Toggletip class="relative z-2">
         <template #toggletip>
@@ -71,7 +71,7 @@
           </div>
         </template>
       </Toggletip>
-      <p class="fr-my-0 fr-mr-1v text-mention-grey fr-text--sm">
+      <p class="my-0 mr-1 text-gray-medium text-sm">
         {{ $t('Metadata :') }}
       </p>
       <div class="fr-grid-row fr-grid-row--middle fr-mr-1v">

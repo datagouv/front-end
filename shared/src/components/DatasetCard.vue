@@ -1,12 +1,12 @@
 <template>
-  <div class="fr-my-2w fr-p-2w border border-default-grey relative hover:bg-gray-some">
+  <div class="fr-my-2w fr-p-2w border border-gray-default relative hover:bg-gray-some">
     <div
       v-if="dataset.private || dataset.archived"
       class="absolute top-0 fr-grid-row fr-grid-row--middle fr-mt-n3v fr-ml-n1v"
     >
       <p
         v-if="dataset.private"
-        class="fr-badge fr-badge--sm fr-badge--mention-grey text-gray-380 fr-mr-1w"
+        class="fr-badge fr-badge--sm fr-badge--mention-grey text-gray-medium mr-2"
       >
         <span
           class="fr-icon-lock-line fr-icon--sm"
@@ -16,7 +16,7 @@
       </p>
       <p
         v-if="dataset.archived"
-        class="fr-badge fr-badge--sm fr-badge--mention-grey text-gray-380 fr-mr-1w"
+        class="fr-badge fr-badge--sm fr-badge--mention-grey text-gray-medium mr-2"
       >
         <span
           class="fr-icon-archive-line fr-icon--sm"
@@ -101,9 +101,9 @@
             :text="ownerName"
             :max-lines="1"
           />
-          <span class="text-mention-grey dash-before-sm whitespace-nowrap">{{ $t('Updated {date}', { date: formatRelativeIfRecentDate(dataset.last_update) }) }}</span>
+          <span class="text-gray-medium dash-before-sm whitespace-nowrap">{{ $t('Updated {date}', { date: formatRelativeIfRecentDate(dataset.last_update) }) }}</span>
         </div>
-        <div class="fr-mx-0 fr-mb-n1v fr-grid-row fr-grid-row--middle fr-text--sm text-mention-grey">
+        <div class="mx-0 -mb-1 flex flex-wrap items-center text-sm text-gray-medium">
           <div class="fr-hidden flex-sm dash-after-sm text-gray-500">
             <DatasetQualityInline :quality="dataset.quality" />
           </div>

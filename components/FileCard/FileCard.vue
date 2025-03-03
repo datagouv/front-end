@@ -11,7 +11,7 @@
             {{ resourceForm.title || $t('Nameless resource') }}
           </h4>
         </div>
-        <div class="fr-my-0 text-gray-380 fr-grid-row fr-grid-row--middle">
+        <div class="fr-my-0 text-gray-medium fr-grid-row fr-grid-row--middle">
           <div
             v-if="resourceForm.schema?.name"
             class="flex items-center space-x-1 text-sm fr-m-0 overflow-wrap-anywhere text-overflow-ellipsis dash-after"

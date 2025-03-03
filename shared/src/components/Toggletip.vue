@@ -1,6 +1,6 @@
 <template>
   <Popover
-    class="relative text-gray-500"
+    class="relative text-gray-title"
     :focus="true"
   >
     <PopoverButton

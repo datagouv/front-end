@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{
-      'text-mention-grey': !changesThisYear && !summary,
+      'text-gray-medium': !changesThisYear && !summary,
     }"
   >
     <h3 class="fr-text--sm fr-m-0">

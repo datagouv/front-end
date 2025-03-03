@@ -144,7 +144,7 @@ const config = useComponentsConfig()
     <div>
       <ExtraAccordion
         v-if="hasExtras"
-        class="fr-pt-3w fr-mt-3w border-top border-default-grey"
+        class="pt-6 mt-6 border-top border-gray-default"
         :button-text="t('See extras')"
         :title-text="t('Resource Extras')"
         title-level="h5"

@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-py-3w fr-mb-3w border-bottom border-default-grey">
+ <div class="py-6 mb-6 border-bottom border-gray-default">
     <h2 class="subtitle subtitle--uppercase">
       {{ $t('Informations') }}
     </h2>
@@ -12,8 +12,8 @@
           <dt class="subtitle fr-mb-0">
             {{ $t('License') }}
           </dt>
-          <dd class="fr-text--sm fr-m-0 text-mention-grey fr-p-0">
-            <code class="bg-alt-grey fr-px-1v text-gray-380">
+          <dd class="text-sm m-0 text-gray-medium p-0">
+            <code class="bg-grey-some px-1 text-gray-medium">
               <a :href="license.url">
                 {{ license.title }}
               </a>
@@ -24,14 +24,14 @@
           <dt class="subtitle fr-mb-0">
             ID
           </dt>
-          <dd class="fr-text--sm fr-m-0 text-mention-grey fr-p-0">
+          <dd class="text-sm m-0 text-gray-medium p-0">
             {{ dataset.id }}
           </dd>
         </div>
       </dl>
     </div>
   </div>
-  <div class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">
+  <div class="pb-6 mb-6 border-bottom border-gray-default">
     <h2 class="subtitle subtitle--uppercase">
       {{ $t('Temporality') }}
     </h2>
@@ -41,7 +41,7 @@
           <dt class="subtitle fr-mb-0">
             {{ $t('Creation') }}
           </dt>
-          <dd class="fr-text--sm fr-m-0 text-mention-grey fr-p-0">
+          <dd class="text-sm m-0 text-gray-medium p-0">
             {{ formatDate(dataset.created_at) }}
           </dd>
         </div>
@@ -52,7 +52,7 @@
           <dt class="subtitle fr-mb-0">
             {{ $t('Frequency') }}
           </dt>
-          <dd class="fr-text--sm fr-m-0 text-mention-grey fr-p-0">
+          <dd class="text-sm m-0 text-gray-medium p-0">
             {{ frequency.label }}
           </dd>
         </div>
@@ -62,14 +62,14 @@
           <dt class="subtitle fr-mb-0">
             {{ $t('Last update') }}
           </dt>
-          <dd class="fr-text--sm fr-m-0 text-mention-grey fr-p-0">
+          <dd class="text-sm m-0 text-gray-medium p-0">
             {{ formatDate(props.dataset.last_update) }}
           </dd>
         </div>
       </dl>
     </div>
   </div>
-  <div class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">
+  <div class="pb-6 mb-6 border-bottom border-gray-default">
     <h2 class="subtitle subtitle--uppercase">
       {{ $t('Spatial coverage') }}
     </h2>
@@ -82,7 +82,7 @@
           <dt class="subtitle fr-mb-0">
             {{ $t('Territorial coverage') }}
           </dt>
-          <dd class="fr-text--sm fr-m-0 text-mention-grey fr-p-0">
+          <dd class="text-sm m-0 text-gray-medium p-0">
             {{ zonesLabels.join(', ') }}
           </dd>
         </div>
@@ -93,14 +93,14 @@
           <dt class="subtitle fr-mb-0">
             {{ $t('Granularity of territorial coverage') }}
           </dt>
-          <dd class="fr-text--sm fr-m-0 text-mention-grey fr-p-0">
+          <dd class="text-sm m-0 text-gray-medium p-0">
             {{ granularity.name }}
           </dd>
         </div>
       </dl>
     </div>
   </div>
-  <div class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">
+  <div class="pb-6 mb-6 border-bottom border-gray-default">
     <h2 class="subtitle subtitle--uppercase">
       Actions
     </h2>

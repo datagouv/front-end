@@ -1,6 +1,6 @@
 <template>
   <article
-    class="fr-my-2w fr-p-2w border fr-enlarge-link"
+    class="my-4 p-4 border border-gray-default fr-enlarge-link"
     :class="{
       'border-tabular-api': isTabularApi,
     }"
@@ -11,7 +11,7 @@
     >
       <p
         v-if="dataservice.is_restricted"
-        class="fr-badge fr-badge--sm fr-badge--mention-grey text-grey-380 fr-mr-1w"
+        class="fr-badge fr-badge--sm fr-badge--mention-grey text-gray-medium mr-2"
       >
         <span
           class="fr-icon-lock-line fr-icon--sm"
@@ -21,7 +21,7 @@
       </p>
       <p
         v-if="dataservice.private"
-        class="fr-badge fr-badge--sm fr-badge--mention-grey text-grey-380 fr-mr-1w"
+        class="fr-badge fr-badge--sm fr-badge--mention-grey text-gray-medium mr-2"
       >
         <span
           class="fr-icon-lock-line fr-icon--sm"
@@ -31,7 +31,7 @@
       </p>
       <p
         v-if="dataservice.archived_at"
-        class="fr-badge fr-badge--sm fr-badge--mention-grey text-grey-380 fr-mr-1w"
+        class="fr-badge fr-badge--sm fr-badge--mention-grey text-gray-medium mr-2"
       >
         <span
           class="fr-icon-lock-line fr-icon--sm"
@@ -76,7 +76,7 @@
     </h4>
     <p
       v-if="dataservice.organization || dataservice.owner"
-      class="fr-text--sm text-mention-grey inline-flex fr-mt-1v fr-mb-0"
+      class="text-sm text-gray-medium inline-flex mt-1 mb-0"
     >
       <span
         v-if="dataservice.organization"
@@ -104,10 +104,10 @@
       />
       <span class="dash-before whitespace-nowrap">{{ t('Updated {date}', { date: formatRelativeIfRecentDate(dataservice.metadata_modified_at) }) }}</span>
     </p>
-    <p class="fr-text--sm text-mention-grey fr-my-0 fr-mt-1v">
-      <span class="fr-icon-information-line fr-icon--sm text-grey-380" />
+    <p class="text-sm text-gray-medium mb-0 mt-1">
+      <span class="fr-icon-information-line fr-icon--sm text-gray-medium" />
       {{ t('Availability :') }}
-      <span class="text-grey-400">
+      <span class="text-gray-plain">
         <template v-if="dataservice.availability">
           {{ t('{n}%', dataservice.availability) }}
         </template>

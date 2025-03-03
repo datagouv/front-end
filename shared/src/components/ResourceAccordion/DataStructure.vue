@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="hasError"
-    class="bg-alt-green-tilleul-verveine fr-p-3v fr-mb-2w"
+    class="bg-warning-lightest text-warning-dark p-3 mb-4"
   >
     <p class="fr-grid-row fr-m-0">
       <span
@@ -18,7 +18,7 @@
   >
     <div
       v-if="!hasColumnInfo"
-      class="bg-alt-green-tilleul-verveine fr-p-3v fr-mb-2w"
+      class="bg-warning-lightest text-warning-dark p-3 mb-4"
     >
       <p class="fr-grid-row fr-m-0">
         <span

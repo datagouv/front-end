@@ -1,7 +1,7 @@
 <template>
   <li
     v-if="!qualityItem"
-    class="text-default-warning fr-grid-row fr-grid-row--middle fr-m-1v"
+    class="text-warning-dark flex flex-wrap items-center m-1"
   >
     <p class="fr-my-0 fr-text--sm">
       <span

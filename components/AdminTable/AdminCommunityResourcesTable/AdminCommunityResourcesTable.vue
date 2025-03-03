@@ -71,7 +71,7 @@
           </AdminBadge>
         </td>
         <td>
-          <code class="fr-p-1v font-mono bg-gray-100 fr-text--sm text-mention-grey rounded">{{ communityResource.format }}</code>
+          <code class="p-1 font-mono bg-gray-lower text-sm text-gray-medium rounded">{{ communityResource.format }}</code>
         </td>
         <td>{{ formatDate(communityResource.created_at) }}</td>
         <td>{{ formatDate(communityResource.last_modified) }}</td>

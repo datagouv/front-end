@@ -1,8 +1,8 @@
 <template>
   <button
     type="button"
-    class="fr-text--sm fr-mb-0 whitespace-nowrap relative fr-p-1v text-mention-grey line-height-1"
-    :class="{ 'border bg-white rounded-xxs text-gray-500': hideLabel }"
+    class="text-sm mb-0 whitespace-nowrap relative p-1 text-gray-medium leading-none"
+    :class="{ 'border bg-white rounded-sm text-gray-title': hideLabel }"
     @click="copy"
   >
     <span

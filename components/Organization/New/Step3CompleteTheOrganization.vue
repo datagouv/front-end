@@ -43,7 +43,7 @@
           <h4 class="fr-mb-1v fr-grid-row">
             <a
               :href="organization.page"
-              class="text-gray-500"
+              class="text-gray-title"
             >
               {{ organization.name }}
               <small v-if="organization.acronym">{{ organization.acronym }}</small>

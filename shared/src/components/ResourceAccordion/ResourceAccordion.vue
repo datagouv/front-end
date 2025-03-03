@@ -1,6 +1,6 @@
 <template>
   <div
-    class="border border-default-grey"
+    class="border border-gray-default"
     :class="{ 'fr-pb-4v': open }"
   >
     <header
@@ -45,7 +45,7 @@
             class="z-2"
           />
         </div>
-        <div class="text-gray-380 subheaders-infos">
+        <div class="text-gray-medium subheaders-infos">
           <SchemaBadge
             :resource
             class="dash-after"

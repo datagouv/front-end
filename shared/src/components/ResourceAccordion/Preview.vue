@@ -2,7 +2,7 @@
   <div>
     <div
       v-if="hasError"
-      class="bg-alt-green-tilleul-verveine fr-p-3v fr-mt-4w fr-mx-4w fr-mb-3v"
+      class="bg-warning-lightest text-warning-dark p-3 mt-8 mx-8 mb-3"
     >
       <p class="fr-grid-row fr-m-0">
         <span
@@ -14,7 +14,7 @@
     </div>
     <PreviewLoader v-else-if="loading" />
     <template v-else>
-      <div class="bg-blue-100 text-blue-400 fr-hidden fr-unhidden-md fr-p-2w">
+      <div class="bg-blue-100 text-datagouv fr-hidden fr-unhidden-md p-4">
         <div class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters">
           <div
             class="fr-col-auto"

@@ -4,7 +4,7 @@
     as="div"
   >
     <header
-      class="fr-grid-row fr-grid-row--middle fr-pb-3w fr-mb-3w border-bottom border-default-grey"
+      class="flex flex-wrap items-center pb-6 mb-6 border-bottom border-gray-default"
     >
       <div class="fr-col">
         <component
@@ -32,7 +32,7 @@
       :id="accordionId"
       class="accordion-content"
     >
-      <div class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">
+      <div class="pb-6 mb-6 border-bottom border-gray-default">
         <div
           class="fr-grid-row fr-grid-row--gutters fr-text--sm fr-m-0"
           data-testid="extra-list"
@@ -45,7 +45,7 @@
             <h3 class="subtitle fr-mb-1v">
               {{ key }}
             </h3>
-            <p class="fr-text--sm fr-m-0 text-mention-grey overflow-wrap-anywhere">
+            <p class="text-sm m-0 text-gray-medium break-all">
               {{ value }}
             </p>
           </div>

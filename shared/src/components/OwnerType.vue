@@ -20,8 +20,8 @@ const props = withDefaults(defineProps<{
 
 const colorClass = computed(() => {
   return {
-    black: 'text-grey-500',
-    grey: 'text-mention-grey',
+    black: 'text-gray-title',
+    grey: 'text-gray-medium',
   }[props.color]
 })
 

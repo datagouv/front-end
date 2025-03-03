@@ -16,8 +16,8 @@
         :class="{
           'fr-icon-arrow-down-line': !sorted || sorted === 'asc',
           'fr-icon-arrow-up-line': sorted === 'desc',
-          'text-gray-500': sorted,
-          'text-mention-grey': !sorted,
+          'text-gray-title': sorted,
+          'text-gray-medium': !sorted,
         }"
         :title="t('Sort')"
         @click="toggleSort"

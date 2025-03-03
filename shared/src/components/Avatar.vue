@@ -1,6 +1,6 @@
 <template>
   <img
-    :class="{ 'rounded-full border border-default-grey': rounded }"
+    :class="{ 'rounded-full border border-gray-default': rounded }"
     :src="avatarUrl"
     :width="size"
     :height="size"
