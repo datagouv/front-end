@@ -264,6 +264,7 @@
 
 <script setup lang="ts">
 import { RiAddLine, RiDeleteBinLine } from '@remixicon/vue'
+import { SimpleBanner } from '@datagouv/components-next'
 import HelpAccordion from '../Form/HelpAccordion.vue'
 import FieldsetElement from '../Form/FieldsetElement.vue'
 import SelectGroup from '../Form/SelectGroup/SelectGroup.vue'
@@ -271,7 +272,6 @@ import InputGroup from '../InputGroup/InputGroup.vue'
 import ToggleSwitch from '../Form/ToggleSwitch.vue'
 import ProducerSelect from '~/components/ProducerSelect.vue'
 import type { HarvestBackend, HarvesterForm } from '~/types/harvesters'
-import SimpleBanner from '~/shared/src/components/SimpleBanner.vue'
 
 const props = defineProps<{
   type: 'create' | 'update'
