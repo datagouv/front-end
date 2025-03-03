@@ -15,7 +15,7 @@
     <PaddedContainer
       ref="dropFilesHere"
       color="alt-grey"
-      class="fr-grid-row fr-grid-row--middle flex-direction-column border border-default-grey border-dashed text-mention-grey fr-text--bold"
+      class="fr-grid-row fr-grid-row--middle flex-direction-column border border-gray-default border-dashed text-mention-grey fr-text--bold"
       :class="{ 'border-plain-error': hasError }"
     >
       {{ $t('Drag and drop files') }}
