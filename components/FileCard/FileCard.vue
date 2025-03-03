@@ -76,7 +76,7 @@
           <p class="fr-col-auto fr-m-0">
             <button
               type="button"
-              class="fr-btn fr-btn--secondary fr-btn--secondary-gray-500 fr-icon-delete-line fr-icon--sm"
+              class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500 fr-icon-delete-line fr-icon--sm"
               @click="$emit('delete')"
             >
               {{ $t("Remove file") }}

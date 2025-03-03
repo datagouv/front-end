@@ -221,11 +221,11 @@ onUnmounted(() => unregister(id))
 }
 
 .fr-sidemenu__btn:hover {
-  background-color: var(--background-alt-gray-hover);
+  background-color: var(--background-alt-grey-hover);
 }
 
 .fr-sidemenu__btn:active {
-  background-color: var(--background-alt-gray-active);
+  background-color: var(--background-alt-grey-active);
 }
 
 .fr-sidemenu__btn[aria-current]:not([aria-current=false]) {

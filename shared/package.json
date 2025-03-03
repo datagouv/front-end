@@ -12,8 +12,8 @@
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
-    "css": "tailwindcss -i ./assets/main.css -o ./assets/dist.css --minify --optimize",
-    "i18n": "intlify compile --source ./src/locales/**/*.json --output ./assets"
+    "css": "tailwindcss -i ./assets/main.css -o ./dist/components.css --minify --optimize",
+    "i18n": "intlify compile --source ./src/locales/**/*.json --output ./dist/locales"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",

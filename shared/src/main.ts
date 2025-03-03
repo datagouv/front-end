@@ -1,6 +1,6 @@
 import { inject, type App, type Component, type InjectionKey, type Plugin } from 'vue'
-import frMessages from '../assets/fr.js'
-import enMessages from '../assets/en.js'
+import frMessages from '../dist/locales/fr.js'
+import enMessages from '../dist/locales/en.js'
 import type { Badge, Badges } from './types/badges'
 import type { Dataset, DatasetV2, NewDataset, Quality, Rel } from './types/datasets'
 import type { NewDataservice, Dataservice } from './types/dataservices'

@@ -58,7 +58,7 @@ app.vueApp.use(datagouv, {
 `@datagouv/components` is using TailwindCSS and some DSFR right now. The user needs to provide the correct version of the DSFR. Concerning TailwindCSS, there is two modes:
 
 1. If the user is using TailwindCSS, it can import a full TailwindCSS config with `@import "@datagouv/components-next/assets/main.css";`, then build the CSS via TailwindCSS CLI or Vite plugin.
-2. If the user is not using TailwindCSS, it can import an already built CSS file with `@import '@datagouv/components-next/assets/dist.css';`. Note @dev, this file should be built before publishing the package to NPM with `npm run css`.
+2. If the user is not using TailwindCSS, it can import an already built CSS file with `@import '@datagouv/components-next/dist/components.css';`. Note @dev, this file should be built before publishing the package to NPM with `npm run css`.
 
 ### I18n
 

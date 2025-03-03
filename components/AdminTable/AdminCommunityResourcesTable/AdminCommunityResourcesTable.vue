@@ -80,7 +80,7 @@
             :dataset="communityResource.dataset"
             :loading
             :resource="resourceToForm(communityResource, schemas || [])"
-            button-classes="fr-btn fr-btn--sm fr-btn--secondary-gray-500 fr-btn--tertiary-no-outline fr-icon-pencil-line"
+            button-classes="fr-btn fr-btn--sm fr-btn--secondary-grey-500 fr-btn--tertiary-no-outline fr-icon-pencil-line"
             @submit="(closeModal, resourceForm) => updateResource(communityResource, closeModal, resourceForm)"
             @delete="$emit('refresh')"
           />
