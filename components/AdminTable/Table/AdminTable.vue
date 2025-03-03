@@ -53,7 +53,7 @@ withDefaults(defineProps<{
 
 .fr-table :deep(tbody), .fr-table :deep(thead) {
   background-color: var(--background-default-grey);
-  --hover: var(--background-default-grey-hover);
-  --active: var(--background-default-grey-active);
+  --hover: var(--background-default-gray-hover);
+  --active: var(--background-default-gray-active);
 }
 </style>

@@ -264,6 +264,7 @@
 
 <script setup lang="ts">
 import { RiAddLine, RiDeleteBinLine } from '@remixicon/vue'
+import { SimpleBanner } from '@datagouv/components-next'
 import HelpAccordion from '../Form/HelpAccordion.vue'
 import FieldsetElement from '../Form/FieldsetElement.vue'
 import SelectGroup from '../Form/SelectGroup/SelectGroup.vue'

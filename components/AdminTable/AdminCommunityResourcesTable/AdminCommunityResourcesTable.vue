@@ -71,7 +71,7 @@
           </AdminBadge>
         </td>
         <td>
-          <code class="fr-p-1v font-mono bg-grey-100 fr-text--sm text-mention-grey rounded">{{ communityResource.format }}</code>
+          <code class="p-1 font-mono bg-gray-lower text-sm text-gray-medium rounded">{{ communityResource.format }}</code>
         </td>
         <td>{{ formatDate(communityResource.created_at) }}</td>
         <td>{{ formatDate(communityResource.last_modified) }}</td>
@@ -91,7 +91,7 @@
 </template>
 
 <script setup lang="ts">
-import type { CommunityResource, SchemaResponseData } from '@datagouv/components'
+import type { CommunityResource, SchemaResponseData } from '@datagouv/components-next'
 import { useI18n } from 'vue-i18n'
 import AdminBadge from '../../../components/AdminBadge/AdminBadge.vue'
 import AdminTable from '../../../components/AdminTable/Table/AdminTable.vue'
