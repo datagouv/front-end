@@ -69,7 +69,7 @@
         </div>
         <p
           v-if="communityResource"
-          class="fr-mb-0 fr-mt-1v fr-text--xs text-gray-380"
+          class="fr-mb-0 fr-mt-1v fr-text--xs text-gray-medium"
         >
           {{ t('From') }}
           <a
@@ -219,7 +219,7 @@
                 >
                   {{ $t('Original format') }}
                 </dt>
-                <dd class="fr-text--sm fr-ml-0 fr-mt-0 fr-mb-2w text-mention-grey h-4w fr-grid-row fr-grid-row--middle">
+                <dd class="text-sm ml-0 mt-0 mb-4 text-gray-medium h-8 flex flex-wrap items-center">
                   <span v-if="resource.format === 'url'">
                     <a
                       :href="resource.latest"
@@ -261,7 +261,7 @@
                   <dt class="font-bold fr-text--sm fr-mb-0">
                     {{ $t('Auto-generated formats from {platform}', { platform: config.name }) }}
                   </dt>
-                  <dd class="fr-text--sm fr-ml-0 fr-mt-0 fr-mb-2w text-mention-grey h-4w fr-grid-row fr-grid-row--middle">
+                  <dd class="text-sm ml-0 mt-0 mb-4 text-gray-medium h-8 flex flex-wrap items-center">
                     <span>
                       <span class="text-blue-400 fr-icon-download-line fr-icon--sm fr-mr-1v fr-mt-1v" />
                       <a

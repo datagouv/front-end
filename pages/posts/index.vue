@@ -49,6 +49,7 @@
 </template>
 
 <script setup lang="ts">
+import { Pagination } from '@datagouv/components-next'
 import Breadcrumb from '~/components/Breadcrumb/Breadcrumb.vue'
 import type { Post } from '~/types/posts'
 import type { PaginatedArray } from '~/types/types'

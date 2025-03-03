@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-default-grey fr-p-1w">
+  <div class="border border-gray-default fr-p-1w">
     <div class="fr-grid-row fr-grid-row--middle no-wrap wrap-md justify-between">
       <div class="fr-col-auto min-width-0">
         <div class="flex items-center mb-1">

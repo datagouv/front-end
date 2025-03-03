@@ -73,7 +73,7 @@
                   <template #option="{ option: user }">
                     <div class="flex items-center space-x-2">
                       <NuxtImg
-                        class="rounded-full border border-default-grey size-5"
+                        class="rounded-full border border-gray-default size-5"
                         :src="getUserAvatar(user, 24)"
                         loading="lazy"
                         alt=""

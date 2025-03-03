@@ -23,7 +23,7 @@
         />
         <NuxtImg
           v-else
-          class="rounded-full border border-default-grey size-5"
+          class="rounded-full border border-gray-default size-5"
           :src="avatar"
           loading="lazy"
           alt=""
