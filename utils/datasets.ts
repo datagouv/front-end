@@ -343,3 +343,7 @@ export function getFilesize(resourceForm: ResourceForm): number | null {
 
   return null
 }
+
+export function isHarvested(dataset: Dataset | DatasetV2) {
+  return !!dataset.harvest?.source_id || false
+}

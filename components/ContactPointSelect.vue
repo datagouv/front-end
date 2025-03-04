@@ -1,12 +1,12 @@
 <template>
-  <div v-if="role">
+  <div>
     <div>
       <SearchableSelect
         v-model="contact"
         :options="contactsWithNewOption"
-        :label="t('Choose the {type} with which you want to publish', { type: role.label.toLocaleLowerCase() })"
-        :placeholder="t('Select a contact point')"
-        :display-value="(option) => 'id' in option ? (option.name || option.email || $t('Unknown')) : t('New contact')"
+        :label="t('Choose the attribution with which you want to publish')"
+        :placeholder="t('Select an attribution')"
+        :display-value="(option) => 'id' in option ? (option.name || option.email || $t('Unknown')) : t('New attribution')"
         :get-option-id="(option) => 'id' in option ? option.id : 'new'"
         :multiple="false"
         :loading
@@ -24,21 +24,42 @@
             <template v-else>
               {{ $t('Unknown') }}
             </template>
+            <AdminBadge
+              v-if="getRole(option.role)"
+              size="xs"
+              type="primary"
+              class="ml-1"
+            >
+              {{ getRole(option.role).label }}
+            </AdminBadge>
           </span>
           <span v-else>
-            {{ t('New {type}', { type: role.label.toLocaleLowerCase() }) }}
+            {{ t('New attribution') }}
           </span>
         </template>
       </SearchableSelect>
     </div>
     <div
       v-if="contact && !('id' in contact)"
-      class="fr-fieldset__element mt-2"
+      class="fr-fieldset__element grid grid-cols-2 gap-3 mt-2"
     >
+      <SelectGroup
+        v-model="newContactForm.role"
+        :options
+        class="mb-0"
+        required
+        :label="t('Role')"
+        :has-error="!!getFirstError('role')"
+        :has-warning="!!getFirstWarning('role')"
+        :error-text="getFirstError('role')"
+        @blur="touch('role')"
+      />
       <InputGroup
         v-model="newContactForm.name"
+        class="mb-0"
         required
-        :label="t('Contact Name')"
+        :label="t('Name')"
+        placeholder="e.g. the service name"
         :has-error="!!getFirstError('name')"
         :has-warning="!!getFirstWarning('name')"
         :error-text="getFirstError('name')"
@@ -46,8 +67,9 @@
       />
       <InputGroup
         v-model="newContactForm.email"
+        class="mb-0"
         type="email"
-        :label="t('Contact Email')"
+        :label="t('Email')"
         placeholder="contact@organization.org"
         :has-error="!!getFirstError('email')"
         :has-warning="!!getFirstWarning('email')"
@@ -56,8 +78,9 @@
       />
       <InputGroup
         v-model="newContactForm.contact_form"
+        class="mb-0"
         type="url"
-        :label="t('Contact URL')"
+        :label="t('Link')"
         placeholder="https://..."
         :has-error="!!getFirstError('contact_form')"
         :has-warning="!!getFirstWarning('contact_form')"
@@ -67,30 +90,33 @@
     </div>
     <div
       v-else
-      class="mt-2"
+      class="mt-2 fr-fieldset__element"
     >
-      <div
+      <p
+        v-if="getRole(contact.role)"
+        class="flex items-center gap-1 mb-2"
+      >
+        {{ t("Role:") }}
+        <AdminBadge
+          size="sm"
+          type="primary"
+        >
+          {{ getRole(contact.role).label }}
+        </AdminBadge>
+      </p>
+      <p
         v-if="contact?.email"
-        class="fr-fieldset__element"
+        class="mb-2"
       >
         {{ t("Contact email:") }} {{ contact.email }}
-      </div>
-      <div
+      </p>
+      <p
         v-if="contact?.contact_form"
-        class="fr-fieldset__element"
+        class="mb-2"
       >
         {{ t("Contact link:") }} {{ contact.contact_form }}
-      </div>
+      </p>
     </div>
-    <button
-      v-if="! contact || 'id' in contact"
-      class="flex items-center space-x-1 text-datagouv-dark"
-      type="button"
-      @click="contact = newContactForm"
-    >
-      <RiAddLine class="size-4" />
-      <span>{{ t('New {type}', { type: role.label.toLocaleLowerCase() }) }}</span>
-    </button>
   </div>
 </template>
 
@@ -98,21 +124,19 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { Organization } from '@datagouv/components-next'
-import { RiAddLine } from '@remixicon/vue'
-import InputGroup from './InputGroup/InputGroup.vue'
+import SelectGroup from '~/components/Form/SelectGroup/SelectGroup.vue'
+import InputGroup from '~/components/InputGroup/InputGroup.vue'
 import type { ContactPoint, ContactPointInForm, NewContactPoint, PaginatedArray } from '~/types/types'
 
 const { t } = useI18n()
 
 const { form: newContactForm, getFirstError, getFirstWarning, touch } = useForm({
-  name: '',
-  email: '',
-  contact_form: '',
-  role: 'contact',
+  ...defaultContactForm,
 } as NewContactPoint, {
   name: [required()],
   email: [email()],
   contact_form: [url()],
+  role: [required()],
 }, {})
 
 const contact = defineModel<ContactPointInForm | null>()
@@ -125,8 +149,6 @@ const props = defineProps<{
 
 type ContactType = { id: string, label: string }
 
-const role = ref<ContactType>()
-
 watchEffect(() => {
   if (contact.value && !('id' in contact.value)) {
     contact.value = newContactForm.value
@@ -134,13 +156,26 @@ watchEffect(() => {
 })
 
 const contactsUrl = computed(() => `/api/1/organizations/${props.organization.id}/contacts/`)
-const { data: contacts, status } = await useAPI<PaginatedArray<ContactPoint>>(contactsUrl, { lazy: true })
-const { data: rolesList, status: rolesStatus } = await useAPI<Array<ContactType>>('/api/1/contacts/roles/', { lazy: true })
+const { data: contacts, status } = await useAPI<PaginatedArray<ContactPoint>>(contactsUrl, {
+  key: contactsUrl.value,
+  getCachedData: getDataFromSSRPayload,
+})
+
+const roleKey = '/api/1/contacts/roles/'
+const { data: rolesList, status: rolesStatus } = await useAPI<Array<ContactType>>(roleKey, {
+  key: roleKey,
+  getCachedData: getDataFromSSRPayload,
+})
 const loading = computed(() => status.value === 'pending' || rolesStatus.value === 'pending')
 
-watchEffect(() => {
-  role.value = rolesList.value?.find(r => r.id === contact.value?.role)
-})
+const options = computed(() => rolesList.value?.map(r => ({
+  label: r.label,
+  value: r.id,
+})) ?? [])
+
+function getRole(role: string) {
+  return rolesList.value?.find(r => r.id === role)
+}
 
 const contactsWithNewOption = computed<Array<ContactPointInForm>>(() => {
   return [

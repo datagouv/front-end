@@ -902,8 +902,10 @@
   "Number of followers": "Number of followers",
   "Number of reuses": "Number of reuses",
   "All types": "All types",
-  "Choose the {type} with which you want to publish": "Choose the {type} with which you want to publish",
+  "Choose the attribution with which you want to publish": "Choose the attribution with which you want to publish",
+  "Select an attribution": "Select an attribution",
   "Attributions": "Attributions",
-  "New {type}": "New {type}",
+  "Role": "Role",
+  "New attribution": "New attribution",
   "": ""
 }

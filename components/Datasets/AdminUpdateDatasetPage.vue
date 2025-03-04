@@ -113,7 +113,7 @@ const licenses = computed(() => {
 const { data: granularities } = await useAPI<Array<SpatialGranularity>>('/api/1/spatial/granularities/', { lazy: true })
 
 const url = computed(() => `/api/1/datasets/${route.params.id}`)
-const { data: dataset, refresh } = await useAPI<Dataset>(url, { lazy: true })
+const { data: dataset, refresh } = await useAPI<Dataset>(url)
 const datasetForm = ref<DatasetForm | null>(null)
 watchEffect(() => {
   if (dataset.value && licenses.value && frequencies.value && granularities.value) {
