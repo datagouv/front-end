@@ -1,12 +1,12 @@
 <template>
-  <DiscussionsPage :subject="dataset" />
+  <DiscussionsPage :subject="reuse" />
 </template>
 
 <script setup lang="ts">
-import type { Dataset } from '@datagouv/components-next'
+import type { Reuse } from '@datagouv/components-next'
 import DiscussionsPage from '~/components/Discussions/DiscussionsPage.vue'
 
 defineProps<{
-  dataset: Dataset
+  reuse: Reuse
 }>()
 </script>

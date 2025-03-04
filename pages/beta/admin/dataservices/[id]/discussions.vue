@@ -1,5 +1,5 @@
 <template>
-  <DiscussionsPage :id="dataservice.id" />
+  <DiscussionsPage :subject="dataservice" />
 </template>
 
 <script setup lang="ts">

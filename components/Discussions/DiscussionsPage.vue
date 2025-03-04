@@ -69,7 +69,7 @@
                 size="xs"
                 color="secondary-softer"
                 :icon="RiEyeLine"
-                :href="thread.url"
+                :href="getDiscussionUrl(thread.id, subject)"
                 external
               />
             </td>
@@ -94,10 +94,10 @@ import { RiEyeLine } from '@remixicon/vue'
 import AdminTable from '../AdminTable/Table/AdminTable.vue'
 import AdminTableTh from '../AdminTable/Table/AdminTableTh.vue'
 import type { AdminBadgeType, PaginatedArray } from '~/types/types'
-import type { Thread } from '~/types/discussions'
+import type { DiscussionSubjectTypes, Thread } from '~/types/discussions'
 
 const props = defineProps<{
-  id: string
+  subject: DiscussionSubjectTypes
 }>()
 
 const { t } = useI18n()
@@ -107,7 +107,7 @@ const pageSize = ref(20)
 
 const params = computed(() => {
   return {
-    for: props.id,
+    for: props.subject.id,
 
     page_size: pageSize.value,
     page: page.value,
