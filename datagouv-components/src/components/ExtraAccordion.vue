@@ -17,8 +17,9 @@
       <div class="fr-col-auto">
         <DisclosureButton
           :as="BrandedButton"
-          class="fr-btn fr-btn--tertiary-no-outline fr-btn--icon-left fr-btn--secondary-grey-500"
-          :class="{ 'fr-icon-arrow-up-s-line': open, 'fr-icon-arrow-down-s-line': !open }"
+          color="secondary-softer"
+          keep-margins-even-without-borders
+          :icon="open ? RiArrowUpSLine : RiArrowDownSLine"
         >
           <template v-if="open">
             {{ $t('Close details') }}
@@ -63,6 +64,7 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from '@headlessui/vue'
+import { RiArrowDownSLine, RiArrowUpSLine } from '@remixicon/vue'
 import BrandedButton from './BrandedButton.vue'
 
 const accordionId = useId()

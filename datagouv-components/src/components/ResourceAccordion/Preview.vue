@@ -29,12 +29,13 @@
             </p>
           </div>
           <p class="fr-col-auto fr-my-0">
-            <a
+            <BrandedButton
               :href="resource.preview_url"
-              class="fr-btn fr-btn--icon-right fr-icon-external-link-fill"
+              :icon="RiExternalLinkFill"
+              icon-right
             >
               {{ t("Explore data") }}
-            </a>
+            </BrandedButton>
           </p>
         </div>
       </div>
@@ -51,19 +52,16 @@
                 scope="col"
               >
                 <div class="fr-grid-row fr-grid-row--middle col-width">
-                  <button
-                    class="fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-my-n1w"
-                    :class="{
-                      'fr-btn--secondary-grey-500': !isSortedBy(col),
-                      'fr-btn--icon-right': isSortedBy(col),
-                      'fr-icon-arrow-down-line': isSortedBy(col) && sortConfig && sortConfig.type == 'desc',
-                      'fr-icon-arrow-up-line': isSortedBy(col) && sortConfig && sortConfig.type == 'asc',
-                    }"
+                  <BrandedButton
+                    color="secondary-softer"
+                    :icon="isSortedBy(col) && sortConfig && sortConfig.type == 'asc' ? RiArrowUpLine : RiArrowDownLine"
+                    icon-right
+                    size="xs"
                     @click="sortByField(col)"
                   >
                     {{ col }}
-                    <span class="fr-sr-only">{{ sortConfig && sortConfig.type == 'desc' ? t("Sort ascending") : t("Sort descending") }}</span>
-                  </button>
+                    <span class="sr-only">{{ sortConfig && sortConfig.type == 'desc' ? t("Sort ascending") : t("Sort descending") }}</span>
+                  </BrandedButton>
                 </div>
               </th>
             </tr>
@@ -107,11 +105,13 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { RiArrowDownLine, RiArrowUpLine, RiExternalLinkFill } from '@remixicon/vue'
 import Pagination from '../Pagination.vue'
 import { getData, type SortConfig } from '../../functions/tabularApi'
 import { formatDate } from '../../functions/dates'
 import type { Resource } from '../../types/resources'
 import { useComponentsConfig } from '../../main'
+import BrandedButton from '../BrandedButton.vue'
 import franceSvg from './france.svg?raw'
 import PreviewLoader from './PreviewLoader.vue'
 
@@ -142,7 +142,7 @@ function isSortedBy(col: string) {
 async function getTableInfos(page: number, sortConfig?: SortConfig) {
   try {
     // Check that this function return wanted data
-    const { data } = await getData(props.resource.id, page, sortConfig)
+    const { data } = await getData(config, props.resource.id, page, sortConfig)
     if ('data' in data && data.data && data.data.length > 0) {
       // Update existing rows
       rows.value = data.data
@@ -152,11 +152,15 @@ async function getTableInfos(page: number, sortConfig?: SortConfig) {
       loading.value = false
     }
     else {
+      console.log('error here')
+      console.log(data)
       hasError.value = true
       loading.value = false
     }
   }
-  catch {
+  catch (e) {
+    console.log('here')
+    console.error(e)
     hasError.value = true
     loading.value = false
   }

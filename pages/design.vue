@@ -63,11 +63,22 @@
         :dataset
         dataset-url="#"
       />
+      <DatasetQuality
+        v-if="dataset"
+        :quality="dataset.quality"
+      />
       <ResourceAccordion
         v-if="dataset && dataset.resources.length"
-        :resource="dataset.resources[0]"
+        :resource="dataset.resources[1]"
         :dataset-id="dataset.id"
+        can-edit
       />
+
+      <ReadMore v-if="dataset">
+        <div class="prose">
+          {{ dataset.description }}
+        </div>
+      </ReadMore>
 
       <SearchInput />
       <div class="bg-white py-4 px-4 -mx-4">
@@ -99,7 +110,7 @@
 </template>
 
 <script setup lang="ts">
-import { DatasetCard, ResourceAccordion, SimpleBanner, type Dataset } from '@datagouv/components-next'
+import { DatasetCard, DatasetQuality, ReadMore, ResourceAccordion, SimpleBanner, type Dataset } from '@datagouv/components-next'
 import NuxtSearchPage from '~/components/Search/NuxtSearchPage.vue'
 import AdminBadge from '~/design-system/AdminBadge.vue'
 import BannerAction from '~/design-system/BannerAction.vue'
@@ -109,5 +120,5 @@ import BrandedButton from '~/design-system/BrandedButton.vue'
 import OrganizationNameWithCertificate from '~/design-system/OrganizationNameWithCertificate.vue'
 import SearchInput from '~/design-system/SearchInput.vue'
 
-const { data: dataset } = await useAPI<Dataset>('/api/1/datasets/demandes-de-valeurs-foncieres')
+const { data: dataset } = await useAPI<Dataset>('/api/1/datasets/repertoire-national-des-elus-1')
 </script>
