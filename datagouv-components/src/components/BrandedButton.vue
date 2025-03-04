@@ -116,10 +116,10 @@ const colors = computed(() => {
 
 const sizes = computed(() => {
   return {
-    'lg': `text-lg ${hasText.value ? 'px-6 py-2' : 'p-3'}`,
-    'sm': `text-sm leading-none ${hasText.value ? 'px-4 py-3' : 'p-2.5'}`,
-    'xs': `text-xs leading-[0.875rem] ${hasText.value ? 'px-4 py-2' : 'p-2'}`,
-    '2xs': `text-xs leading-[0.875rem] p-1`,
+    'lg': `text-lg ${hasText.value ? 'px-4 py-2 space-x-3' : 'p-3'}`,
+    'sm': `text-sm leading-none ${hasText.value ? 'px-4 py-3 space-x-1' : 'p-2.5'}`,
+    'xs': `text-xs leading-[0.875rem] ${hasText.value ? 'px-4 py-2 space-x-1' : 'p-2'}`,
+    '2xs': `text-xs leading-[0.875rem] p-1 space-x-1`,
   }[size.value]
 })
 
@@ -132,10 +132,10 @@ const removePaddingsIfNoBorders = computed(() => {
   if (props.keepMarginsEvenWithoutBorders) return ''
 
   return {
-    'lg': hasText.value ? '-mx-6 space-x-3' : '-mx-3',
-    'sm': hasText.value ? '-mx-4 space-x-1' : '-mx-2.5',
-    'xs': hasText.value ? '-mx-4 space-x-1' : '-mx-2',
-    '2xs': '-m-1 space-x-1',
+    'lg': hasText.value ? '-mx-6' : '-mx-3',
+    'sm': hasText.value ? '-mx-4' : '-mx-2.5',
+    'xs': hasText.value ? '-mx-4' : '-mx-2',
+    '2xs': '-m-1',
   }[size.value]
 })
 
