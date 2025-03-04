@@ -192,13 +192,17 @@
                 @open="newRole = member.role"
               >
                 <template #button="{ attrs, listeners }">
-                  <button
-                    class="fr-btn fr-btn--sm fr-btn--secondary-grey-500 fr-btn--tertiary-no-outline fr-icon-pencil-line"
+                  <BrandedButton
+                    color="secondary-softer"
+                    :icon="RiPencilLine"
+                    icon-only
+                    size="xs"
+                    keep-margins-even-without-borders
                     v-bind="attrs"
                     v-on="listeners"
                   >
                     {{ t("Edit") }}
-                  </button>
+                  </BrandedButton>
                 </template>
 
                 <template #default="{ close }">
@@ -268,7 +272,7 @@
 import { Avatar, getUserAvatar, type Member, type Organization } from '@datagouv/components-next'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { RiAddLine, RiLogoutBoxRLine, RiMailLine } from '@remixicon/vue'
+import { RiAddLine, RiLogoutBoxRLine, RiMailLine, RiPencilLine } from '@remixicon/vue'
 import { BrandedButton } from '@datagouv/components-next'
 import type { AdminBadgeType, MemberRole, PendingMembershipRequest, UserSuggest } from '~/types/types'
 import AdminTable from '~/components/AdminTable/Table/AdminTable.vue'

@@ -95,45 +95,48 @@
           v-if="resource.format === 'url'"
           class="fr-col-auto fr-ml-3v fr-m-0 z-2"
         >
-          <a
+          <BrandedButton
             :href="resource.latest"
             :title="t('File link - opens a new window')"
             :aria-describedby="resourceTitleId"
             rel="ugc nofollow noopener"
-            target="_blank"
-            class="fr-btn fr-btn--sm"
+            new-tab
+            size="xs"
           >
             {{ $t('Visit') }}
-          </a>
+          </BrandedButton>
         </p>
         <p
           v-else-if="ogcService"
           class="fr-col-auto fr-ml-3v fr-m-0 z-2"
         >
-          <button
+          <BrandedButton
             :id="resource.id + '-copy'"
             :data-clipboard-text="resource.url"
             :aria-describedby="resourceTitleId"
-            class="fr-btn fr-btn--sm"
+            color="primary"
+            size="xs"
+            :icon="RiFileCopyLine"
           >
-            <RiFileCopyLine class="size-4 mr-1" />
             {{ t('Copy link') }}
-          </button>
+          </BrandedButton>
         </p>
         <p
           v-else
           class="fr-col-auto fr-ml-3v fr-m-0"
         >
-          <a
+          <BrandedButton
             :href="resource.latest"
             rel="ugc nofollow noopener"
             :title="t('Download file')"
             download
-            class="relative text-transform-uppercase fr-btn fr-btn--sm fr-btn--icon-left fr-icon-test-tube-line fr-icon-download-line fr-icon--sm matomo_download z-2"
+            class="relative text-transform-uppercase matomo_download z-2"
+            :icon="RiDownloadLine"
+            size="xs"
             :aria-describedby="resourceTitleId"
           >
-            <span class="fr-sr-only">{{ t('Download file as ') }}</span>{{ format }}
-          </a>
+            <span class="sr-only">{{ t('Download file as ') }}</span>{{ format }}
+          </BrandedButton>
         </p>
         <p
           v-if="canEdit"
@@ -302,7 +305,7 @@
 <script setup lang="ts">
 import { ref, computed, defineAsyncComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { RiFileCopyLine } from '@remixicon/vue'
+import { RiDownloadLine, RiFileCopyLine } from '@remixicon/vue'
 import { useRoute } from 'vue-router'
 import OrganizationNameWithCertificate from '../OrganizationNameWithCertificate.vue'
 import { filesize, summarize } from '../../functions/helpers'
@@ -318,6 +321,7 @@ import { trackEvent } from '../../functions/matomo'
 import CopyButton from '../CopyButton.vue'
 import { getOwnerName, useComponentsConfig } from '../../main'
 import { getResourceFormatIcon, getResourceTitleId } from '../../functions/resources'
+import BrandedButton from '../BrandedButton.vue'
 import Metadata from './Metadata.vue'
 import SchemaBadge from './SchemaBadge.vue'
 import ResourceIcon from './ResourceIcon.vue'

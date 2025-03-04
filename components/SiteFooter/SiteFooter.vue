@@ -234,44 +234,7 @@
               </li>
             </ul>
           </div>
-          <div class="fr-col-auto fr-ml-auto self-end">
-            <!-- <nav
-              role="navigation"
-              class="fr-translate fr-nav"
-            >
-              <div class="fr-nav__item">
-                <button
-                  class="fr-translate__btn fr-btn fr-btn--tertiary"
-                  aria-controls="translate-in-footer"
-                  aria-expanded="false"
-                  :title="$t('Select a Language')"
-                >
-                  {{ g.lang_code | upper }} - {{ current_language_name() }}
-                </button>
-                <div
-                  id="translate-in-footer"
-                  class="fr-collapse fr-translate__menu fr-menu"
-                >
-                  <ul class="fr-menu__list">
-                    {% for code, name in config['LANGUAGES'].items() %}
-                    <li>
-                      <a
-                        class="fr-translate__language fr-nav__link"
-                        :hreflang="code"
-                        :lang="code"
-                        :href="language_url(code)"
-                        {% if g.lang_code==code
-                         %}aria-current="true" {% endif %}
-                        >
-                        {{ code | upper }} - {{ name }}
-                      </a>
-                    </li>
-                    {% endfor %}
-                  </ul>
-                </div>
-              </div>
-            </nav> -->
-          </div>
+          <div class="fr-col-auto fr-ml-auto self-end" />
         </div>
         <div class="fr-footer__bottom">
           <ul class="fr-footer__bottom-list">
