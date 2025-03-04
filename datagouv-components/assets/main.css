@@ -74,7 +74,7 @@
   }
 }
 
-@custom-variant aria-current-page (&[aria-current-page="page"]);
+@custom-variant aria-current-page (&[aria-current="page"]);
 
 @utility container {
   margin-inline: auto;
