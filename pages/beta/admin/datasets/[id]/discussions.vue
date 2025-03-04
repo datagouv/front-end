@@ -1,10 +1,10 @@
 <template>
-  <AdminDatasetResourcesPage />
+  <DiscussionsPage :subject="dataset" />
 </template>
 
 <script setup lang="ts">
 import type { Dataset } from '@datagouv/components-next'
-import AdminDatasetResourcesPage from '~/components/Datasets/AdminDatasetResourcesPage.vue'
+import DiscussionsPage from '~/components/Discussions/DiscussionsPage.vue'
 
 defineProps<{
   dataset: Dataset

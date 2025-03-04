@@ -83,10 +83,14 @@
         :links="[
           { href: getDatasetAdminUrl(dataset), label: t('Metadata') },
           { href: `${getDatasetAdminUrl(dataset)}/files`, label: t('Files') },
+          { href: `${getDatasetAdminUrl(dataset)}/discussions`, label: t('Discussions') },
         ]"
       />
 
-      <NuxtPage :page-key="route => route.fullPath" />
+      <NuxtPage
+        :page-key="route => route.fullPath"
+        :dataset
+      />
     </div>
   </div>
 </template>
