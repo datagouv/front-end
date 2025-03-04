@@ -1,6 +1,6 @@
 <template>
   <DevOnly>
-    <div class="fr-container space-y-8 py-8 bg-gray-100 pb-32">
+    <div class="space-y-8 p-8 bg-gray-50 pb-32">
       <h1 class="!mb-3">
         Design System
       </h1>

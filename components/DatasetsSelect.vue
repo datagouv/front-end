@@ -20,25 +20,29 @@
         :key="dataset.id"
         class="flex items-center space-x-2"
       >
-        <button
-          type="button"
-          class="fr-btn fr-btn--tertiary-no-outline shrink-0"
-          :title="t('Drag to move this content')"
-        >
-          <RiDraggable class="size-8" />
-        </button>
+        <div class="shrink-0">
+          <BrandedButton
+            color="primary-softer"
+            :title="t('Drag to move this content')"
+            :icon="RiDraggable"
+            size="lg"
+            keep-margins-even-without-borders
+          />
+        </div>
         <CardLg
           class="flex-1"
           :dataset
         />
-        <button
-          type="button"
-          class="fr-btn fr-btn--tertiary-no-outline shrink-0"
-          :title="t('Remove the dataset')"
-          @click="removeDataset(index)"
-        >
-          <RiDeleteBinLine class="size-8" />
-        </button>
+        <div class="shrink-0">
+          <BrandedButton
+            color="primary-softer"
+            :title="t('Remove the dataset')"
+            :icon="RiDeleteBinLine"
+            size="lg"
+            keep-margins-even-without-borders
+            @click="removeDataset(index)"
+          />
+        </div>
       </div>
     </div>
 

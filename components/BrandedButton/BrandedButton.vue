@@ -2,7 +2,7 @@
   <component
     :is="href ? NuxtLinkLocale: 'button'"
     class="inline-flex items-center space-x-1 rounded-full font-medium border !bg-none !no-underline"
-    :class="[colors, sizes, isDisabled ? '!opacity-50' : '']"
+    :class="[colors, sizes, removePaddingsIfNoBorders, isDisabled ? '!opacity-50' : '']"
     :disabled="isDisabled"
     :aria-disabled="isDisabled"
     :role="href ? 'link' : ''"
@@ -41,7 +41,7 @@ import { bannerActionTypeKey } from '~/components/BannerAction.vue'
 
 import { NuxtLinkLocale } from '#components'
 
-type ColorType = 'primary' | 'primary-soft' | 'secondary' | 'warning' | 'danger' | 'tertiary'
+type ColorType = 'primary' | 'primary-soft' | 'primary-softer' | 'secondary' | 'secondary-softer' | 'warning' | 'danger' | 'tertiary'
 
 const props = withDefaults(defineProps<{
   size?: 'xs' | 'sm' | 'lg'
@@ -52,9 +52,11 @@ const props = withDefaults(defineProps<{
   href?: string
   newTab?: boolean
   iconOnly?: boolean
+  keepMarginsEvenWithoutBorders?: boolean
 }>(), {
   newTab: false,
   iconOnly: false,
+  keepMarginsEvenWithoutBorders: false,
 })
 
 const slots = useSlots()
@@ -88,7 +90,9 @@ const colors = computed(() => {
   return {
     'primary': `text-white bg-datagouv-dark !border-datagouv-dark ${!isDisabled.value ? 'hover:!bg-datagouv-hover hover:!border-datagouv-hover' : ''}`,
     'primary-soft': `text-datagouv-dark bg-transparent !border-datagouv-dark ${!isDisabled.value ? '[&&]:hover:!bg-gray-some' : ''}`,
+    'primary-softer': `text-datagouv-dark bg-transparent !border-transparent ${!isDisabled.value ? '[&&]:hover:!bg-gray-some' : ''}`,
     'secondary': `text-gray-plain bg-white !border-gray-plain ${!isDisabled.value ? '[&&]:hover:!bg-gray-some' : ''}`,
+    'secondary-softer': `text-gray-plain !border-transparent ${!isDisabled.value ? '[&&]:hover:!bg-gray-some' : ''}`,
     'warning': `text-warning-dark bg-white !border-warning-dark ${!isDisabled.value ? '[&&]:hover:!bg-gray-some' : ''}`,
     'danger': `!text-danger-dark bg-white !border-danger-dark ${!isDisabled.value ? '[&&]:hover:!bg-gray-some' : ''}`,
     'tertiary': `!border-none bg-transparent text-datagouv-dark ${!isDisabled.value ? '[&&]:hover:!bg-gray-some' : ''}`,
@@ -103,11 +107,26 @@ const sizes = computed(() => {
   }[size.value]
 })
 
+const hasBorders = computed(() => {
+  return props.color !== 'primary-softer' && props.color !== 'secondary-softer'
+})
+
+const removePaddingsIfNoBorders = computed(() => {
+  if (hasBorders.value) return ''
+  if (props.keepMarginsEvenWithoutBorders) return ''
+
+  return {
+    lg: hasText.value ? '-mx-6 -my-2' : '-m-3',
+    sm: hasText.value ? '-mx-4 -my-3' : '-m-2.5',
+    xs: hasText.value ? '-mx-4 -my-2' : '-m-2',
+  }[size.value]
+})
+
 const iconSize = computed(() => {
   return {
-    lg: 'size-6',
-    sm: 'size-4',
-    xs: 'size-3',
+    lg: hasBorders.value ? 'size-6' : 'size-8',
+    sm: hasBorders.value ? 'size-4' : 'size-6',
+    xs: hasBorders.value ? 'size-3' : 'size-5',
   }[size.value]
 })
 
