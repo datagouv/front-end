@@ -1,7 +1,7 @@
 <template>
   <component
-    :is="href ? NuxtLinkLocale: 'button'"
-    class="inline-flex items-center space-x-1 rounded-full font-medium border !bg-none !no-underline"
+    :is="href ? AppLink: 'button'"
+    class="inline-flex items-center rounded-full font-medium border !bg-none !no-underline"
     :class="[colors, sizes, removePaddingsIfNoBorders, isDisabled ? '!opacity-50' : '', iconRight ? 'flex-row-reverse space-x-reverse' : '']"
     :disabled="isDisabled"
     :aria-disabled="isDisabled"
@@ -19,6 +19,7 @@
       :is="icon"
       v-else-if="icon"
       :class="iconSize"
+      v-bind="iconAttrs"
     />
     <span
       v-if="hasText"
@@ -36,11 +37,13 @@ import type {
 } from 'vue'
 import {
   Comment,
+  computed,
+  inject,
   Text,
+  useSlots,
 } from 'vue'
+import AppLink from './AppLink.vue'
 import { bannerActionTypeKey } from '~/components/BannerAction.vue'
-
-import { NuxtLinkLocale } from '#components'
 
 type ColorType = 'primary' | 'primary-soft' | 'primary-softer' | 'secondary' | 'secondary-softer' | 'warning' | 'danger' | 'tertiary'
 
@@ -50,6 +53,7 @@ const props = withDefaults(defineProps<{
   disabled?: boolean
   loading?: boolean
   icon?: Component
+  iconAttrs?: Record<string, string>
   href?: string
   newTab?: boolean
   iconOnly?: boolean
@@ -128,10 +132,10 @@ const removePaddingsIfNoBorders = computed(() => {
   if (props.keepMarginsEvenWithoutBorders) return ''
 
   return {
-    'lg': hasText.value ? '-mx-6' : '-mx-3',
-    'sm': hasText.value ? '-mx-4' : '-mx-2.5',
-    'xs': hasText.value ? '-mx-4' : '-mx-2',
-    '2xs': '-m-1',
+    'lg': hasText.value ? '-mx-6 space-x-3' : '-mx-3',
+    'sm': hasText.value ? '-mx-4 space-x-1' : '-mx-2.5',
+    'xs': hasText.value ? '-mx-4 space-x-1' : '-mx-2',
+    '2xs': '-m-1 space-x-1',
   }[size.value]
 })
 

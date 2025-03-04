@@ -36,6 +36,7 @@
                 :aria-controls="modalId"
                 :icon="RiCloseLine"
                 icon-right
+                :keep-margins-even-without-borders="isFullscreen"
                 @click="emit('close')"
               >
                 {{ $t('Close') }}
