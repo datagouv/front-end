@@ -29,7 +29,6 @@
           <template #button>
             <BrandedButton
               :icon="RiArchiveLine"
-              type="button"
               @click="archiveDataservice"
             >
               {{ dataservice.archived_at ? $t('Unarchive') : $t('Archive') }}

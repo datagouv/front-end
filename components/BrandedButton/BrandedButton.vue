@@ -8,6 +8,7 @@
     :role="href ? 'link' : ''"
     :to="isDisabled ? undefined : href"
     :target="newTab ? '_blank' : undefined"
+    :type
   >
     <AdminLoader
       v-if="loading"
@@ -53,6 +54,7 @@ const props = withDefaults(defineProps<{
   newTab?: boolean
   iconOnly?: boolean
   keepMarginsEvenWithoutBorders?: boolean
+  type?: 'submit' | 'button'
 }>(), {
   newTab: false,
   iconOnly: false,
@@ -60,6 +62,13 @@ const props = withDefaults(defineProps<{
 })
 
 const slots = useSlots()
+
+const type = computed(() => {
+  if (props.type) return props.type
+  if (props.href) return undefined
+
+  return 'button'
+})
 
 const size = computed(() => {
   if (props.size) return props.size

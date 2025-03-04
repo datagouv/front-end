@@ -143,7 +143,6 @@
             <BrandedButton
               :icon="RiDeleteBinLine"
               size="xs"
-              type="button"
               color="secondary"
               @click="form.filters.splice(index, 1)"
             >
@@ -194,7 +193,6 @@
                 :icon="RiDeleteBinLine"
                 size="xs"
                 color="secondary"
-                type="button"
                 @click="form.configs.splice(index, 1)"
               >
                 {{ $t('Remove') }}

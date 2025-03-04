@@ -155,7 +155,6 @@
                 color="primary-soft"
                 :icon="RiCloseCircleLine"
                 class="w-full justify-center"
-                type="button"
                 @click="resetFilters"
               >
                 {{ t('Reset filters') }}

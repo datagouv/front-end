@@ -39,7 +39,7 @@
         :disabled="disabled"
         :title="$t('Browse')"
         :aria-controls="id"
-        @click="open"
+        @click.prevent.stop="open"
       >
         {{ $t('Browse') }}
       </BrandedButton>

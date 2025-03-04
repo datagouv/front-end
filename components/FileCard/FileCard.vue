@@ -77,7 +77,6 @@
             <BrandedButton
               color="secondary"
               :icon="RiDeleteBinLine"
-              size="xs"
               icon-only
               @click="$emit('delete')"
             >

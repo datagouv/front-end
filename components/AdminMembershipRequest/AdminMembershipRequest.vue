@@ -78,6 +78,7 @@
             </div>
             <div class="fr-col-auto">
               <BrandedButton
+                type="submit"
                 color="primary"
                 :disabled="loading || !refuseComment"
                 :form="refuseFormId"

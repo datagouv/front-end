@@ -21,7 +21,6 @@
 
           <template #button>
             <BrandedButton
-              type="button"
               @click="publishPost"
             >
               {{ post.published ? $t('Unpublish') : $t('Publish') }}

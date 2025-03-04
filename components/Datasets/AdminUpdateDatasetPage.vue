@@ -22,7 +22,6 @@
           <template #button>
             <BrandedButton
               :icon="RiArchiveLine"
-              type="button"
               @click="archiveDataset"
             >
               {{ dataset.archived ? $t('Unarchive') : $t('Archive') }}

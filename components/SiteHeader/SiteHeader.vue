@@ -47,6 +47,7 @@
                           :placeholder="$t('Search')"
                           type="search"
                         > <BrandedButton
+                          type="submit"
                           color="primary"
                           class="rounded-l-none rounded-br-none rounded-tr-[0.25rem]"
                           :title="$t('Search')"
