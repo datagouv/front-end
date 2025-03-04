@@ -77,12 +77,16 @@
               <td>{{ formatDate(post.created_at) }}</td>
               <td>{{ formatDate(post.last_modified) }}</td>
               <td>
-                <NuxtLinkLocale
-                  class="fr-btn fr-btn--sm fr-btn--secondary-grey-500 fr-btn--tertiary-no-outline fr-icon-pencil-line"
-                  :to="`/beta/admin/posts/${post.id}`"
+                <BrandedButton
+                  :href="`/beta/admin/posts/${post.id}`"
+                  color="secondary-softer"
+                  :icon="RiPencilLine"
+                  icon-only
+                  size="xs"
+                  keep-margins-even-without-borders
                 >
                   {{ t("Edit") }}
-                </NuxtLinkLocale>
+                </BrandedButton>
               </td>
             </tr>
           </tbody>
@@ -126,18 +130,17 @@
 </template>
 
 <script setup lang="ts">
-import { Pagination } from '@datagouv/components-next'
+import { Pagination, BrandedButton } from '@datagouv/components-next'
 import { refDebounced } from '@vueuse/core'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { RiAddLine, RiSearchLine } from '@remixicon/vue'
+import { RiAddLine, RiPencilLine, RiSearchLine } from '@remixicon/vue'
 import type { AdminBadgeType, PaginatedArray } from '~/types/types'
 import AdminBreadcrumb from '~/components/Breadcrumbs/AdminBreadcrumb.vue'
 import BreadcrumbItem from '~/components/Breadcrumbs/BreadcrumbItem.vue'
 import AdminTable from '~/components/AdminTable/Table/AdminTable.vue'
 import AdminTableTh from '~/components/AdminTable/Table/AdminTableTh.vue'
 import type { Post } from '~/types/posts'
-import BrandedButton from '~/components/BrandedButton/BrandedButton.vue'
 
 const { t } = useI18n()
 

@@ -1,16 +1,20 @@
 <template>
-  <a
+  <BrandedButton
     :href="adminUrl"
-    class="fr-btn fr-btn--secondary fr-btn--secondary-warning-425 fr-icon-pencil-line fr-icon--sm"
+    icon-only
+    :icon="RiPencilLine"
+    color="warning"
     data-testid="edit-button"
   >
     {{ t("Edit file") }}
-  </a>
+  </BrandedButton>
 </template>
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { RiPencilLine } from '@remixicon/vue'
 import { useComponentsConfig } from '../../main'
+import BrandedButton from '../BrandedButton.vue'
 
 type Props = {
   datasetId: string

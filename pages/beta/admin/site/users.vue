@@ -116,6 +116,7 @@ import { refDebounced } from '@vueuse/core'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RiMailLine, RiSearchLine } from '@remixicon/vue'
+import { BrandedButton } from '@datagouv/components-next'
 import type { DiscussionSortedBy } from '~/types/discussions'
 import type { PaginatedArray, SortDirection } from '~/types/types'
 import AdminBreadcrumb from '~/components/Breadcrumbs/AdminBreadcrumb.vue'
@@ -123,7 +124,6 @@ import BreadcrumbItem from '~/components/Breadcrumbs/BreadcrumbItem.vue'
 import AdminTable from '~/components/AdminTable/Table/AdminTable.vue'
 import AdminTableTh from '~/components/AdminTable/Table/AdminTableTh.vue'
 import AdminInput from '~/components/AdminInput.vue'
-import BrandedButton from '~/components/BrandedButton/BrandedButton.vue'
 
 const { t } = useI18n()
 const config = useRuntimeConfig()

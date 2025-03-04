@@ -18,10 +18,8 @@
       }"
       @click.prevent="toggle"
     >
-      <button
-        type="button"
-        role="button"
-        class="fr-btn fr-btn--tertiary-no-outline rounded-4xl"
+      <BrandedButton
+        color="primary-softer"
         @click="toggle"
       >
         <template v-if="expanded">
@@ -30,7 +28,7 @@
         <template v-else>
           {{ $t("Read more") }}
         </template>
-      </button>
+      </BrandedButton>
     </div>
   </div>
 </template>
@@ -39,6 +37,7 @@
 import { templateRef, useElementSize } from '@vueuse/core'
 import { ref, watch } from 'vue'
 import { easing, tween, styler } from 'popmotion'
+import BrandedButton from './BrandedButton.vue'
 
 const props = withDefaults(defineProps<{
   maxHeight?: string

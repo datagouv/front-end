@@ -46,12 +46,14 @@
                           class="fr-input"
                           :placeholder="$t('Search')"
                           type="search"
-                        > <button
-                          class="fr-btn rounded-0 !rounded-r-[0.25rem]"
+                        > <BrandedButton
+                          type="submit"
+                          color="primary"
+                          class="rounded-l-none rounded-br-none rounded-tr-[0.25rem]"
                           :title="$t('Search')"
                         >
                           {{ $t('Search') }}
-                        </button>
+                        </BrandedButton>
                       </div>
                     </div>
                   </template>
@@ -77,73 +79,77 @@
                       <div class="fr-header__menu-links">
                         <ul
                           v-if="me"
-                          class="fr-btns-group fr-btns-group--sm fr-btns-group--icon-left"
+                          class="list-none"
                         >
                           <li>
-                            <a
+                            <BrandedButton
                               :href="me.page"
-                              class="fr-btn fr-icon-svg fr-icon--sm flex !justify-start !mb-0"
+                              color="primary-softer"
+                              class="w-full"
+                              size="lg"
+                              :icon="NuxtImg"
+                              :icon-attrs="{
+                                src: getUserAvatar(me, 24),
+                                loading: 'lazy',
+                                alt: '',
+                                class: 'rounded-full',
+                              }"
                             >
-                              <NuxtImg
-                                :src="getUserAvatar(me, 24)"
-                                width="24"
-                                height="24"
-                                loading="lazy"
-                                alt=""
-                                class="mr-2 rounded-full"
-                              />
                               {{ me.first_name }} {{ me.last_name }}
-                            </a>
+                            </BrandedButton>
                           </li>
                           <li>
-                            <NuxtLinkLocale
-                              to="/admin/"
+                            <BrandedButton
+                              href="/admin/"
                               :external="true"
-                              class="fr-btn !justify-start !text-sm !p-3 !mb-0"
+                              color="primary-softer"
+                              :icon="RiSettings3Line"
+                              class="w-full"
+                              size="lg"
                             >
-                              <RiSettings3Line
-                                size="1rem"
-                                class="fr-mr-1w"
-                              />
                               {{ $t("Administration") }}
-                            </NuxtLinkLocale>
+                            </BrandedButton>
                           </li>
                           <li>
-                            <a
+                            <BrandedButton
                               :href="`${config.public.apiBase}/logout`"
-                              class="fr-btn !justify-start !text-sm !p-3 !mb-0"
+                              :icon="RiLogoutBoxRLine"
+                              :external="true"
+                              color="primary-softer"
+                              class="w-full"
+                              size="lg"
                             >
-                              <RiLogoutBoxRLine
-                                size="1rem"
-                                class="fr-mr-1w"
-                              />
                               {{ $t('Logout') }}
-                            </a>
+                            </BrandedButton>
                           </li>
                         </ul>
                         <ul
                           v-else
-                          class="fr-btns-group"
+                          class="list-none"
                         >
                           <li>
-                            <NuxtLinkLocale
-                              class="fr-btn items-center !justify-start !p-3 !mb-0 !text-sm"
-                              to="/login"
+                            <BrandedButton
+                              href="/login"
+                              color="primary-softer"
+                              size="lg"
                               :external="true"
+                              :icon="RiLockLine"
+                              class="w-full"
                             >
-                              <RiLockLine class="inline mr-2 size-4" />
                               {{ $t("Log in") }}
-                            </NuxtLinkLocale>
+                            </BrandedButton>
                           </li>
                           <li>
-                            <NuxtLinkLocale
-                              class="fr-btn !justify-start !p-3 !mb-0 !text-sm"
-                              to="/register"
+                            <BrandedButton
+                              color="primary-softer"
+                              size="lg"
+                              href="/register"
                               :external="true"
+                              class="w-full"
+                              :icon="RiAccountCircleLine"
                             >
-                              <RiAccountCircleLine class="inline mr-2 size-4" />
                               {{ $t("Register") }}
-                            </NuxtLinkLocale>
+                            </BrandedButton>
                           </li>
                         </ul>
                       </div>
@@ -254,74 +260,65 @@
           <div class="fr-header__tools">
             <div class="fr-header__tools-links">
               <ClientOnly v-if="me">
-                <ul
-                  class="fr-btns-group"
-                >
+                <ul class="list-none flex space-x-7">
                   <li>
-                    <a
+                    <BrandedButton
                       :href="me.page"
-                      class="fr-btn fr-icon-svg fr-icon--sm fr-grid-row"
+                      color="primary-softer"
+                      :icon="NuxtImg"
+                      :icon-attrs="{
+                        src: getUserAvatar(me, 24),
+                        loading: 'lazy',
+                        alt: '',
+                        class: 'rounded-full',
+                      }"
                     >
-                      <NuxtImg
-                        :src="getUserAvatar(me, 24)"
-                        width="24"
-                        height="24"
-                        loading="lazy"
-                        alt=""
-                        class="mr-2 rounded-full"
-                      />
                       {{ me.first_name }} {{ me.last_name }}
-                    </a>
+                    </BrandedButton>
                   </li>
                   <li>
-                    <NuxtLinkLocale
-                      to="/beta/admin/"
-                      class="fr-btn"
+                    <BrandedButton
+                      href="/beta/admin/"
+                      color="primary-softer"
+                      :icon="RiSettings3Line"
                     >
-                      <RiSettings3Line
-                        size="1rem"
-                        class="fr-mr-1w"
-                      />
                       {{ $t("Administration") }}
-                    </NuxtLinkLocale>
+                    </BrandedButton>
                   </li>
                   <li>
-                    <a
+                    <BrandedButton
                       :href="`${config.public.apiBase}/logout`"
-                      class="fr-btn"
+                      color="primary-softer"
+                      :icon="RiLogoutBoxRLine"
                     >
-                      <RiLogoutBoxRLine
-                        size="1rem"
-                        class="fr-mr-1w"
-                      />
                       {{ $t('Logout') }}
-                    </a>
+                    </BrandedButton>
                   </li>
                 </ul>
               </ClientOnly>
               <ul
                 v-else
-                class="fr-btns-group"
+                class="list-none flex space-x-7"
               >
                 <li>
-                  <NuxtLinkLocale
-                    class="fr-btn items-center"
-                    to="/login"
+                  <BrandedButton
+                    color="primary-softer"
+                    href="/login"
                     :external="true"
+                    :icon="RiLockLine"
                   >
-                    <RiLockLine class="inline mr-2 size-4" />
                     {{ $t("Log in") }}
-                  </NuxtLinkLocale>
+                  </BrandedButton>
                 </li>
                 <li>
-                  <NuxtLinkLocale
-                    class="fr-btn"
-                    to="/register"
+                  <BrandedButton
+                    color="primary-softer"
+                    href="/register"
                     :external="true"
+                    :icon="RiAccountCircleLine"
                   >
-                    <RiAccountCircleLine class="inline mr-2 size-4" />
                     {{ $t("Register") }}
-                  </NuxtLinkLocale>
+                  </BrandedButton>
                 </li>
               </ul>
             </div>
@@ -442,10 +439,10 @@
 </template>
 
 <script setup lang="ts">
+import { Avatar, BrandedButton, getUserAvatar } from '@datagouv/components-next'
 import { RiAccountCircleLine, RiAddLine, RiDatabase2Line, RiGovernmentLine, RiLockLine, RiMenuLine, RiSearchLine, RiRobot2Line, RiLineChartLine, RiServerLine, RiArticleLine, RiSettings3Line, RiLogoutBoxRLine } from '@remixicon/vue'
 import { Disclosure, DisclosureButton, DisclosurePanel, Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
-import { getUserAvatar } from '@datagouv/components-next'
-import { NuxtLinkLocale } from '#components'
+import { NuxtImg, NuxtLinkLocale } from '#components'
 import SiteLogo from '~/components/SiteLogo.vue'
 import { useMaybeMe } from '~/utils/auth'
 

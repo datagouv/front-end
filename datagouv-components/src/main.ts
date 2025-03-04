@@ -15,6 +15,7 @@ import type { User } from './types/users'
 
 import Avatar from './components/Avatar.vue'
 import AvatarWithName from './components/AvatarWithName.vue'
+import BrandedButton from './components/BrandedButton.vue'
 import CopyButton from './components/CopyButton.vue'
 import DataserviceCard from './components/DataserviceCard.vue'
 import DatasetCard from './components/DatasetCard.vue'
@@ -137,6 +138,7 @@ export {
   datagouv,
   Avatar,
   AvatarWithName,
+  BrandedButton,
   CopyButton,
   DataserviceCard,
   DatasetCard,

@@ -43,21 +43,21 @@
       </div>
     </details>
     <template #footer="{ close }">
-      <div class="fr-btns-group fr-btns-group--right">
-        <button
-          type="button"
-          class="fr-btn"
+      <div class="flex-1 flex justify-end">
+        <BrandedButton
+          color="primary"
           data-testid="add-image-button"
           @click="send(close)"
         >
           {{ t('Add image') }}
-        </button>
+        </BrandedButton>
       </div>
     </template>
   </ModalWithButton>
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { useI18n } from 'vue-i18n'
 import { RiImageAddFill, RiImageLine } from '@remixicon/vue'
 import TooltipButton from '../EditorButton.vue'

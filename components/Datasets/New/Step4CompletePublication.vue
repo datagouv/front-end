@@ -24,14 +24,15 @@
     </SimpleBanner>
     <DatasetCardLg :dataset="publicDataset" />
     <div class="fr-grid-row justify-between">
-      <a
+      <BrandedButton
         v-if="config.public.publishingDatasetFeedbackUrl"
         :href="config.public.publishingDatasetFeedbackUrl"
-        class="fr-btn fr-btn--tertiary-no-outline fr-btn--secondary-grey-500 fr-btn--icon-left fr-icon-lightbulb-line"
-        target="_blank"
+        :icon="RiLightbulbLine"
+        color="secondary-softer"
+        new-tab
       >
         {{ $t('Give us your feedback on the publishing form') }}
-      </a>
+      </BrandedButton>
       <div class="fr-grid-row fr-grid-row--right">
         <BrandedButton
           class="mr-3"
@@ -54,7 +55,9 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { SimpleBanner, type Dataset } from '@datagouv/components-next'
+import { RiLightbulbLine } from '@remixicon/vue'
 
 const props = defineProps<{
   dataset: Dataset

@@ -34,16 +34,15 @@
         :disabled="disabled"
         @change="change"
       >
-      <button
-        type="button"
+      <BrandedButton
+        color="secondary"
         :disabled="disabled"
-        class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500"
         :title="$t('Browse')"
         :aria-controls="id"
-        @click="open"
+        @click.prevent.stop="open"
       >
         {{ $t('Browse') }}
-      </button>
+      </BrandedButton>
     </PaddedContainer>
     <p
       v-if="hintText"
@@ -70,6 +69,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { computed } from 'vue'
 import { useDropZone } from '@vueuse/core'
 import PaddedContainer from '~/components/PaddedContainer/PaddedContainer.vue'

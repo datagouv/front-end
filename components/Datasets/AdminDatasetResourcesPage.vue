@@ -96,7 +96,6 @@
                 :dataset
                 :loading
                 :resource="resourceToForm(resource, schemas || [])"
-                button-classes="fr-btn fr-btn--sm fr-btn--secondary-grey-500 fr-btn--tertiary-no-outline fr-icon-pencil-line"
                 @submit="updateResource"
                 @delete="refreshResources"
               />
