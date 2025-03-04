@@ -116,7 +116,7 @@ const colors = computed(() => {
 
 const sizes = computed(() => {
   return {
-    'lg': `text-lg ${hasText.value ? 'px-4 py-2 space-x-3' : 'p-3'}`,
+    'lg': `text-lg ${hasText.value ? 'px-4 py-2 space-x-2' : 'p-3'}`,
     'sm': `text-sm leading-none ${hasText.value ? 'px-4 py-3 space-x-1' : 'p-2.5'}`,
     'xs': `text-xs leading-[0.875rem] ${hasText.value ? 'px-4 py-2 space-x-1' : 'p-2'}`,
     '2xs': `text-xs leading-[0.875rem] p-1 space-x-1`,
