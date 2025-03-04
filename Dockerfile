@@ -5,6 +5,7 @@ WORKDIR /app
 COPY ./ /app
 
 ENV NODE_OPTIONS=--openssl-legacy-provider
+ENV NODE_OPTIONS=--max_old_space_size=4096
 
 RUN npm install
 RUN echo "$(date)" && \
