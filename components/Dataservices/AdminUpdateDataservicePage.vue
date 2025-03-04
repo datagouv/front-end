@@ -60,7 +60,7 @@
                 {{ $t("This action can't be reverse.") }}
               </p>
               <template #footer>
-                <div class="flex-1 fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left">
+                <div class="flex-1 flex justify-end">
                   <BrandedButton
                     color="danger"
                     :disabled="loading"

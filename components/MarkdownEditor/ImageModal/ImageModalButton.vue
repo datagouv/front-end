@@ -43,7 +43,7 @@
       </div>
     </details>
     <template #footer="{ close }">
-      <div class="fr-btns-group fr-btns-group--right">
+      <div class="flex-1 flex justify-end">
         <BrandedButton
           color="primary"
           data-testid="add-image-button"

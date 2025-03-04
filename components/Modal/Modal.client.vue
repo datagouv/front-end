@@ -27,18 +27,19 @@
             :class="{ 'overflow-y-visible max-h-full': isFullscreen, 'overflow-y-auto drop-shadow max-h-[calc(100vh - 2rem)]': !isFullscreen }"
           >
             <div
-              class="flex items-center pt-4 px-4 pb-2"
+              class="flex items-center justify-end pt-4 px-4 sm:px-8 pb-2"
               :class="{ 'pl-0 pr-0': isFullscreen }"
             >
-              <button
-                class="fr-btn--close fr-btn"
+              <BrandedButton
                 :title="$t('Close the modal window')"
+                color="primary-softer"
                 :aria-controls="modalId"
-                type="button"
+                :icon="RiCloseLine"
+                icon-right
                 @click="emit('close')"
               >
                 {{ $t('Close') }}
-              </button>
+              </BrandedButton>
             </div>
             <div
               class="px-4 sm:px-8 mb-[3.5rem] sm:mb-[4rem] contrast-more:border-solid contrast-more:border-1"
@@ -66,6 +67,7 @@
 
 <script setup lang="ts">
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
+import { RiCloseLine } from '@remixicon/vue'
 
 const props = withDefaults(defineProps<{
   /** Modal id to set for an external button `arial-controls` */

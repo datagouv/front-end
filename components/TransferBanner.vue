@@ -68,8 +68,9 @@
         <template #footer="{ close }">
           <div
             v-if="existingTransfers && !existingTransfers.length"
-            class="flex-1 fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left"
+            class="flex-1 flex justify-end"
           >
+            <!-- TODO @SwitchToForm -->
             <BrandedButton
               color="primary"
               :loading

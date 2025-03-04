@@ -24,13 +24,15 @@
     </SimpleBanner>
     <DataserviceCard :dataservice />
     <div class="fr-grid-row justify-between">
-      <a
+      <BrandedButton
         v-if="config.public.publishingDataserviceFeedbackUrl"
         :href="config.public.publishingDataserviceFeedbackUrl"
-        class="fr-btn fr-btn--tertiary-no-outline fr-btn--secondary-grey-500 fr-btn--icon-left fr-icon-lightbulb-line"
+        :icon="RiLightbulbLine"
+        color="secondary-softer"
+        new-tab
       >
         {{ $t('Give us your feedback on the publishing form') }}
-      </a>
+      </BrandedButton>
       <div class="fr-grid-row fr-grid-row--right">
         <BrandedButton
           class="mr-3"
@@ -53,6 +55,7 @@
 
 <script setup lang="ts">
 import { SimpleBanner, type Dataservice } from '@datagouv/components-next'
+import { RiLightbulbLine } from '@remixicon/vue'
 import DataserviceCard from '~/components/Dataservices/Card/Card.vue'
 
 defineProps<{

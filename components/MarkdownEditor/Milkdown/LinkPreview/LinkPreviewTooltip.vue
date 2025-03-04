@@ -15,22 +15,23 @@
         {{ link }}
       </a>
     </div>
-    <button
-      class="flex-none fr-btn fr-btn--secondary fr-btn--sm !p-1 !px-2"
-      type="button"
-      :title="$t('Edit link')"
-      @click="editLink"
-    >
-      <RiPencilLine class="size-4" />
-    </button>
-    <button
-      class="flex-none fr-btn fr-btn--tertiary fr-btn--sm !p-1 !px-2"
-      type="button"
-      :title="t('Remove link')"
-      @click="deleteLink"
-    >
-      <RiLinkUnlink class="size-4" />
-    </button>
+    <div class="space-x-2">
+      <BrandedButton
+        type="button"
+        :title="$t('Edit link')"
+        size="xs"
+        color="primary-soft"
+        :icon="RiPencilLine"
+        @click="editLink"
+      />
+      <BrandedButton
+        color="primary-soft"
+        size="xs"
+        :title="t('Remove link')"
+        :icon="RiLinkUnlink"
+        @click="deleteLink"
+      />
+    </div>
   </EditorTooltip>
 </template>
 

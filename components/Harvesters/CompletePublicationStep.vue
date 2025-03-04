@@ -23,13 +23,15 @@
       </div>
     </SimpleBanner>
     <div class="flex justify-between">
-      <a
+      <BrandedButton
         v-if="config.public.publishingHarvesterFeedbackUrl"
         :href="config.public.publishingHarvesterFeedbackUrl"
-        class="fr-btn fr-btn--tertiary-no-outline fr-btn--secondary-grey-500 fr-btn--icon-left fr-icon-lightbulb-line"
+        color="secondary-softer"
+        :icon="RiLightbulbLine"
+        new-tab
       >
         {{ $t('Give us your feedback on the publishing form') }}
-      </a>
+      </BrandedButton>
       <div class="fr-grid-row fr-grid-row--right">
         <BrandedButton
           class="mr-3"
@@ -52,6 +54,7 @@
 
 <script setup lang="ts">
 import { SimpleBanner } from '@datagouv/components-next'
+import { RiLightbulbLine } from '@remixicon/vue'
 import type { HarvesterSource } from '~/types/harvesters'
 
 defineProps<{

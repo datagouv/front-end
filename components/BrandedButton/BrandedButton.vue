@@ -2,7 +2,7 @@
   <component
     :is="href ? NuxtLinkLocale: 'button'"
     class="inline-flex items-center space-x-1 rounded-full font-medium border !bg-none !no-underline"
-    :class="[colors, sizes, removePaddingsIfNoBorders, isDisabled ? '!opacity-50' : '']"
+    :class="[colors, sizes, removePaddingsIfNoBorders, isDisabled ? '!opacity-50' : '', iconRight ? 'flex-row-reverse space-x-reverse' : '']"
     :disabled="isDisabled"
     :aria-disabled="isDisabled"
     :role="href ? 'link' : ''"
@@ -45,7 +45,7 @@ import { NuxtLinkLocale } from '#components'
 type ColorType = 'primary' | 'primary-soft' | 'primary-softer' | 'secondary' | 'secondary-softer' | 'warning' | 'danger' | 'tertiary'
 
 const props = withDefaults(defineProps<{
-  size?: 'xs' | 'sm' | 'lg'
+  size?: '2xs' | 'xs' | 'sm' | 'lg'
   color?: ColorType
   disabled?: boolean
   loading?: boolean
@@ -53,11 +53,13 @@ const props = withDefaults(defineProps<{
   href?: string
   newTab?: boolean
   iconOnly?: boolean
+  iconRight?: boolean
   keepMarginsEvenWithoutBorders?: boolean
   type?: 'submit' | 'button'
 }>(), {
   newTab: false,
   iconOnly: false,
+  iconRight: false,
   keepMarginsEvenWithoutBorders: false,
 })
 
@@ -110,9 +112,10 @@ const colors = computed(() => {
 
 const sizes = computed(() => {
   return {
-    lg: `text-lg ${hasText.value ? 'px-6 py-2' : 'p-3'}`,
-    sm: `text-sm leading-none ${hasText.value ? 'px-4 py-3' : 'p-2.5'}`,
-    xs: `text-xs leading-[0.875rem] ${hasText.value ? 'px-4 py-2' : 'p-2'}`,
+    'lg': `text-lg ${hasText.value ? 'px-6 py-2' : 'p-3'}`,
+    'sm': `text-sm leading-none ${hasText.value ? 'px-4 py-3' : 'p-2.5'}`,
+    'xs': `text-xs leading-[0.875rem] ${hasText.value ? 'px-4 py-2' : 'p-2'}`,
+    '2xs': `text-xs leading-[0.875rem] p-1`,
   }[size.value]
 })
 
@@ -125,17 +128,19 @@ const removePaddingsIfNoBorders = computed(() => {
   if (props.keepMarginsEvenWithoutBorders) return ''
 
   return {
-    lg: hasText.value ? '-mx-6 -my-2' : '-m-3',
-    sm: hasText.value ? '-mx-4 -my-3' : '-m-2.5',
-    xs: hasText.value ? '-mx-4 -my-2' : '-m-2',
+    'lg': hasText.value ? '-mx-6' : '-mx-3',
+    'sm': hasText.value ? '-mx-4' : '-mx-2.5',
+    'xs': hasText.value ? '-mx-4' : '-mx-2',
+    '2xs': '-m-1',
   }[size.value]
 })
 
 const iconSize = computed(() => {
   return {
-    lg: hasBorders.value ? 'size-6' : 'size-8',
-    sm: hasBorders.value ? 'size-4' : 'size-6',
-    xs: hasBorders.value ? 'size-3' : 'size-5',
+    'lg': (hasBorders.value || hasText.value) ? 'size-6' : 'size-8',
+    'sm': (hasBorders.value || hasText.value) ? 'size-4' : 'size-6',
+    'xs': (hasBorders.value || hasText.value) ? 'size-3' : 'size-5',
+    '2xs': (hasBorders.value || hasText.value) ? 'size-3' : 'size-4',
   }[size.value]
 })
 
