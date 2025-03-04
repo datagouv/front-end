@@ -307,6 +307,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { RiBlueskyLine, RiGithubLine, RiLinkedinBoxLine, RiMastodonLine, RiRssLine, RiTwitterLine } from '@remixicon/vue'
 
 const config = useRuntimeConfig()

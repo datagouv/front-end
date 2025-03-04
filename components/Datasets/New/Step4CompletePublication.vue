@@ -55,6 +55,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { SimpleBanner, type Dataset } from '@datagouv/components-next'
 import { RiLightbulbLine } from '@remixicon/vue'
 

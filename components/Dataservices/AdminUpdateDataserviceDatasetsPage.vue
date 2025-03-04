@@ -17,6 +17,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import type { Dataservice, Dataset, DatasetV2 } from '@datagouv/components-next'
 import type { DatasetSuggest, PaginatedArray } from '~/types/types'
 

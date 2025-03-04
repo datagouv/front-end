@@ -17,6 +17,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import type { Dataset, DatasetV2, Reuse } from '@datagouv/components-next'
 import type { DatasetSuggest } from '~/types/types'
 

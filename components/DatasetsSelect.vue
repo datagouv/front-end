@@ -94,6 +94,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import type { Dataset, DatasetV2 } from '@datagouv/components-next'
 import { RiAddLine, RiDeleteBinLine, RiDraggable } from '@remixicon/vue'
 import { useSortable } from '@vueuse/integrations/useSortable'

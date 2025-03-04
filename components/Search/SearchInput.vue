@@ -29,6 +29,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { RiSearchLine } from '@remixicon/vue'
 import { nextTick, onMounted, useId, useTemplateRef } from 'vue'
 

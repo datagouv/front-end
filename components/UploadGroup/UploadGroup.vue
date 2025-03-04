@@ -69,6 +69,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { computed } from 'vue'
 import { useDropZone } from '@vueuse/core'
 import PaddedContainer from '~/components/PaddedContainer/PaddedContainer.vue'

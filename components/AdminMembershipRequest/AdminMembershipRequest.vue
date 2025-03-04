@@ -94,6 +94,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RiCheckLine, RiUserAddLine } from '@remixicon/vue'

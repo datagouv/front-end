@@ -127,7 +127,7 @@
 </template>
 
 <script setup lang="ts">
-import { SimpleBanner } from '@datagouv/components-next'
+import { BrandedButton, SimpleBanner } from '@datagouv/components-next'
 import ActionCard from '~/components/ActionCard/ActionCard.vue'
 
 defineEmits<{

@@ -566,6 +566,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { SimpleBanner, type Frequency, type License } from '@datagouv/components-next'
 import { RiStarFill } from '@remixicon/vue'
 import { computed } from 'vue'

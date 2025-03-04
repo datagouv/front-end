@@ -303,6 +303,7 @@
 import { ref, computed, defineAsyncComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RiFileCopyLine } from '@remixicon/vue'
+import { useRoute } from 'vue-router'
 import OrganizationNameWithCertificate from '../OrganizationNameWithCertificate.vue'
 import { filesize, summarize } from '../../functions/helpers'
 import { markdown } from '../../functions/markdown'
@@ -413,7 +414,9 @@ const lastUpdate = props.resource.last_modified
 const availabilityChecked = props.resource.extras && 'check:available' in props.resource.extras
 const unavailable = availabilityChecked && props.resource.extras['check:available'] === false
 
-const resourceExternalUrl = computed(() => `${window.location.origin}${window.location.pathname}#/${props.isCommunityResource ? 'community-resources' : 'resources'}/${props.resource.id}`)
+const route = useRoute()
+
+const resourceExternalUrl = computed(() => `${route.fullPath}#/${props.isCommunityResource ? 'community-resources' : 'resources'}/${props.resource.id}`)
 
 const resourceContentId = 'resource-' + props.resource.id
 const resourceHeaderId = 'resource-' + props.resource.id + '-header'

@@ -66,6 +66,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
 import { RiCloseLine } from '@remixicon/vue'
 

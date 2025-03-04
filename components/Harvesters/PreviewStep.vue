@@ -28,6 +28,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import JobPage from './JobPage.vue'
 import PreviewLoader from './PreviewLoader.vue'
 import type { HarvesterForm, HarvesterJob } from '~/types/harvesters'

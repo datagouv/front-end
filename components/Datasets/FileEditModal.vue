@@ -172,7 +172,7 @@
                   v-if="form.filetype === 'remote'"
                   class="fr-fieldset__element min-width-0"
                   :accordion="chooseTheCorrectLinkAccordionId"
-                  @blur="touch('url')"
+                  <BrandedButton @blur="touch('url')"
                 >
                   <InputGroup
                     v-model="form.url"
@@ -395,6 +395,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { getResourceLabel, RESOURCE_TYPE, SimpleBanner, type Dataset, type DatasetV2, type Resource, type SchemaResponseData } from '@datagouv/components-next'
 import { cloneDeep } from 'lodash-es'
 import { RiDeleteBin6Line, RiPencilLine } from '@remixicon/vue'

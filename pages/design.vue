@@ -57,6 +57,18 @@
       <BannerAction />
       <BannerNotif />
       <OrganizationNameWithCertificate />
+
+      <DatasetCard
+        v-if="dataset"
+        :dataset
+        dataset-url="#"
+      />
+      <ResourceAccordion
+        v-if="dataset && dataset.resources.length"
+        :resource="dataset.resources[0]"
+        :dataset-id="dataset.id"
+      />
+
       <SearchInput />
       <div class="bg-white py-4 px-4 -mx-4">
         <NuxtSearchPage />
@@ -87,8 +99,7 @@
 </template>
 
 <script setup lang="ts">
-import { SimpleBanner } from '@datagouv/components-next'
-import { RiDeleteBinLine, RiDraggable } from '@remixicon/vue'
+import { DatasetCard, ResourceAccordion, SimpleBanner, type Dataset } from '@datagouv/components-next'
 import NuxtSearchPage from '~/components/Search/NuxtSearchPage.vue'
 import AdminBadge from '~/design-system/AdminBadge.vue'
 import BannerAction from '~/design-system/BannerAction.vue'
@@ -97,4 +108,6 @@ import BannerSticky from '~/design-system/BannerSticky.vue'
 import BrandedButton from '~/design-system/BrandedButton.vue'
 import OrganizationNameWithCertificate from '~/design-system/OrganizationNameWithCertificate.vue'
 import SearchInput from '~/design-system/SearchInput.vue'
+
+const { data: dataset } = await useAPI<Dataset>('/api/1/datasets/demandes-de-valeurs-foncieres')
 </script>

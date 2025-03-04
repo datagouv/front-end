@@ -126,7 +126,7 @@
 </template>
 
 <script setup lang="ts">
-import { Pagination } from '@datagouv/components-next'
+import { Pagination, BrandedButton } from '@datagouv/components-next'
 import { refDebounced } from '@vueuse/core'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -137,7 +137,6 @@ import BreadcrumbItem from '~/components/Breadcrumbs/BreadcrumbItem.vue'
 import AdminTable from '~/components/AdminTable/Table/AdminTable.vue'
 import AdminTableTh from '~/components/AdminTable/Table/AdminTableTh.vue'
 import type { Post } from '~/types/posts'
-import BrandedButton from '~/components/BrandedButton/BrandedButton.vue'
 
 const { t } = useI18n()
 

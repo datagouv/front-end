@@ -80,7 +80,7 @@
           class="space-y-2 flex flex-col items-start"
         >
           <div
-            v-for="size in ['lg', 'sm', 'xs']"
+            v-for="size in ['lg', 'sm', 'xs', '2xs']"
             :key="size"
           >
             <BrandedButton
@@ -102,5 +102,6 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { RiDeleteBinLine, RiDraggable, RiLightbulbFlashLine } from '@remixicon/vue'
 </script>

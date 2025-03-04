@@ -66,6 +66,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import type { Dataservice, Dataset, DatasetV2 } from '@datagouv/components-next'
 import Breadcrumb from '~/components/Breadcrumb/Breadcrumb.vue'
 import DescribeDataservice from '~/components/Dataservices/DescribeDataservice.vue'

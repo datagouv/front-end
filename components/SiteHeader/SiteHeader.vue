@@ -444,9 +444,9 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton, getUserAvatar } from '@datagouv/components-next'
 import { RiAccountCircleLine, RiAddLine, RiDatabase2Line, RiGovernmentLine, RiLockLine, RiMenuLine, RiSearchLine, RiRobot2Line, RiLineChartLine, RiServerLine, RiArticleLine, RiSettings3Line, RiLogoutBoxRLine } from '@remixicon/vue'
 import { Disclosure, DisclosureButton, DisclosurePanel, Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
-import { getUserAvatar } from '@datagouv/components-next'
 import { NuxtLinkLocale } from '#components'
 import SiteLogo from '~/components/SiteLogo.vue'
 import { useMaybeMe } from '~/utils/auth'

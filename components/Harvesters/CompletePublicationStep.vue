@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { SimpleBanner } from '@datagouv/components-next'
+import { BrandedButton, SimpleBanner } from '@datagouv/components-next'
 import { RiLightbulbLine } from '@remixicon/vue'
 import type { HarvesterSource } from '~/types/harvesters'
 

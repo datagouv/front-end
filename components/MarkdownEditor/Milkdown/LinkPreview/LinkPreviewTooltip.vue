@@ -36,6 +36,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { ref, toRaw } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { usePluginViewContext } from '@prosemirror-adapter/vue'

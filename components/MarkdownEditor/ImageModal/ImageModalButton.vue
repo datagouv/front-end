@@ -57,6 +57,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { useI18n } from 'vue-i18n'
 import { RiImageAddFill, RiImageLine } from '@remixicon/vue'
 import TooltipButton from '../EditorButton.vue'

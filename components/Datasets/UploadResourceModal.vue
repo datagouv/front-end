@@ -90,7 +90,7 @@
 
 <script setup lang="ts">
 import { RiUploadLine } from '@remixicon/vue'
-import BrandedButton from '../BrandedButton/BrandedButton.vue'
+import { BrandedButton } from '@datagouv/components-next'
 import ModalWithButton from '../Modal/ModalWithButton.vue'
 import UploadGroup from '../UploadGroup/UploadGroup.vue'
 import type { ResourceForm } from '~/types/types'
