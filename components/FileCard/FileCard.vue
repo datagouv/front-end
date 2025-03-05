@@ -74,13 +74,14 @@
           class="fr-grid-row fr-grid-row--middle no-wrap wrap-md"
         >
           <p class="fr-col-auto fr-m-0">
-            <button
-              type="button"
-              class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500 fr-icon-delete-line fr-icon--sm"
+            <BrandedButton
+              color="secondary"
+              :icon="RiDeleteBinLine"
+              icon-only
               @click="$emit('delete')"
             >
               {{ $t("Remove file") }}
-            </button>
+            </BrandedButton>
           </p>
           <p
             v-if="showEditAndWarning"
@@ -143,9 +144,9 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton, filesize as formatFilesize, ResourceIcon } from '@datagouv/components-next'
 import { computed } from 'vue'
-import { filesize as formatFilesize, ResourceIcon } from '@datagouv/components-next'
-import { RiCodeSSlashLine, RiInformationLine, RiLink, RiMapPin2Line } from '@remixicon/vue'
+import { RiCodeSSlashLine, RiDeleteBinLine, RiInformationLine, RiLink, RiMapPin2Line } from '@remixicon/vue'
 import FileEditModal from '../Datasets/FileEditModal.vue'
 import FileLoader from './FileLoader.vue'
 import type { ResourceForm } from '~/types/types'

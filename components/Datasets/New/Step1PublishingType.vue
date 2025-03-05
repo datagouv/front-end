@@ -31,12 +31,12 @@
           :stretch-height="true"
         >
           <template #actions>
-            <button
-              class="fr-btn"
+            <BrandedButton
+              color="primary"
               @click="$emit('start')"
             >
               {{ $t("Start publishing") }}
-            </button>
+            </BrandedButton>
           </template>
         </ActionCard>
       </div>
@@ -49,12 +49,12 @@
           :stretch-height="true"
         >
           <template #actions>
-            <a
-              class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500"
+            <BrandedButton
+              color="secondary"
               :href="config.public.schemaPublishingUrl"
             >
               {{ $t("Use our dedicated tool") }}
-            </a>
+            </BrandedButton>
           </template>
         </ActionCard>
       </div>
@@ -127,7 +127,7 @@
 </template>
 
 <script setup lang="ts">
-import { SimpleBanner } from '@datagouv/components-next'
+import { BrandedButton, SimpleBanner } from '@datagouv/components-next'
 import ActionCard from '~/components/ActionCard/ActionCard.vue'
 
 defineEmits<{

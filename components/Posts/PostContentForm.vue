@@ -32,6 +32,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import type { PostForm } from '~/types/posts'
 
 const props = defineProps<{

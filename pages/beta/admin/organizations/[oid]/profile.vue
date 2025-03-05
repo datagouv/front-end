@@ -30,12 +30,14 @@
           </div>
         </div>
         <div class="fr-col-auto">
-          <a
+          <BrandedButton
             :href="organization.page"
-            class="fr-btn fr-btn--sm fr-btn--secondary fr-btn--secondary-grey-500 fr-btn--icon-left fr-icon-eye-line"
+            color="secondary"
+            :icon="RiEyeLine"
+            size="xs"
           >
             {{ t('See the organization page') }}
-          </a>
+          </BrandedButton>
         </div>
       </div>
     </PaddedContainer>
@@ -89,15 +91,14 @@
                 <p>{{ t("If you want to delete your published content too, start by deleting the contents before deleting your account.") }}</p>
               </template>
               <template #footer>
-                <div class="flex-1 fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left">
-                  <button
-                    class="fr-btn fr-btn--secondary rounded-full !text-red-600 !border border-solid !border-red-600 !shadow-none"
-                    role="button"
+                <div class="flex-1 flex justify-end">
+                  <BrandedButton
+                    color="danger"
                     :disabled="loading"
                     @click="deleteCurrentOrganization"
                   >
                     {{ t("Delete the organization") }}
-                  </button>
+                  </BrandedButton>
                 </div>
               </template>
             </ModalWithButton>
@@ -109,10 +110,11 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { Placeholder, isOrganizationCertified, type NewOrganization, type Organization } from '@datagouv/components-next'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { RiDeleteBin6Line } from '@remixicon/vue'
+import { RiDeleteBin6Line, RiEyeLine } from '@remixicon/vue'
 import AdminLoader from '~/components/AdminLoader/AdminLoader.vue'
 import AdminBreadcrumb from '~/components/Breadcrumbs/AdminBreadcrumb.vue'
 import BreadcrumbItem from '~/components/Breadcrumbs/BreadcrumbItem.vue'
