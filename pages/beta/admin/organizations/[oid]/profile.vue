@@ -59,6 +59,7 @@
 
 <script setup lang="ts">
 import { Placeholder, isOrganizationCertified, type Organization } from '@datagouv/components-next'
+import { RiEyeLine } from '@remixicon/vue'
 import { useI18n } from 'vue-i18n'
 import AdminBreadcrumb from '~/components/Breadcrumbs/AdminBreadcrumb.vue'
 import BreadcrumbItem from '~/components/Breadcrumbs/BreadcrumbItem.vue'
@@ -70,8 +71,6 @@ const props = defineProps<{
 
 const localPath = useLocalePath()
 const { t } = useI18n()
-
-const { organizationCertified } = useOrganizationCertified(props.organization)
 
 const organizationUrl = computed(() => `/beta/admin/organizations/${props.organization?.id}/profile`)
 </script>
