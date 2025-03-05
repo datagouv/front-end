@@ -5,7 +5,7 @@
         v-for="link in links"
         :key="link.label"
         :to="link.href"
-        class="group block rounded !bg-none !bg-transparent !border border-transparent  -m-px no-underline outline-none aria-current-page:border aria-current-page:!border-primary aria-current-page:text-primary p-1"
+        class="group block rounded bg-none bg-transparent border border-transparent -m-px no-underline outline-none aria-current-page:border aria-current-page:border-primary aria-current-page:text-primary p-1"
         :aria-current="isCurrent(link.href) ? 'page': false"
       >
         <span class="rounded  px-2 ">
