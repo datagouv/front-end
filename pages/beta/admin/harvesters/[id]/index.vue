@@ -162,11 +162,10 @@
 </template>
 
 <script setup lang="ts">
-import { Pagination } from '@datagouv/components'
+import { Pagination, BrandedButton } from '@datagouv/components-next'
 import { RiArchiveLine, RiCheckLine, RiCloseLine, RiEyeOffLine } from '@remixicon/vue'
 import AdminTable from '~/components/AdminTable/Table/AdminTable.vue'
 import AdminTableTh from '~/components/AdminTable/Table/AdminTableTh.vue'
-import BrandedButton from '~/components/BrandedButton/BrandedButton.vue'
 import JobBadge from '~/components/Harvesters/JobBadge.vue'
 import type { HarvesterJob, HarvesterSource } from '~/types/harvesters'
 import type { PaginatedArray } from '~/types/types'

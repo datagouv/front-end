@@ -124,7 +124,6 @@
                 :label="$t('Copy API key')"
                 :copied-label="$t('API key copied')"
                 :text="user.apikey"
-                :hide-label="true"
               />
             </div>
           </div>
@@ -255,7 +254,7 @@
               <p>{{ $t("If you want to delete your published content too, start by deleting the contents before deleting your account.") }}</p>
             </template>
             <template #footer>
-              <div class="flex-1 fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left">
+              <div class="flex-1 flex justify-end">
                 <BrandedButton
                   color="danger"
                   :disabled="loading"
@@ -273,7 +272,8 @@
 </template>
 
 <script setup lang="ts">
-import { Avatar, CopyButton, type User } from '@datagouv/components'
+import { BrandedButton, CopyButton } from '@datagouv/components-next'
+import { Avatar, type User } from '@datagouv/components-next'
 import { RiDeleteBin6Line, RiEditLine, RiEyeLine, RiRecycleLine, RiSaveLine } from '@remixicon/vue'
 import AdminBreadcrumb from '../Breadcrumbs/AdminBreadcrumb.vue'
 import BreadcrumbItem from '../Breadcrumbs/BreadcrumbItem.vue'

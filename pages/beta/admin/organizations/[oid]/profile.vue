@@ -22,7 +22,7 @@
           <div class="fr-col fr-ml-3v fr-my-0 fr-h3">
             {{ organization.name }}
             <span
-              v-if="organizationCertified"
+              v-if="isOrganizationCertified(organization)"
               class="fr-icon-success-line fr-icon--lg text-blue-400"
               :title="t('The identity of this public service is certified by {certifier}', { certifier: $config.public.title })"
               aria-hidden="true"
@@ -30,12 +30,14 @@
           </div>
         </div>
         <div class="fr-col-auto">
-          <a
+          <BrandedButton
             :href="organization.page"
-            class="fr-btn fr-btn--sm fr-btn--secondary fr-btn--secondary-grey-500 fr-btn--icon-left fr-icon-eye-line"
+            color="secondary"
+            :icon="RiEyeLine"
+            size="xs"
           >
             {{ t('See the organization page') }}
-          </a>
+          </BrandedButton>
         </div>
       </div>
     </PaddedContainer>
@@ -56,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import { Placeholder, useOrganizationCertified, type Organization } from '@datagouv/components'
+import { Placeholder, isOrganizationCertified, type Organization } from '@datagouv/components-next'
 import { useI18n } from 'vue-i18n'
 import AdminBreadcrumb from '~/components/Breadcrumbs/AdminBreadcrumb.vue'
 import BreadcrumbItem from '~/components/Breadcrumbs/BreadcrumbItem.vue'

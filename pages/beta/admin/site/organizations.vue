@@ -137,7 +137,8 @@
 </template>
 
 <script setup lang="ts">
-import { Pagination, type Organization } from '@datagouv/components'
+import { BrandedButton } from '@datagouv/components-next'
+import { Pagination, type Organization } from '@datagouv/components-next'
 import { refDebounced } from '@vueuse/core'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'

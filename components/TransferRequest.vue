@@ -121,6 +121,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { RiCheckLine, RiCloseLine, RiSendPlaneLine } from '@remixicon/vue'
 import ModalClient from './Modal/Modal.client.vue'
 import type { TransferRequest } from '~/types/types'

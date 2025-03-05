@@ -7,13 +7,12 @@
       @submit="save"
     >
       <template #button>
-        <button
+        <BrandedButton
           type="submit"
-          class="fr-btn"
           :disabled="loading"
         >
           {{ t("Save") }}
-        </button>
+        </BrandedButton>
       </template>
       <div class="mt-5 space-y-5">
         <TransferBanner
@@ -30,7 +29,6 @@
           <template #button>
             <BrandedButton
               :icon="RiArchiveLine"
-              type="button"
               @click="archiveDataservice"
             >
               {{ dataservice.archived_at ? $t('Unarchive') : $t('Archive') }}
@@ -62,7 +60,7 @@
                 {{ $t("This action can't be reverse.") }}
               </p>
               <template #footer>
-                <div class="flex-1 fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left">
+                <div class="flex-1 flex justify-end">
                   <BrandedButton
                     color="danger"
                     :disabled="loading"
@@ -81,9 +79,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Dataservice } from '@datagouv/components'
+import type { Dataservice } from '@datagouv/components-next'
 import { RiArchiveLine, RiDeleteBin6Line } from '@remixicon/vue'
-import BrandedButton from '../BrandedButton/BrandedButton.vue'
+import { BrandedButton } from '@datagouv/components-next'
 import DescribeDataservice from '~/components/Dataservices/DescribeDataservice.vue'
 import type { DataserviceForm, LinkToSubject } from '~/types/types'
 import { toForm, toApi } from '~/utils/dataservices'

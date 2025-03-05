@@ -73,7 +73,7 @@
                   <template #option="{ option: user }">
                     <div class="flex items-center space-x-2">
                       <NuxtImg
-                        class="rounded-full border border-default-grey size-5"
+                        class="rounded-full border border-gray-default size-5"
                         :src="getUserAvatar(user, 24)"
                         loading="lazy"
                         alt=""
@@ -93,23 +93,24 @@
           </template>
 
           <template #footer="{ close }">
-            <div class="fr-btns-group fr-btns-group--right fr-btns-group--sm fr-btns-group--inline-lg fr-btns-group--icon-left">
-              <button
-                class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500"
-                type="button"
+            <div class="space-x-4">
+              <BrandedButton
+                color="secondary"
+                size="xs"
                 :disabled="loading"
                 @click="close"
               >
                 {{ t("Cancel") }}
-              </button>
-              <button
-                class="fr-btn"
+              </BrandedButton>
+              <BrandedButton
+                color="primary"
+                size="xs"
                 type="submit"
                 :form="addFormId"
                 :disabled="loading || !canSubmitNewMember"
               >
                 {{ t("Add to the organization") }}
-              </button>
+              </BrandedButton>
             </div>
           </template>
         </ModalWithButton>
@@ -191,13 +192,17 @@
                 @open="newRole = member.role"
               >
                 <template #button="{ attrs, listeners }">
-                  <button
-                    class="fr-btn fr-btn--sm fr-btn--secondary-grey-500 fr-btn--tertiary-no-outline fr-icon-pencil-line"
+                  <BrandedButton
+                    color="secondary-softer"
+                    :icon="RiPencilLine"
+                    icon-only
+                    size="xs"
+                    keep-margins-even-without-borders
                     v-bind="attrs"
                     v-on="listeners"
                   >
                     {{ t("Edit") }}
-                  </button>
+                  </BrandedButton>
                 </template>
 
                 <template #default="{ close }">
@@ -216,7 +221,27 @@
                       :email="member.user.email"
                     />
                   </div>
-
+                  <form
+                    class="flex flex-wrap gap-4 items-end"
+                    @submit.prevent="updateRole(member, close)"
+                  >
+                    <div class="flex-1">
+                      <SelectGroup
+                        v-if="roles.length > 0"
+                        v-model="newRole"
+                        :label="t('Role of the member')"
+                        :options="rolesOptions"
+                      />
+                    </div>
+                    <div>
+                      <BrandedButton
+                        type="submit"
+                        :disabled="loading"
+                      >
+                        {{ t("Validate") }}
+                      </BrandedButton>
+                    </div>
+                  </form>
                   <BannerAction
                     class="mt-4"
                     type="danger"
@@ -244,10 +269,11 @@
 </template>
 
 <script setup lang="ts">
-import { Avatar, getUserAvatar, type Member, type Organization } from '@datagouv/components'
+import { Avatar, getUserAvatar, type Member, type Organization } from '@datagouv/components-next'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { RiAddLine, RiLogoutBoxRLine, RiMailLine } from '@remixicon/vue'
+import { RiAddLine, RiLogoutBoxRLine, RiMailLine, RiPencilLine } from '@remixicon/vue'
+import { BrandedButton } from '@datagouv/components-next'
 import type { AdminBadgeType, MemberRole, PendingMembershipRequest, UserSuggest } from '~/types/types'
 import AdminTable from '~/components/AdminTable/Table/AdminTable.vue'
 import AdminTableTh from '~/components/AdminTable/Table/AdminTableTh.vue'
@@ -255,7 +281,6 @@ import ModalWithButton from '~/components/Modal/ModalWithButton.vue'
 import SelectGroup from '~/components/Form/SelectGroup/SelectGroup.vue'
 import SearchableSelect from '~/components/SearchableSelect.vue'
 import AdminMembershipRequest from '~/components/AdminMembershipRequest/AdminMembershipRequest.vue'
-import BrandedButton from '~/components/BrandedButton/BrandedButton.vue'
 import AdminBreadcrumb from '~/components/Breadcrumbs/AdminBreadcrumb.vue'
 import BreadcrumbItem from '~/components/Breadcrumbs/BreadcrumbItem.vue'
 

@@ -39,12 +39,12 @@
       @submit="dataserviceNext"
     >
       <template #button>
-        <button
+        <BrandedButton
           type="submit"
-          class="fr-btn"
+          color="primary"
         >
           {{ $t("Next") }}
-        </button>
+        </BrandedButton>
       </template>
     </DescribeDataservice>
     <Step2AddDatasets
@@ -66,7 +66,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Dataservice, Dataset, DatasetV2 } from '@datagouv/components'
+import { BrandedButton } from '@datagouv/components-next'
+import type { Dataservice, Dataset, DatasetV2 } from '@datagouv/components-next'
 import Breadcrumb from '~/components/Breadcrumb/Breadcrumb.vue'
 import DescribeDataservice from '~/components/Dataservices/DescribeDataservice.vue'
 import Step2AddDatasets from '~/components/Dataservices/New/Step2AddDatasets.vue'

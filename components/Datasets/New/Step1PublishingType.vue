@@ -3,9 +3,8 @@
     <h1 class="text-sm font-bold uppercase">
       {{ $t("Publishing type") }}
     </h1>
-    <Well
-      color="blue-cumulus"
-      weight="regular"
+    <SimpleBanner
+      type="primary"
       class="fr-mb-3w"
     >
       <span
@@ -20,7 +19,7 @@
           <a :href="config.public.demoServer.url">{{ config.public.demoServer.name }}</a>
         </template>
       </i18n-t>
-    </Well>
+    </SimpleBanner>
 
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-md-6">
@@ -32,12 +31,12 @@
           :stretch-height="true"
         >
           <template #actions>
-            <button
-              class="fr-btn"
+            <BrandedButton
+              color="primary"
               @click="$emit('start')"
             >
               {{ $t("Start publishing") }}
-            </button>
+            </BrandedButton>
           </template>
         </ActionCard>
       </div>
@@ -50,12 +49,12 @@
           :stretch-height="true"
         >
           <template #actions>
-            <a
-              class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500"
+            <BrandedButton
+              color="secondary"
               :href="config.public.schemaPublishingUrl"
             >
               {{ $t("Use our dedicated tool") }}
-            </a>
+            </BrandedButton>
           </template>
         </ActionCard>
       </div>
@@ -128,7 +127,7 @@
 </template>
 
 <script setup lang="ts">
-import { Well } from '@datagouv/components'
+import { BrandedButton, SimpleBanner } from '@datagouv/components-next'
 import ActionCard from '~/components/ActionCard/ActionCard.vue'
 
 defineEmits<{

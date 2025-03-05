@@ -68,24 +68,23 @@
         <template #footer="{ close }">
           <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--right">
             <div class="fr-col-auto">
-              <button
-                class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500"
-                type="button"
+              <BrandedButton
+                color="secondary"
                 :disabled="loading"
                 @click="close"
               >
                 {{ t("Cancel") }}
-              </button>
+              </BrandedButton>
             </div>
             <div class="fr-col-auto">
-              <button
-                class="fr-btn"
+              <BrandedButton
                 type="submit"
+                color="primary"
                 :disabled="loading || !refuseComment"
                 :form="refuseFormId"
               >
                 {{ t("Refuse request") }}
-              </button>
+              </BrandedButton>
             </div>
           </div>
         </template>
@@ -95,11 +94,10 @@
 </template>
 
 <script setup lang="ts">
-import { Avatar } from '@datagouv/components'
+import { BrandedButton } from '@datagouv/components-next'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RiCheckLine, RiUserAddLine } from '@remixicon/vue'
-import AdminEmail from '../AdminEmail.vue'
 import InputGroup from '../InputGroup/InputGroup.vue'
 import ModalWithButton from '../Modal/ModalWithButton.vue'
 import type { PendingMembershipRequest } from '~/types/types'

@@ -143,7 +143,6 @@
             <BrandedButton
               :icon="RiDeleteBinLine"
               size="xs"
-              type="button"
               color="secondary"
               @click="form.filters.splice(index, 1)"
             >
@@ -194,7 +193,6 @@
                 :icon="RiDeleteBinLine"
                 size="xs"
                 color="secondary"
-                type="button"
                 @click="form.configs.splice(index, 1)"
               >
                 {{ $t('Remove') }}
@@ -263,6 +261,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton, SimpleBanner } from '@datagouv/components-next'
 import { RiAddLine, RiDeleteBinLine } from '@remixicon/vue'
 import HelpAccordion from '../Form/HelpAccordion.vue'
 import FieldsetElement from '../Form/FieldsetElement.vue'
