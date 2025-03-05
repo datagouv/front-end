@@ -7,7 +7,6 @@
     <div class="fr-grid-row fr-grid-row--right">
       <BrandedButton
         color="primary"
-        :disabled="!datasets.length"
         @click="submit"
       >
         {{ t("Save") }}
