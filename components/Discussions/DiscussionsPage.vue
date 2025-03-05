@@ -71,6 +71,7 @@
                 :icon="RiEyeLine"
                 :href="getDiscussionUrl(thread.id, subject)"
                 external
+                keep-margins-even-without-borders
               />
             </td>
           </tr>
@@ -88,7 +89,7 @@
 </template>
 
 <script setup lang="ts">
-import { Pagination } from '@datagouv/components-next'
+import { BrandedButton, Pagination } from '@datagouv/components-next'
 import { useI18n } from 'vue-i18n'
 import { RiEyeLine } from '@remixicon/vue'
 import AdminTable from '../AdminTable/Table/AdminTable.vue'
