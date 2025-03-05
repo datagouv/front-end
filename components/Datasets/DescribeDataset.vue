@@ -346,7 +346,7 @@
           >
             <ContactPointSelect
               v-for="(contact_point, index) in form.contact_points"
-              :key="'id' in contact_point ? contact_point.id : index"
+              :key="contact_point && 'id' in contact_point ? contact_point.id : index"
               v-model="form.contact_points[index]"
               class="pt-3"
               :organization="form.owned?.organization"
