@@ -6,7 +6,7 @@
           <h5 class="fr-text--sm fr-my-0">
             {{ $t("Metadata quality:") }}
           </h5>
-          <ul class="list-style-none fr-m-0 fr-p-0">
+          <ul class="list-none pl-0">
             <DatasetQualityItem
               :passed="quality.dataset_description_quality"
               :message-passed="$t('Data description filled')"
