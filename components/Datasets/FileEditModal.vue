@@ -9,13 +9,17 @@
       v-if="!openOnMounted"
       #button="{ attrs, listeners }"
     >
-      <button
-        :class="buttonClasses"
+      <BrandedButton
+        color="secondary-softer"
         v-bind="attrs"
+        icon-only
+        :icon="RiPencilLine"
+        size="xs"
+        keep-margins-even-without-borders
         v-on="listeners"
       >
         {{ $t("Edit file") }}
-      </button>
+      </BrandedButton>
     </template>
 
     <template #default="{ close }">
@@ -372,7 +376,7 @@
                 {{ $t("This action can't be reverse.") }}
               </p>
               <template #footer>
-                <div class="flex-1 fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left">
+                <div class="flex-1 flex justify-end">
                   <BrandedButton
                     color="danger"
                     :loading="deleting"
@@ -391,9 +395,10 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { getResourceLabel, RESOURCE_TYPE, SimpleBanner, type Dataset, type DatasetV2, type Resource, type SchemaResponseData } from '@datagouv/components-next'
 import { cloneDeep } from 'lodash-es'
-import { RiDeleteBin6Line } from '@remixicon/vue'
+import { RiDeleteBin6Line, RiPencilLine } from '@remixicon/vue'
 import ModalWithButton from '../Modal/ModalWithButton.vue'
 import SelectGroup from '../Form/SelectGroup/SelectGroup.vue'
 import type { ResourceForm } from '~/types/types'
@@ -406,14 +411,12 @@ const formId = useId()
 
 const props = withDefaults(defineProps<{
   openOnMounted?: boolean
-  buttonClasses?: string
   loading?: boolean
   dataset?: Dataset | DatasetV2 | Omit<Dataset, 'resources' | 'community_resources'> // only require for deleting a resource :-(
   resource: ResourceForm
 }>(), {
   loading: false,
   openOnMounted: false,
-  buttonClasses: 'fr-btn fr-icon-pencil-line fr-icon--sm',
 })
 const emit = defineEmits<{
   (e: 'submit', close: () => void, file: ResourceForm): void

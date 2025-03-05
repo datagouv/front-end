@@ -96,6 +96,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { DatasetQualityScore, summarize, type Dataset } from '@datagouv/components-next'
 import { RiDownloadLine, RiEyeLine, RiInformationLine, RiLineChartLine, RiPriceTag3Line } from '@remixicon/vue'
 import AdminBreadcrumb from '~/components/Breadcrumbs/AdminBreadcrumb.vue'

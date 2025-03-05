@@ -30,16 +30,18 @@
       </div>
       <div class="flex items-center">
         <p class="fr-col-auto fr-ml-3v fr-m-0">
-          <a
+          <BrandedButton
             :disabled="!downloadStatsUrl"
             :href="downloadStatsUrl || ''"
             rel="ugc nofollow noopener"
             :title="t('Download file')"
             download="stats.csv"
-            class="relative fr-btn fr-btn--sm fr-btn--icon-left fr-icon-test-tube-line fr-icon-download-line fr-icon--sm z-2"
+            :icon="RiDownloadLine"
+            size="xs"
+            class="relative z-2"
           >
             {{ t('Download') }}
-          </a>
+          </BrandedButton>
         </p>
         <div
           class="fr-icon--sm fr-ml-4v"
@@ -78,7 +80,9 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { StatBox, type Organization } from '@datagouv/components-next'
+import { RiDownloadLine, RiTestTubeLine } from '@remixicon/vue'
 
 const props = defineProps<{
   organization: Organization

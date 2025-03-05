@@ -21,7 +21,6 @@
 
           <template #button>
             <BrandedButton
-              type="button"
               @click="publishPost"
             >
               {{ post.published ? $t('Unpublish') : $t('Publish') }}
@@ -34,6 +33,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import BannerAction from '~/components/BannerAction.vue'
 import DescribePost from '~/components/Posts/DescribePost.vue'
 import type { Post, PostForm } from '~/types/posts'
