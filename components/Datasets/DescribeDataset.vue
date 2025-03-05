@@ -336,7 +336,7 @@
             class="fr-fieldset__legend"
           >
             <h2 class="text-sm font-bold uppercase mb-0">
-              {{ t("Attributions") }}
+              {{ harvested ? t("Attributions and Contact points") : t("Contact points") }}
             </h2>
           </legend>
           <LinkedToAccordion
@@ -364,7 +364,7 @@
               :icon="RiAddLine"
               @click="form.contact_points.push({ ...defaultContactForm })"
             >
-              {{ t('New Attribution') }}
+              {{ harvested ? t('New Attribution') : t('New Contact') }}
             </BrandedButton>
           </LinkedToAccordion>
         </fieldset>
@@ -589,6 +589,7 @@ const datasetForm = defineModel<DatasetForm>({ required: true })
 const props = defineProps<{
   submitLabel: string
   type: 'create' | 'update'
+  harvested?: boolean
 }>()
 const emit = defineEmits<{
   previous: []

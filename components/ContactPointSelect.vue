@@ -4,9 +4,9 @@
       <SearchableSelect
         v-model="contact"
         :options="contactsWithNewOption"
-        :label="t('Choose the attribution with which you want to publish')"
-        :placeholder="t('Select an attribution')"
-        :display-value="(option) => 'id' in option ? (option.name || option.email || $t('Unknown')) : t('New attribution')"
+        :label="showAttributions ? t('Choose the attribution with which you want to publish') : t('Choose the contact point with which you want to publish')"
+        :placeholder="showAttributions ? t('Select an attribution') : t('Select a contact point')"
+        :display-value="(option) => 'id' in option ? (option.name || option.email || $t('Unknown')) : (showAttributions ? t('New attribution') : t('New contact point'))"
         :get-option-id="(option) => 'id' in option ? option.id : 'new'"
         :multiple="false"
         :loading
@@ -25,16 +25,19 @@
               {{ $t('Unknown') }}
             </template>
             <AdminBadge
-              v-if="getRole(option.role)"
+              v-if="showAttributions && getRole(option.role)"
               size="xs"
               type="primary"
               class="ml-1"
             >
-              {{ getRole(option.role).label }}
+              {{ getRole(option.role)?.label }}
             </AdminBadge>
           </span>
-          <span v-else>
+          <span v-else-if="showAttributions">
             {{ t('New attribution') }}
+          </span>
+          <span v-else>
+            {{ t('New contact point') }}
           </span>
         </template>
       </SearchableSelect>
@@ -44,6 +47,7 @@
       class="fr-fieldset__element grid grid-cols-2 gap-3 mt-2"
     >
       <SelectGroup
+        v-if="showAttributions"
         v-model="newContactForm.role"
         :options
         class="mb-0"
@@ -57,6 +61,7 @@
       <InputGroup
         v-model="newContactForm.name"
         class="mb-0"
+        :class="{ 'col-span-2': !showAttributions }"
         required
         :label="t('Name')"
         placeholder="e.g. the service name"
@@ -93,7 +98,7 @@
       class="mt-2 fr-fieldset__element"
     >
       <p
-        v-if="getRole(contact.role)"
+        v-if="showAttributions && contact && getRole(contact.role)"
         class="flex items-center gap-1 mb-2"
       >
         {{ t("Role:") }}
@@ -101,7 +106,7 @@
           size="sm"
           type="primary"
         >
-          {{ getRole(contact.role).label }}
+          {{ getRole(contact.role)?.label }}
         </AdminBadge>
       </p>
       <p
@@ -128,6 +133,17 @@ import SelectGroup from '~/components/Form/SelectGroup/SelectGroup.vue'
 import InputGroup from '~/components/InputGroup/InputGroup.vue'
 import type { ContactPoint, ContactPointInForm, NewContactPoint, PaginatedArray } from '~/types/types'
 
+const contact = defineModel<ContactPointInForm | null>()
+
+const props = defineProps<{
+  organization: Organization
+  showAttributions?: boolean
+  errorText?: string | null
+  warningText?: string | null
+}>()
+
+type ContactType = { id: string, label: string }
+
 const { t } = useI18n()
 
 const { form: newContactForm, getFirstError, getFirstWarning, touch } = useForm({
@@ -138,16 +154,6 @@ const { form: newContactForm, getFirstError, getFirstWarning, touch } = useForm(
   contact_form: [url()],
   role: [required()],
 }, {})
-
-const contact = defineModel<ContactPointInForm | null>()
-
-const props = defineProps<{
-  organization: Organization
-  errorText?: string | null
-  warningText?: string | null
-}>()
-
-type ContactType = { id: string, label: string }
 
 watchEffect(() => {
   if (contact.value && !('id' in contact.value)) {
@@ -179,7 +185,7 @@ function getRole(role: string) {
 
 const contactsWithNewOption = computed<Array<ContactPointInForm>>(() => {
   return [
-    ...contacts.value?.data || [],
+    ...contacts.value?.data.filter(c => c.role === 'contact') || [],
     newContactForm.value,
   ]
 })
