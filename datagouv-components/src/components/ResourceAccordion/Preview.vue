@@ -152,15 +152,11 @@ async function getTableInfos(page: number, sortConfig?: SortConfig) {
       loading.value = false
     }
     else {
-      console.log('error here')
-      console.log(data)
       hasError.value = true
       loading.value = false
     }
   }
-  catch (e) {
-    console.log('here')
-    console.error(e)
+  catch {
     hasError.value = true
     loading.value = false
   }
