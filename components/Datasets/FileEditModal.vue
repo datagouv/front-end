@@ -172,7 +172,7 @@
                   v-if="form.filetype === 'remote'"
                   class="fr-fieldset__element min-width-0"
                   :accordion="chooseTheCorrectLinkAccordionId"
-                  <BrandedButton @blur="touch('url')"
+                  @blur="touch('url')"
                 >
                   <InputGroup
                     v-model="form.url"
