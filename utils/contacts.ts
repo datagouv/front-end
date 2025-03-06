@@ -2,6 +2,8 @@ import type { Organization } from '@datagouv/components-next'
 import type { $Fetch } from 'ofetch'
 import type { ContactPoint, NewContactPoint } from '~/types/types'
 
+export type ContactType = { id: string, label: string }
+
 export async function newContactPoint(api: $Fetch, organization: Organization, contactPoint: NewContactPoint): Promise<ContactPoint> {
   return await api<ContactPoint>('/api/1/contacts/', {
     method: 'POST',
@@ -15,7 +17,7 @@ export async function newContactPoint(api: $Fetch, organization: Organization, c
   })
 }
 
-export async function updateContactPoint(api: $Fetch, organization: Organization, contactPoint: ContactPoint): Promise<ContactPoint> {
+export async function saveContactPoint(api: $Fetch, organization: Organization, contactPoint: ContactPoint): Promise<ContactPoint> {
   return await api<ContactPoint>(`/api/1/contacts/${contactPoint.id}/`, {
     method: 'PUT',
     body: JSON.stringify({

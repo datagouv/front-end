@@ -1,6 +1,6 @@
 <template>
   <span
-    class="inline-flex items-center space-x-1 font-bold  uppercase"
+    class="inline-flex items-center space-x-1 font-bold uppercase"
     :class="[colors, sizes]"
   >
     <component

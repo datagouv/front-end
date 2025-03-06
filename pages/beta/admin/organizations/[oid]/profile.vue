@@ -58,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import { Placeholder, isOrganizationCertified, type Organization } from '@datagouv/components-next'
+import { BrandedButton, Placeholder, isOrganizationCertified, type Organization } from '@datagouv/components-next'
 import { RiEyeLine } from '@remixicon/vue'
 import { useI18n } from 'vue-i18n'
 import AdminBreadcrumb from '~/components/Breadcrumbs/AdminBreadcrumb.vue'

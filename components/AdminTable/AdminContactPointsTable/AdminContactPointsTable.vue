@@ -2,25 +2,18 @@
   <AdminTable>
     <thead>
       <AdminTableTh scope="col">
-        {{ t("Resource title") }}
+        {{ t("Contact point name") }}
       </AdminTableTh>
       <AdminTableTh class="w-44">
-        {{ t("Status") }}
+        {{ t("Role") }}
       </AdminTableTh>
-      <AdminTableTh class="w-14">
-        {{ t("Format") }}
-      </AdminTableTh>
-      <AdminTableTh
-        class="w-32"
-        scope="col"
-      >
-        {{ t("Created at") }}
+      <AdminTableTh>
+        {{ t("Contact Email") }}
       </AdminTableTh>
       <AdminTableTh
-        class="w-32"
         scope="col"
       >
-        {{ t("Modified at") }}
+        {{ t("Contact Url") }}
       </AdminTableTh>
       <AdminTableTh
         class="w-32"
@@ -31,51 +24,93 @@
     </thead>
     <tbody>
       <tr
-        v-for="communityResource in communityResources"
-        :key="communityResource.id"
+        v-for="contactPoint in contactPoints"
+        :key="contactPoint.id"
       >
-        <td>
-          <AdminContentWithTooltip class="fr-text--bold">
-            <a
-              class="fr-link fr-reset-link"
-              :href="getCommunityResourceLinkToAdmin(communityResource)"
-            >
-              <TextClamp
-                :text="communityResource.title"
-                :auto-resize="true"
-                :max-lines="2"
-              />
-            </a>
-          </AdminContentWithTooltip>
-          <p v-if="communityResource.dataset">
-            <LinkToSubject
-              type="Dataset"
-              :subject="communityResource.dataset"
-            />
-          </p>
+        <td class="font-bold">
+          {{ contactPoint.name }}
         </td>
         <td>
           <AdminBadge
             size="xs"
-            :type="getStatus(communityResource).type"
+            type="secondary"
           >
-            {{ getStatus(communityResource).label }}
+            {{ getRoleLabel(contactPoint) }}
           </AdminBadge>
         </td>
         <td>
-          <code class="fr-p-1v font-mono bg-grey-100 fr-text--sm text-mention-grey rounded">{{ communityResource.format }}</code>
+          {{ contactPoint.email }}
         </td>
-        <td>{{ formatDate(communityResource.created_at) }}</td>
-        <td>{{ formatDate(communityResource.last_modified) }}</td>
         <td>
-          <FileEditModal
-            :dataset="communityResource.dataset"
-            :loading
-            :resource="resourceToForm(communityResource, schemas || [])"
-            button-classes="fr-btn fr-btn--sm fr-btn--secondary-grey-500 fr-btn--tertiary-no-outline fr-icon-pencil-line"
-            @submit="(closeModal, resourceForm) => updateResource(communityResource, closeModal, resourceForm)"
-            @delete="$emit('refresh')"
-          />
+          <div class="break-all truncate">
+            {{ contactPoint.contact_form }}
+          </div>
+        </td>
+        <td>
+          <ModalWithButton
+            :title="$t('Edit the contact point')"
+            size="lg"
+            @open="newContactForm = contactPoint"
+            @close="newContactForm = null"
+          >
+            <template #button="{ attrs, listeners }">
+              <BrandedButton
+                color="secondary-softer"
+                :icon="RiPencilLine"
+                icon-only
+                size="xs"
+                keep-margins-even-without-borders
+                v-bind="attrs"
+                v-on="listeners"
+              >
+                {{ $t('Transfer') }}
+              </BrandedButton>
+            </template>
+            <div class="space-y-4">
+              <RequiredExplanation />
+              <InputGroup
+                v-model="newContactForm.name"
+                required
+                :label="t('Name')"
+                placeholder="e.g. the service name"
+                :has-error="!!getFirstError('name')"
+                :error-text="getFirstError('name')"
+                @blur="touch('name')"
+              />
+              <SelectGroup
+                v-model="newContactForm.role"
+                :options
+                required
+                :label="t('Role')"
+                @blur="touch('role')"
+              />
+              <InputGroup
+                v-model="newContactForm.email"
+                type="email"
+                :label="t('Email')"
+                placeholder="contact@organization.org"
+                @blur="touch('email')"
+              />
+              <InputGroup
+                v-model="newContactForm.contact_form"
+                type="url"
+                :label="t('Link')"
+                placeholder="https://..."
+                @blur="touch('contact_form')"
+              />
+            </div>
+            <template #footer="{ close }">
+              <div class="flex-1 flex justify-end">
+                <BrandedButton
+                  color="primary"
+                  :loading
+                  @click="updateContactPoint(close)"
+                >
+                  {{ $t('Validation') }}
+                </BrandedButton>
+              </div>
+            </template>
+          </ModalWithButton>
         </td>
       </tr>
     </tbody>
@@ -83,30 +118,65 @@
 </template>
 
 <script setup lang="ts">
-import AdminBadge from '../../../components/AdminBadge/AdminBadge.vue'
-import AdminTable from '../../../components/AdminTable/Table/AdminTable.vue'
-import AdminTableTh from '../../../components/AdminTable/Table/AdminTableTh.vue'
-import AdminContentWithTooltip from '../../../components/AdminContentWithTooltip/AdminContentWithTooltip.vue'
+import { BrandedButton, type Organization } from '@datagouv/components-next'
+import { RiPencilLine } from '@remixicon/vue'
+import AdminBadge from '~/components/AdminBadge/AdminBadge.vue'
+import AdminTable from '~/components/AdminTable/Table/AdminTable.vue'
+import AdminTableTh from '~/components/AdminTable/Table/AdminTableTh.vue'
+import SelectGroup from '~/components/Form/SelectGroup/SelectGroup.vue'
 import type { ContactPoint } from '~/types/types'
 
-defineProps<{
+const props = defineProps<{
   contactPoints: Array<ContactPoint>
+  organization: Organization
 }>()
 
 const emit = defineEmits<{
   (event: 'refresh'): void
 }>()
 
-const config = useRuntimeConfig()
+const { $api } = useNuxtApp()
+
 const { t } = useI18n()
 const { toast } = useToast()
 
+// TODO: use defaultContactForm
+const { form: newContactForm, getFirstError, touch } = useForm({
+  id: '',
+  name: '',
+  email: '',
+  contact_form: '',
+  role: 'contact',
+} as ContactPoint, {
+  id: [required()],
+  name: [required()],
+  email: [email()],
+  contact_form: [url()],
+  role: [required()],
+}, {})
+
 const loading = ref(false)
-async function updateContactPoint(contactPoint: ContactPoint, closeModal: () => void, contactForm: ContactPointForm) {
+
+const roleKey = '/api/1/contacts/roles/'
+const { data: rolesList } = await useAPI<Array<ContactType>>(roleKey, {
+  key: roleKey,
+  // getCachedData: getDataFromSSRPayload, add when available
+})
+
+const options = computed(() => rolesList.value?.map(r => ({
+  label: r.label,
+  value: r.id,
+})) ?? [])
+
+function getRoleLabel(contact: ContactPoint) {
+  return rolesList.value?.find(role => role.id === contact.role)?.label
+}
+
+async function updateContactPoint(closeModal: () => void) {
   loading.value = true
 
   try {
-    // await saveResourceForm(communityResource.dataset, contactForm)
+    await saveContactPoint($api, props.organization, newContactForm.value)
     emit('refresh')
     closeModal()
   }
