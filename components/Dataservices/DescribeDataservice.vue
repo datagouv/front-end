@@ -58,12 +58,21 @@
           </p>
         </Accordion>
         <Accordion
-          :id="addEndpointUrlAccordionId"
-          :title="t('Add a link to the technical documentation')"
-          :state="accordionState('endpoint_description_url')"
+          :id="machineDocumentationUrlAccordionId"
+          :title="t('Add a link to the machine documentation')"
+          :state="accordionState('machine_documentation_url')"
         >
           <p class="fr-m-0">
             {{ t("Ideally, provide an OpenAPI (swagger) link that allows developers to explore the endpoints, see the available methods, and test requests directly from the documentation. In the case of geographic services, you can provide a link to the service with a GetCapabilities request to obtain the service's metadata.") }}
+          </p>
+        </Accordion>
+        <Accordion
+          :id="technicalDocumentationUrlAccordionId"
+          :title="t('Add a link to the technical documentation')"
+          :state="accordionState('machine_documentation_url')"
+        >
+          <p class="fr-m-0">
+            {{ t("Add access to the general technical documentation of the API and indicate the integration steps.") }}
           </p>
         </Accordion>
         <Accordion
@@ -95,35 +104,19 @@
           </p>
         </Accordion>
         <Accordion
-          :id="selectIsRestrictedAccordionId"
+          :id="accessTypeAccordionId"
           :title="$t('Select an access type')"
-          :state="accordionState('is_restricted')"
+          :state="accordionState('access_type')"
         >
           <p class="fr-m-0">
-            {{ $t("Choose the access type (open or restricted). Select open if the data is open data.") }}
+            {{ $t("Choose the access type (open, open with account or restricted). Select open if the data is open data.") }}
           </p>
           <SimpleBanner
-            v-if="getFirstWarning('is_restricted')"
+            v-if="getFirstWarning('access_type')"
             class="font-bold mt-2"
             type="warning"
           >
-            {{ getFirstWarning("is_restricted") }}
-          </SimpleBanner>
-        </Accordion>
-        <Accordion
-          :id="selectHasTokenAccordionId"
-          :title="$t('Add an access token')"
-          :state="accordionState('has_token')"
-        >
-          <p class="fr-m-0">
-            {{ $t("Please indicate whether the dataservice is freely accessible or whether a user requires a token to access the data.") }}
-          </p>
-          <SimpleBanner
-            v-if="getFirstWarning('has_token')"
-            class="font-bold mt-2"
-            type="warning"
-          >
-            {{ getFirstWarning("has_token") }}
+            {{ getFirstWarning("access_type") }}
           </SimpleBanner>
         </Accordion>
         <Accordion
@@ -272,19 +265,36 @@
           </LinkedToAccordion>
           <LinkedToAccordion
             class="fr-fieldset__element"
-            :accordion="addEndpointUrlAccordionId"
-            @blur="touch('endpoint_description_url')"
+            :accordion="machineDocumentationUrlAccordionId"
+            @blur="touch('machine_documentation_url')"
           >
             <InputGroup
-              v-model="form.endpoint_description_url"
-              :aria-describedby="addEndpointUrlAccordionId"
+              v-model="form.machine_documentation_url"
+              :aria-describedby="machineDocumentationUrlAccordionId"
               :label="t('Dataservice endpoint description URL')"
               type="url"
               placeholder="https://..."
               :required="false"
-              :has-error="!!getFirstError('endpoint_description_url')"
-              :has-warning="!!getFirstWarning('endpoint_description_url')"
-              :error-text="getFirstError('endpoint_description_url')"
+              :has-error="!!getFirstError('machine_documentation_url')"
+              :has-warning="!!getFirstWarning('machine_documentation_url')"
+              :error-text="getFirstError('machine_documentation_url')"
+            />
+          </LinkedToAccordion>
+          <LinkedToAccordion
+            class="fr-fieldset__element"
+            :accordion="technicalDocumentationUrlAccordionId"
+            @blur="touch('technical_documentation_url')"
+          >
+            <InputGroup
+              v-model="form.technical_documentation_url"
+              :aria-describedby="technicalDocumentationUrlAccordionId"
+              :label="t('Dataservice endpoint description URL')"
+              type="url"
+              placeholder="https://..."
+              :required="false"
+              :has-error="!!getFirstError('technical_documentation_url')"
+              :has-warning="!!getFirstWarning('technical_documentation_url')"
+              :error-text="getFirstError('technical_documentation_url')"
             />
           </LinkedToAccordion>
           <LinkedToAccordion
@@ -367,31 +377,17 @@
           </legend>
           <LinkedToAccordion
             class="fr-fieldset__element"
-            :accordion="selectIsRestrictedAccordionId"
-            @blur="touch('is_restricted')"
+            :accordion="accessTypeAccordionId"
+            @blur="touch('access_type')"
           >
             <RadioButtons
-              v-model="form.is_restricted"
+              v-model="form.access_type"
               class="!mb-0"
               :label="t('Access type')"
               :options="[
-                { value: false, label: t('Open') },
-                { value: true, label: t('Restricted') },
-              ]"
-            />
-          </LinkedToAccordion>
-          <LinkedToAccordion
-            class="fr-fieldset__element"
-            :accordion="selectHasTokenAccordionId"
-            @blur="touch('has_token')"
-          >
-            <RadioButtons
-              v-model="form.has_token"
-              :label="t('Access token')"
-              class="!mb-0"
-              :options="[
-                { value: true, label: t('With access token') },
-                { value: false, label: t('Without access token') },
+                { value: 'open', label: t('Open') },
+                { value: 'open_with_account', label: t('Open with account') },
+                { value: 'restricted', label: t('Restricted') },
               ]"
             />
           </LinkedToAccordion>
@@ -488,11 +484,11 @@ const user = useMe()
 const nameDataserviceAccordionId = useId()
 const acronymDataserviceAccordionId = useId()
 const addDescriptionAccordionId = useId()
-const selectIsRestrictedAccordionId = useId()
-const selectHasTokenAccordionId = useId()
+const accessTypeAccordionId = useId()
 const addBaseUrlAccordionId = useId()
 const addAuthorizationUrlAccordionId = useId()
-const addEndpointUrlAccordionId = useId()
+const machineDocumentationUrlAccordionId = useId()
+const technicalDocumentationUrlAccordionId = useId()
 const addBusinessUrlAccordionId = useId()
 const rateLimitingDataserviceAccordionId = useId()
 const availabilityDataserviceAccordionId = useId()
@@ -508,7 +504,8 @@ const { form, touch, getFirstError, getFirstWarning, validate } = useForm(datase
   description: [required()],
   base_api_url: [url()],
   authorization_request_url: [url()],
-  endpoint_description_url: [url()],
+  technical_documentation_url: [url()],
+  machine_documentation_url: [url()],
   business_documentation_url: [url()],
   private: [],
 }, {
