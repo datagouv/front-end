@@ -5,19 +5,19 @@
   >
     <DatasetsSelect v-model="datasets" />
     <div class="fr-grid-row fr-grid-row--right">
-      <button
-        type="button"
-        class="fr-btn"
+      <BrandedButton
+        color="primary"
         :disabled="!datasets.length"
         @click="submit"
       >
         {{ t("Save") }}
-      </button>
+      </BrandedButton>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import type { Dataset, DatasetV2, Reuse } from '@datagouv/components-next'
 import type { DatasetSuggest } from '~/types/types'
 

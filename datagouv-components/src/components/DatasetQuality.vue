@@ -1,10 +1,6 @@
 <template>
   <div class="fr-grid-row fr-grid-row--middle fr-ml-n1v">
-    <Toggletip
-      class="fr-btn--secondary-grey-500"
-      icon="fr-icon-info-line"
-      size="md"
-    >
+    <Toggletip>
       {{ $t('Metadata quality:') }}
       <template #toggletip>
         <h5 class="fr-text--sm fr-my-0">
