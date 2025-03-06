@@ -22,7 +22,6 @@
           <template #button>
             <BrandedButton
               :icon="RiArchiveLine"
-              type="button"
               @click="archiveDataset"
             >
               {{ dataset.archived ? $t('Unarchive') : $t('Archive') }}
@@ -53,7 +52,7 @@
                 {{ $t("This action can't be reverse.") }}
               </p>
               <template #footer>
-                <div class="flex-1 fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left">
+                <div class="flex-1 flex justify-end">
                   <BrandedButton
                     color="danger"
                     :disabled="loading"
@@ -72,9 +71,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Dataset, Frequency, License } from '@datagouv/components'
+import { BrandedButton } from '@datagouv/components-next'
+import type { Dataset, Frequency, License } from '@datagouv/components-next'
 import { RiArchiveLine, RiDeleteBin6Line } from '@remixicon/vue'
-import BrandedButton from '../BrandedButton/BrandedButton.vue'
 import DescribeDataset from '~/components/Datasets/DescribeDataset.vue'
 import type { DatasetForm, EnrichedLicense, SpatialGranularity } from '~/types/types'
 import { toForm, toApi } from '~/utils/datasets'

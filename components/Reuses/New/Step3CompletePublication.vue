@@ -1,8 +1,7 @@
 <template>
   <div class="fr-p-3w bg-white">
-    <Well
-      color="blue-cumulus"
-      weight="regular"
+    <SimpleBanner
+      type="primary"
       class="mb-6"
     >
       <div class="fr-grid-row">
@@ -22,7 +21,7 @@
           </p>
         </div>
       </div>
-    </Well>
+    </SimpleBanner>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mb-3">
       <ReuseCard
         :reuse
@@ -30,13 +29,15 @@
       />
     </div>
     <div class="flex justify-between">
-      <a
+      <BrandedButton
         v-if="config.public.publishingReuseFeedbackUrl"
         :href="config.public.publishingReuseFeedbackUrl"
-        class="fr-btn fr-btn--tertiary-no-outline fr-btn--secondary-grey-500 fr-btn--icon-left fr-icon-lightbulb-line"
+        color="secondary-softer"
+        :icon="RiLightbulbLine"
+        new-tab
       >
         {{ $t('Give us your feedback on the publishing form') }}
-      </a>
+      </BrandedButton>
       <div class="fr-grid-row fr-grid-row--right">
         <BrandedButton
           class="mr-3"
@@ -59,7 +60,9 @@
 </template>
 
 <script setup lang="ts">
-import { Well, type Reuse } from '@datagouv/components'
+import { BrandedButton } from '@datagouv/components-next'
+import { SimpleBanner, type Reuse } from '@datagouv/components-next'
+import { RiLightbulbLine } from '@remixicon/vue'
 import ReuseCard from '~/components/Reuses/Card/NuxtCard.vue'
 
 defineProps<{

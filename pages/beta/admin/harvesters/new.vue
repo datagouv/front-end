@@ -39,12 +39,12 @@
       @submit="harvesterNext"
     >
       <template #button>
-        <button
+        <BrandedButton
           type="submit"
-          class="fr-btn"
+          color="primary"
         >
           {{ $t("Next") }}
-        </button>
+        </BrandedButton>
       </template>
     </DescribeHarvester>
 
@@ -64,6 +64,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import Breadcrumb from '~/components/Breadcrumb/Breadcrumb.vue'
 import CompletePublicationStep from '~/components/Harvesters/CompletePublicationStep.vue'
 import DescribeHarvester from '~/components/Harvesters/DescribeHarvester.vue'

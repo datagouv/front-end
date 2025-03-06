@@ -68,8 +68,9 @@
         <template #footer="{ close }">
           <div
             v-if="existingTransfers && !existingTransfers.length"
-            class="flex-1 fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left"
+            class="flex-1 flex justify-end"
           >
+            <!-- TODO @SwitchToForm -->
             <BrandedButton
               color="primary"
               :loading
@@ -86,10 +87,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Dataservice, Dataset, DatasetV2, Reuse } from '@datagouv/components'
-import type { Owned } from '@datagouv/components/ts'
+import type { Dataservice, Dataset, DatasetV2, Reuse, Owned } from '@datagouv/components-next'
 import { RiSendPlaneLine } from '@remixicon/vue'
-import BrandedButton from './BrandedButton/BrandedButton.vue'
+import { BrandedButton } from '@datagouv/components-next'
 import type { LinkToSubject, TransferRequest } from '~/types/types'
 
 const props = defineProps<{

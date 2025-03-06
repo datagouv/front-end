@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Reuse } from '@datagouv/components'
+import { ReuseCard, type Reuse } from '@datagouv/components-next'
 import type { StyleValue } from 'vue'
 import ReuseCard from '~/components/Reuses/Card/ReuseCard.vue'
 

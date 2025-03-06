@@ -65,6 +65,7 @@
 </template>
 
 <script setup lang="ts">
+import { SimpleBanner } from '@datagouv/components-next'
 import AdminLoader from '../AdminLoader/AdminLoader.vue'
 import AdminTable from '~/components/AdminTable/Table/AdminTable.vue'
 import AdminTableTh from '~/components/AdminTable/Table/AdminTableTh.vue'

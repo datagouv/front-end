@@ -1,8 +1,7 @@
 <template>
   <PaddedContainer>
-    <Well
-      color="blue-cumulus"
-      weight="regular"
+    <SimpleBanner
+      type="primary"
       class="-mb-3"
     >
       <div class="flex flex-wrap gap-3">
@@ -23,7 +22,7 @@
           </p>
         </div>
       </div>
-    </Well>
+    </SimpleBanner>
     <article class="my-6 p-6 !border border-neutral-200 fr-enlarge-link">
       <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--top">
         <div class="fr-col-auto">
@@ -44,7 +43,7 @@
           <h4 class="fr-mb-1v fr-grid-row">
             <a
               :href="organization.page"
-              class="text-grey-500"
+              class="text-gray-title"
             >
               {{ organization.name }}
               <small v-if="organization.acronym">{{ organization.acronym }}</small>
@@ -62,24 +61,24 @@
       </div>
     </article>
     <div class="fr-grid-row fr-grid-row--right gap-3">
-      <NuxtLinkLocale
-        :to="`/beta/admin/organizations/${organization.id}/profile`"
-        class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500"
+      <BrandedButton
+        color="secondary"
+        :href="`/beta/admin/organizations/${organization.id}/profile`"
       >
         {{ $t("Manage the organization") }}
-      </NuxtLinkLocale>
-      <NuxtLinkLocale
-        to="/beta/admin/reuses/new"
-        class="fr-btn"
+      </BrandedButton>
+      <BrandedButton
+        href="/beta/admin/reuses/new"
+        color="primary"
       >
         {{ $t("Publish a reuse") }}
-      </NuxtLinkLocale>
-      <NuxtLinkLocale
-        to="/beta/admin/datasets/new"
-        class="fr-btn"
+      </BrandedButton>
+      <BrandedButton
+        href="/beta/admin/datasets/new"
+        color="primary"
       >
         {{ $t("Publish a dataset") }}
-      </NuxtLinkLocale>
+      </BrandedButton>
     </div>
     <Alert
       v-if="errors?.length"
@@ -105,7 +104,8 @@
 </template>
 
 <script setup lang="ts">
-import { removeMarkdown, Well, type Organization } from '@datagouv/components'
+import { BrandedButton } from '@datagouv/components-next'
+import { removeMarkdown, SimpleBanner, type Organization } from '@datagouv/components-next'
 
 defineProps<{
   organization: Organization

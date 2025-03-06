@@ -21,7 +21,7 @@
         </li>
       </Breadcrumb>
     </div>
-    <div class="border-b border-grey-lowest">
+    <div class="border-b border-gray-lowest">
       <div class="container">
         <h1 class="text-4.5xl font-extrabold pt-10 pb-[3.75rem] !mb-0">
           {{ $t('Posts') }}
@@ -49,6 +49,7 @@
 </template>
 
 <script setup lang="ts">
+import { Pagination } from '@datagouv/components-next'
 import Breadcrumb from '~/components/Breadcrumb/Breadcrumb.vue'
 import type { Post } from '~/types/posts'
 import type { PaginatedArray } from '~/types/types'

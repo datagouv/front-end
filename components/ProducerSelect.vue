@@ -23,7 +23,7 @@
         />
         <NuxtImg
           v-else
-          class="rounded-full border border-default-grey size-5"
+          class="rounded-full border border-gray-default size-5"
           :src="avatar"
           loading="lazy"
           alt=""
@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { getUserAvatar, type Organization, type User } from '@datagouv/components'
+import { getUserAvatar, type Organization, type User } from '@datagouv/components-next'
 import type { Owned } from '~/types/types'
 
 const props = withDefaults(defineProps<{

@@ -39,12 +39,12 @@
       @submit="reuseNext"
     >
       <template #button>
-        <button
+        <BrandedButton
           type="submit"
-          class="fr-btn"
+          color="primary"
         >
           {{ $t("Next") }}
-        </button>
+        </BrandedButton>
       </template>
     </DescribeReuse>
 
@@ -66,7 +66,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Dataset, DatasetV2, Reuse } from '@datagouv/components'
+import { BrandedButton } from '@datagouv/components-next'
+import type { Dataset, DatasetV2, Reuse } from '@datagouv/components-next'
 import Breadcrumb from '~/components/Breadcrumb/Breadcrumb.vue'
 import DescribeReuse from '~/components/Reuses/DescribeReuse.vue'
 import Step2AddDatasets from '~/components/Reuses/New/Step2AddDatasets.vue'

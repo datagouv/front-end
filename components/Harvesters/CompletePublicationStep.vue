@@ -1,8 +1,7 @@
 <template>
   <div class="fr-p-3w bg-white">
-    <Well
-      color="blue-cumulus"
-      weight="regular"
+    <SimpleBanner
+      type="primary"
       class="mb-6"
     >
       <div class="fr-grid-row">
@@ -22,15 +21,17 @@
           </p>
         </div>
       </div>
-    </Well>
+    </SimpleBanner>
     <div class="flex justify-between">
-      <a
+      <BrandedButton
         v-if="config.public.publishingHarvesterFeedbackUrl"
         :href="config.public.publishingHarvesterFeedbackUrl"
-        class="fr-btn fr-btn--tertiary-no-outline fr-btn--secondary-grey-500 fr-btn--icon-left fr-icon-lightbulb-line"
+        color="secondary-softer"
+        :icon="RiLightbulbLine"
+        new-tab
       >
         {{ $t('Give us your feedback on the publishing form') }}
-      </a>
+      </BrandedButton>
       <div class="fr-grid-row fr-grid-row--right">
         <BrandedButton
           class="mr-3"
@@ -52,8 +53,8 @@
 </template>
 
 <script setup lang="ts">
-import { Well } from '@datagouv/components'
-import { RiExternalLinkLine } from '@remixicon/vue'
+import { BrandedButton, SimpleBanner } from '@datagouv/components-next'
+import { RiLightbulbLine } from '@remixicon/vue'
 import type { HarvesterSource } from '~/types/harvesters'
 
 defineProps<{

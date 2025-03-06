@@ -15,7 +15,7 @@
     <PaddedContainer
       ref="dropFilesHere"
       color="alt-grey"
-      class="fr-grid-row fr-grid-row--middle flex-direction-column border border-default-grey border-dashed text-mention-grey fr-text--bold"
+      class="fr-grid-row fr-grid-row--middle flex-direction-column border border-gray-default border-dashed text-mention-grey fr-text--bold"
       :class="{ 'border-plain-error': hasError }"
     >
       {{ $t('Drag and drop files') }}
@@ -34,16 +34,15 @@
         :disabled="disabled"
         @change="change"
       >
-      <button
-        type="button"
+      <BrandedButton
+        color="secondary"
         :disabled="disabled"
-        class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500"
         :title="$t('Browse')"
         :aria-controls="id"
-        @click="open"
+        @click.prevent.stop="open"
       >
         {{ $t('Browse') }}
-      </button>
+      </BrandedButton>
     </PaddedContainer>
     <p
       v-if="hintText"
@@ -70,6 +69,7 @@
 </template>
 
 <script setup lang="ts">
+import { BrandedButton } from '@datagouv/components-next'
 import { computed } from 'vue'
 import { useDropZone } from '@vueuse/core'
 import PaddedContainer from '~/components/PaddedContainer/PaddedContainer.vue'

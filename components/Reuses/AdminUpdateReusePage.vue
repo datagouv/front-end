@@ -7,13 +7,13 @@
       @submit="save"
     >
       <template #button>
-        <button
+        <BrandedButton
           type="submit"
-          class="fr-btn"
+          color="primary"
           :disabled="loading"
         >
           {{ t("Save") }}
-        </button>
+        </BrandedButton>
       </template>
       <div class="mt-5 space-y-5">
         <TransferBanner
@@ -47,7 +47,7 @@
                 {{ $t("This action can't be reverse.") }}
               </p>
               <template #footer>
-                <div class="flex-1 fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left">
+                <div class="flex-1 flex justify-end">
                   <BrandedButton
                     color="danger"
                     :disabled="loading"
@@ -66,7 +66,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Reuse, ReuseType } from '@datagouv/components'
+import { BrandedButton } from '@datagouv/components-next'
+import type { Reuse, ReuseType } from '@datagouv/components-next'
 import { RiDeleteBin6Line } from '@remixicon/vue'
 import DescribeReuse from '~/components/Reuses/DescribeReuse.vue'
 import type { ReuseForm, ReuseTopic } from '~/types/types'

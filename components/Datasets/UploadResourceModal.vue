@@ -67,22 +67,21 @@
     <template #footer="{ close }">
       <div class="w-full flex gap-4 justify-end">
         <div class="fr-col-auto">
-          <button
-            class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500"
-            type="button"
+          <BrandedButton
+            color="secondary"
             @click="close"
           >
             {{ t("Cancel") }}
-          </button>
+          </BrandedButton>
         </div>
         <div class="fr-col-auto">
-          <button
-            class="fr-btn"
+          <BrandedButton
+            color="primary"
             type="submit"
             :form="formId"
           >
             {{ t("Send") }}
-          </button>
+          </BrandedButton>
         </div>
       </div>
     </template>
@@ -91,7 +90,7 @@
 
 <script setup lang="ts">
 import { RiUploadLine } from '@remixicon/vue'
-import BrandedButton from '../BrandedButton/BrandedButton.vue'
+import { BrandedButton } from '@datagouv/components-next'
 import ModalWithButton from '../Modal/ModalWithButton.vue'
 import UploadGroup from '../UploadGroup/UploadGroup.vue'
 import type { ResourceForm } from '~/types/types'
