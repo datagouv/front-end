@@ -271,7 +271,7 @@
             <InputGroup
               v-model="form.machine_documentation_url"
               :aria-describedby="machineDocumentationUrlAccordionId"
-              :label="t('Dataservice endpoint description URL')"
+              :label="t('Dataservice machine description URL')"
               type="url"
               placeholder="https://..."
               :required="false"
@@ -288,7 +288,7 @@
             <InputGroup
               v-model="form.technical_documentation_url"
               :aria-describedby="technicalDocumentationUrlAccordionId"
-              :label="t('Dataservice endpoint description URL')"
+              :label="t('Dataservice technical description URL')"
               type="url"
               placeholder="https://..."
               :required="false"
