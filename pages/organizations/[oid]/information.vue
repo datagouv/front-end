@@ -131,7 +131,7 @@
             </p>
             <p class="!mb-0">
               <AdminBadge
-                type="default"
+                type="secondary"
                 size="sm"
               >
                 {{ member.role }}

@@ -1,79 +1,81 @@
 <template>
-  <article class="fr-card fr-card--no-icon fr-enlarge-link">
-    <div class="fr-card__body">
-      <div class="fr-card__content fr-px-2w fr-py-1v">
-        <h3 class="fr-card__title fr-text--md fr-mt-1v fr-mb-0">
+  <article class="fr-enlarge-link group/reuse-card bg-white border border-gray-default flex flex-col relative">
+    <div class="flex flex-col h-full flex-1 order-2 px-8">
+      <div class="order-1 flex flex-col px-4 py-1 h-full -mx-8">
+        <h3 class="font-bold text-base mt-1 mb-0 truncate">
           <AppLink
-            class="text-grey-500"
+            class="text-gray-title"
             :to="reuseUrl"
           >
-            <component
-              :is="config.textClamp"
-              v-if="config.textClamp"
-              :auto-resize="true"
-              :text="reuse.title"
-              :max-lines="1"
-            />
+            {{ reuse.title }}
           </AppLink>
         </h3>
-        <div class="fr-card__desc fr-mt-0 text-mention-grey">
-          <p class="fr-text--sm fr-mb-0 flex">
+        <div class=" order-3 text-sm m-0 text-gray-medium">
+          <p class="text-sm mb-0 flex items-center">
             <span
               v-if="reuse.organization"
-              class="not-enlarged"
+              class="relative block truncate z-[2] flex-1"
             >
               <AppLink
                 v-if="organizationUrl"
-                class="fr-link"
+                class="fr-link block"
                 :to="organizationUrl"
               >
-                <OrganizationNameWithCertificate :organization="reuse.organization" />
+                <OrganizationNameWithCertificate
+                  :certifier
+                  :organization="reuse.organization"
+                />
               </AppLink>
               <OrganizationNameWithCertificate
                 v-else
+                :certifier
                 :organization="reuse.organization"
               />
             </span>
-            <component
-              :is="config.textClamp"
-              v-else-if="config.textClamp"
-              class="not-enlarged fr-mr-1v"
+            <TextClampClient
+              v-else-if="ownerName"
+              class="relative z-[2] mr-1"
               :auto-resize="true"
               :text="ownerName"
               :max-lines="1"
             />
-            <span class="dash-before-sm text-overflow-ellipsis">{{ t('published {date}', { date: formatRelativeIfRecentDate(reuse.created_at) }) }}</span>
+            <RiSubtractLine class="size-4 fill-gray-medium" />
+            <span>{{ t('published {date}', { date: formatRelativeIfRecentDate(reuse.created_at, { dateStyle: 'medium' }) }) }}</span>
           </p>
-          <div class="fr-grid-row fr-grid-row--middle">
-            <p class="fr-text--sm fr-my-0 dash-after-sm">
+          <div class="flex flex-wrap items-center gap-0.5">
+            <p class="text-sm mb-0">
               {{ reuseType }}
             </p>
+            <RiSubtractLine
+              aria-hidden="true"
+              class="size-4 fill-gray-medium"
+            />
             <p
-              class="fr-text--sm fr-my-0"
+              class="text-sm mb-0 flex items-center gap-0.5"
               :aria-label="t('{n} views', reuse.metrics.views)"
             >
-              <span
-                class="fr-icon-eye-line fr-icon--xs fr-px-1v"
+              <RiEyeLine
                 aria-hidden="true"
+                class="size-3.5"
               />{{ summarize(reuse.metrics.views) }}
             </p>
             <p
-              class="fr-text--sm fr-my-0"
+              class="text-sm mb-0 flex items-center gap-0.5"
               :aria-label="t('{n} followers', reuse.metrics.followers)"
             >
-              <span
-                class="fr-icon-star-line fr-icon--xs fr-px-1v"
+              <RiStarLine
                 aria-hidden="true"
+                class="size-3.5"
               />{{ summarize(reuse.metrics.followers) }}
             </p>
           </div>
         </div>
       </div>
     </div>
-    <div class="fr-card__header">
-      <div class="fr-card__img">
+    <div class="order-1 relative flex-auto">
+      <div class="group-hover/reuse-card:brightness-90">
         <Placeholder
-          class="fr-responsive-img reuse-ratio"
+          class="object-cover block object-center w-full h-auto aspect-[1.4]"
           alt=""
           type="reuse"
           :src="reuse.image"
@@ -85,14 +87,14 @@
         class="fr-badges-group"
       >
         <li v-if="reuse.private">
-          <p class="fr-badge fr-badge--sm fr-badge--mention-grey text-grey-380">
-            <span class="fr-icon-lock-line fr-icon--xs" />
+          <p class="fr-badge fr-badge--sm fr-badge--mention-grey text-gray-medium">
+            <RiLockLine class="size-3.5 mr-0.5" />
             {{ t('Draft') }}
           </p>
         </li>
         <li v-if="reuse.archived">
-          <p class="fr-badge fr-badge--sm fr-badge--mention-grey text-grey-380">
-            <span class="fr-icon-lock-line fr-icon--xs" />
+          <p class="fr-badge fr-badge--sm fr-badge--mention-grey text-gray-medium">
+            <RiLockLine class="size-3.5 mr-0.5" />
             {{ t('Archived') }}
           </p>
         </li>
@@ -102,51 +104,34 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
+import { RiEyeLine, RiLockLine, RiStarLine, RiSubtractLine } from '@remixicon/vue'
 import type { RouteLocationRaw } from 'vue-router'
-import { computed } from 'vue'
-import { summarize, formatRelativeIfRecentDate, OrganizationNameWithCertificate, getOwnerName, type Reuse, useComponentsConfig } from '../main'
-import { useFetch } from '../functions/api'
-import Placeholder from './Placeholder.vue'
-import AppLink from './AppLink.vue'
+import { useI18n } from 'vue-i18n'
+import type { Reuse } from '../types/reuses'
 
 const props = defineProps<{
   reuse: Reuse
 
   /**
-     * The reuseUrl is a route location object to allow Vue Router to navigate to the details of a reuse.
-     * It is used as a separate prop to allow other sites using the package to define their own reuse pages.
-     */
+   * The name of the entity certifying the account
+   */
+  certifier: string
+
+  /**
+  * The reuseUrl is a route location object to allow Vue Router to navigate to the details of a reuse.
+  * It is used as a separate prop to allow other sites using the package to define their own reuse pages.
+  */
   reuseUrl: RouteLocationRaw
 
   /**
-     * The organizationUrl is an optional route location object to allow Vue Router to navigate to the details of the organization linked to tha reuse.
-     * It is used as a separate prop to allow other sites using the package to define their own organization pages.
-     */
+  * The organizationUrl is an optional route location object to allow Vue Router to navigate to the details of the organization linked to tha reuse.
+  * It is used as a separate prop to allow other sites using the package to define their own organization pages.
+  */
   organizationUrl?: RouteLocationRaw
 }>()
 
 const { t } = useI18n()
-const config = useComponentsConfig()
 
-const ownerName = computed(() => getOwnerName(props.reuse))
-
-const { data: reusesTypes } = await useFetch<Array<{ id: string, label: string }>>('/api/1/reuses/types')
-
-const reuseType = computed(() => {
-  if (!reusesTypes.value) return ''
-  const type = reusesTypes.value.find(t => t.id === props.reuse.type)
-  return type ? type.label : ''
-})
+const ownerName = useOwnerName(props.reuse)
+const { label: reuseType } = useReuseType(() => props.reuse.type)
 </script>
-
-  <style scoped>
-.fr-card__img img.reuse-ratio {
-    aspect-ratio: 1.4;
-    object-fit: cover;
-  }
-
-  .fr-card.fr-enlarge-link .fr-card__title a::after {
-    content: none;
-  }
-  </style>
