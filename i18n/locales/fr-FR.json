@@ -957,5 +957,10 @@
   "Post updated!": "Article mis à jour !",
   "No posts": "Pas d'article",
   "Not published yet": "Pas encore publié",
-  "This post is not published yet !": "Cet article n'est pas encore publié"
+  "This post is not published yet !": "Cet article n'est pas encore publié",
+  "Choose the attribution with which you want to publish": "Choisissez l'attribution avec laquelle vous voulez publier",
+  "Select an attribution": "Choisissez une attribution",
+  "Attributions": "Attributions",
+  "Role": "Rôle",
+  "New attribution": "Nouvelle attribution"
 }
