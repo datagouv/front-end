@@ -957,5 +957,15 @@
   "Post updated!": "Article mis à jour !",
   "No posts": "Pas d'article",
   "Not published yet": "Pas encore publié",
-  "This post is not published yet !": "Cet article n'est pas encore publié"
+  "This post is not published yet !": "Cet article n'est pas encore publié",
+  "Statistics from the last 12 months": "Statistiques générales des 12 derniers mois",
+  "See members": "Voir les membres",
+  "Technical information": "Informations techniques",
+  "See technical information": "Voir les informations techniques",
+  "Download statistics as CSV": "Télécharger les statistiques au format CSV",
+  "Presentation": "Présentation",
+  "Information": "Informations",
+  "Organization description": "Description de l'organisation",
+  "Organization reuses": "Réutilisations de l'organisation",
+  "": ""
 }

@@ -104,10 +104,10 @@
 </template>
 
 <script setup lang="ts">
+import { AppLink, summarize, useOwnerName, type Reuse } from '@datagouv/components'
 import { RiEyeLine, RiLockLine, RiStarLine, RiSubtractLine } from '@remixicon/vue'
 import type { RouteLocationRaw } from 'vue-router'
-import { useI18n } from 'vue-i18n'
-import type { Reuse } from '../types/reuses'
+import TextClampClient from '~/components/TextClamp.client.vue'
 
 const props = defineProps<{
   reuse: Reuse

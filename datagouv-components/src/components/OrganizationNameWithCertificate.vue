@@ -4,17 +4,19 @@
       v-if="showType"
       :type="getOrganizationType(organization)"
     />
-    <component
-      :is="config.textClamp"
-      v-if="config && config.textClamp"
-      class="fr-mx-1v"
-      :auto-resize="true"
-      :text="organization.name"
-      :max-lines="1"
-    />
+    <div
+      class="mb-0 truncate"
+      :class="{ 'text-sm': size === 'sm' }"
+    >
+      {{ organization.name }}
+    </div>
     <RiCheckboxCircleLine
       v-if="isOrganizationCertified(organization)"
-      class="size-5 flex-none"
+      class="flex-none"
+      :class="{
+        'size-4': size === 'sm',
+        'start-5': size === 'base',
+      }"
       :title="t('The identity of this public service is certified by {certifier}', { certifier: config.name })"
       aria-hidden="true"
     />
@@ -35,7 +37,9 @@ const { t } = useI18n()
 withDefaults(defineProps<{
   organization: Organization
   showType?: boolean
+  size?: 'base' | 'sm'
 }>(), {
   showType: true,
+  size: 'base',
 })
 </script>

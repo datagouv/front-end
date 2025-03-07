@@ -942,5 +942,15 @@
   "No posts": "No posts",
   "{n} users": "{n} users",
   "Not published yet": "Not published yet",
-  "This post is not published yet !": "This post is not published yet !"
+  "This post is not published yet !": "This post is not published yet !",
+  "Statistics from the last 12 months": "Statistics from the last 12 months",
+  "See members": "See members",
+  "Technical information": "Technical information",
+  "See technical information": "See technical information",
+  "Download statistics as CSV": "Download statistics as CSV",
+  "Presentation": "Presentation",
+  "Information": "Information",
+  "Organization description": "Organization description",
+  "Organization reuses": "Organization reuses",
+  "": ""
 }
