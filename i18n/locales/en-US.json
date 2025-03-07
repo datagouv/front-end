@@ -943,5 +943,14 @@
   "Post updated!": "Post updated!",
   "No posts": "No posts",
   "Not published yet": "Not published yet",
-  "This post is not published yet !": "This post is not published yet !"
+  "This post is not published yet !": "This post is not published yet !",
+  "Contact point name": "Contact point name",
+  "Role": "Role",
+  "Contact Url": "Contact Url",
+  "Edit the contact point": "Edit the contact point",
+  "Contact point updated!": "Contact point updated!",
+  "Closed": "Closed",
+  "New": "New",
+  "Responded": "Responded",
+  "Contact points": "Contact points"
 }

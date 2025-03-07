@@ -106,7 +106,7 @@
                   :loading
                   @click="updateContactPoint(close)"
                 >
-                  {{ $t('Validation') }}
+                  {{ $t('Save') }}
                 </BrandedButton>
               </div>
             </template>
