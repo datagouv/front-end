@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex flex-wrap">
+    <div class="flex flex-wrap mb-2">
       <h2 class="!text-sm !mb-2.5 w-full flex-none sm:flex-1">
         {{ $t('Statistics from the last 12 months') }}
       </h2>
@@ -21,35 +21,46 @@
     <section
       class="flex flex-col md:flex-row px-4 pb-4"
     >
-      <StatBox
-        :title="$t('Views')"
-        :data="metricsViews"
-        type="line"
-        :summary="metricsViewsTotal"
-        class="md:w-1/3 mb-8 md:mb-0"
-      />
-      <StatBox
-        :title="$t('Downloads')"
-        :data="metricsDownloads"
-        type="line"
-        :summary="metricsDownloadsTotal"
-        class="md:w-1/3 mb-8 md:mb-0"
-      />
-      <StatBox
-        :title="$t('Reuses Visits')"
-        :data="metricsReuses"
-        type="line"
-        :summary="metricsReusesTotal"
-        class="md:w-1/3 mb-8 md:mb-0"
-      />
+      <ClientOnly>
+        <StatBox
+          :title="$t('Views')"
+          :data="metricsViews"
+          type="line"
+          :summary="metricsViewsTotal"
+          class="md:w-1/3 mb-8 md:mb-0"
+        />
+        <StatBox
+          :title="$t('Downloads')"
+          :data="metricsDownloads"
+          type="line"
+          :summary="metricsDownloadsTotal"
+          class="md:w-1/3 mb-8 md:mb-0"
+        />
+        <StatBox
+          :title="$t('Reuses Visits')"
+          :data="metricsReuses"
+          type="line"
+          :summary="metricsReusesTotal"
+          class="md:w-1/3 mb-8 md:mb-0"
+        />
+      </ClientOnly>
     </section>
     <SectionCollapse
       :title="$t('Members')"
       :button-text="$t('See members')"
     >
       <template #buttons>
+        <BrandedButton
+          v-if="pendingRequests && pendingRequests.length"
+          color="secondary"
+          size="xs"
+          :icon="RiCheckLine"
+          :disabled="true"
+        >
+          {{ $t('Request pending approval') }}
+        </BrandedButton>
         <ModalWithButton
-          v-if="!alreadyMember"
+          v-else-if="!alreadyMember"
           size="lg"
           :title="$t('Ask to join the organization')"
         >
@@ -59,6 +70,7 @@
                 color="secondary"
                 size="xs"
                 :icon="RiTeamLine"
+                :loading="status === 'pending'"
                 v-bind="attrs"
                 v-on="listeners"
               >
@@ -175,8 +187,9 @@
 </template>
 
 <script setup lang="ts">
-import { Avatar, CopyButton, StatBox, type Organization } from '@datagouv/components-next'
-import { RiDownloadLine, RiTeamLine } from '@remixicon/vue'
+import { Avatar, BrandedButton, CopyButton, OrganizationNameWithCertificate, StatBox, type Organization } from '@datagouv/components-next'
+import { RiCheckLine, RiDownloadLine, RiTeamLine } from '@remixicon/vue'
+import type { MembershipRequest, PendingMembershipRequest } from '~/types/types';
 
 const props = defineProps<{
   organization: Organization
@@ -188,7 +201,7 @@ const config = useRuntimeConfig()
 const { $api } = useNuxtApp()
 const { toast } = useToast()
 const me = useMaybeMe()
-const alreadyMember = computed(() => me.value?.organizations.find(organization => organization.id === props.organization.id))
+
 const metricsViews = ref<null | Record<string, number>>(null)
 const metricsViewsTotal = ref<null | number>(null)
 const metricsDownloads = ref<null | Record<string, number>>(null)
@@ -197,6 +210,16 @@ const metricsReuses = ref<null | Record<string, number>>(null)
 const metricsReusesTotal = ref<null | number>(null)
 
 const reason = ref('')
+
+const alreadyMember = computed(() => me.value?.organizations.find(organization => organization.id === props.organization.id))
+
+const downloadStatsUrl = computed(() => {
+  if (!metricsViews.value || !metricsDownloads.value || !metricsReuses.value) {
+    return null
+  }
+
+  return createOrganizationMetricsUrl(metricsViews.value, metricsDownloads.value, metricsReuses.value)
+})
 
 watchEffect(async () => {
   const metrics = await getOrganizationMetrics(props.organization.id)
@@ -208,12 +231,11 @@ watchEffect(async () => {
   metricsViewsTotal.value = metrics.datasetsViewsTotal
 })
 
-const downloadStatsUrl = computed(() => {
-  if (!metricsViews.value || !metricsDownloads.value || !metricsReuses.value) {
-    return null
-  }
-
-  return createOrganizationMetricsUrl(metricsViews.value, metricsDownloads.value, metricsReuses.value)
+const { data: pendingRequests, status, refresh } = await useAPI<Array<PendingMembershipRequest | MembershipRequest>>(`/api/1/organizations/${props.organization.id}/membership/`, {
+  query: {
+    user: me.value?.id,
+    status: 'pending',
+  },
 })
 
 async function sendRequest(comment: string, closeModal: () => void) {
@@ -224,6 +246,7 @@ async function sendRequest(comment: string, closeModal: () => void) {
         comment,
       },
     })
+    refresh()
     closeModal()
   }
   catch {
