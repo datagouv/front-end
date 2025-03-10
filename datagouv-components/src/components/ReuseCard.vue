@@ -22,23 +22,18 @@
                 :to="organizationUrl"
               >
                 <OrganizationNameWithCertificate
-                  :certifier
                   :organization="reuse.organization"
                 />
               </AppLink>
               <OrganizationNameWithCertificate
                 v-else
-                :certifier
                 :organization="reuse.organization"
               />
             </span>
-            <TextClampClient
+            <span
               v-else-if="ownerName"
-              class="relative z-[2] mr-1"
-              :auto-resize="true"
-              :text="ownerName"
-              :max-lines="1"
-            />
+              class="mr-1 truncate"
+            >{{ ownerName }}</span>
             <RiSubtractLine class="size-4 fill-gray-medium" />
             <span>{{ t('published {date}', { date: formatRelativeIfRecentDate(reuse.created_at, { dateStyle: 'medium' }) }) }}</span>
           </p>
@@ -105,9 +100,15 @@
 
 <script setup lang="ts">
 import { RiEyeLine, RiLockLine, RiStarLine, RiSubtractLine } from '@remixicon/vue'
-import type { RouteLocationRaw } from 'vue-router'
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import type { RouteLocationRaw } from 'vue-router'
+import useReuseType from '../composables/useReuseType'
+import { formatRelativeIfRecentDate } from '../functions/dates'
+import { summarize } from '../functions/helpers'
+import { getOwnerName } from '../functions/owned'
 import type { Reuse } from '../types/reuses'
+import OrganizationNameWithCertificate from './OrganizationNameWithCertificate.vue'
 
 const props = defineProps<{
   reuse: Reuse
@@ -132,6 +133,6 @@ const props = defineProps<{
 
 const { t } = useI18n()
 
-const ownerName = useOwnerName(props.reuse)
+const ownerName = computed(() => getOwnerName(props.reuse))
 const { label: reuseType } = useReuseType(() => props.reuse.type)
 </script>

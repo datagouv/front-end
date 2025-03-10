@@ -12,7 +12,6 @@
 <script setup lang="ts">
 import { ReuseCard, type Reuse } from '@datagouv/components-next'
 import type { StyleValue } from 'vue'
-import ReuseCard from '~/components/Reuses/Card/ReuseCard.vue'
 
 withDefaults(defineProps<{
   reuse: Reuse

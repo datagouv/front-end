@@ -11,7 +11,7 @@
           loading="lazy"
         >
       </div>
-      <p class="mb-0 font-bold">
+      <p class="mb-0.5 font-bold">
         <NuxtLinkLocale
           :to="`/organizations/${organization.slug}`"
         >
@@ -27,13 +27,15 @@
           class="mb-0 text-sm after:content-['—'] after:ml-1"
           :type
         />
-        <div class="text-gray-medium flex items-center text-sm">
-          <RiDatabase2Line class="size-3.5 mx-1" /> {{ organization.metrics.datasets }}
-          <RiTerminalLine class="size-3.5 mx-1" /> {{ organization.metrics.dataservices }}
-          <RiLineChartLine class="size-3.5 mx-1" /> {{ organization.metrics.reuses }}
+        <div>
+          <div class="text-gray-medium flex items-center text-sm gap-0.5">
+            <RiDatabase2Line class="size-4 -mt-1" /> {{ organization.metrics.datasets }}
+            <RiTerminalLine class="size-4 -mt-1 ml-1" /> {{ organization.metrics.dataservices }}
+            <RiLineChartLine class="size-4 -mt-1 ml-1" /> {{ organization.metrics.reuses }}
+          </div>
         </div>
       </div>
-      <p class="mt-2 mb-0">
+      <p class="mt-1 mb-0">
         <TextClamp
           v-if="description"
           :text="description"
@@ -45,8 +47,13 @@
 </template>
 
 <script setup lang="ts">
-import { OwnerType, removeMarkdown, getOrganizationType, type Organization } from '@datagouv/components-next'
 import { RiLineChartLine, RiDatabase2Line, RiTerminalLine } from '@remixicon/vue'
+import { computed, ref, watchEffect } from 'vue'
+import { removeMarkdown } from '../functions/markdown'
+import { getOrganizationType } from '../functions/organizations'
+import type { Organization } from '../types/organizations'
+import OwnerType from './OwnerType.vue'
+import OrganizationNameWithCertificate from './OrganizationNameWithCertificate.vue'
 
 const props = defineProps<{
   organization: Organization

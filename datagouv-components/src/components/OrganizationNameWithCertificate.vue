@@ -15,7 +15,7 @@
       class="flex-none"
       :class="{
         'size-4': size === 'sm',
-        'start-5': size === 'base',
+        'size-5': size === 'base',
       }"
       :title="t('The identity of this public service is certified by {certifier}', { certifier: config.name })"
       aria-hidden="true"

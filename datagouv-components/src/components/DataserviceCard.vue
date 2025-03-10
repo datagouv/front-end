@@ -3,10 +3,11 @@
     class="my-4 p-4 border border-gray-default fr-enlarge-link"
     :class="{
       'border-tabular-api': isTabularApi,
+      'mt-6': showBadge,
     }"
   >
     <div
-      v-if="dataservice.is_restricted || dataservice.private || dataservice.archived_at"
+      v-if="showBadge"
       class="absolute top-0 fr-grid-row fr-grid-row--middle fr-mt-n3v fr-ml-n1v"
     >
       <p
@@ -121,7 +122,7 @@
       v-if="config.textClamp && description && showDescription"
       class="fr-text--sm fr-mt-1w fr-mb-0 overflow-wrap-anywhere"
       :auto-resize="true"
-      :text="removeMarkdown(dataservice.description)"
+      :text="description"
       :max-lines="2"
     />
   </article>
@@ -159,6 +160,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const { t } = useI18n()
 const ownerName = computed(() => getOwnerName(props.dataservice))
+const showBadge = computed(() => props.dataservice.is_restricted || props.dataservice.private || props.dataservice.archived_at)
 
 const config = useComponentsConfig()
 const isTabularApi = computed(() => {

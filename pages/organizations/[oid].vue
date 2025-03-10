@@ -69,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import { useOrganizationType, type Organization } from '@datagouv/components'
+import { OrganizationNameWithCertificate, OwnerType, getOrganizationType, type Organization } from '@datagouv/components-next'
 import EditButton from '~/components/BrandedButton/EditButton.vue'
 import BreadcrumbItem from '~/components/Breadcrumbs/BreadcrumbItem.vue'
 import Placeholder from '~/components/Placeholder/Placeholder.vue'
@@ -81,6 +81,6 @@ const me = useMaybeMe()
 const url = computed(() => `/api/1/organizations/${route.params.oid}/`)
 const { data: organization, status } = await useAPI<Organization>(url)
 
-const { type } = useOrganizationType(organization)
+const type = computed(() => getOrganizationType(organization.value))
 const isMember = computed(() => organization.value.members.some(member => member.user.id === me.value?.id))
 </script>
