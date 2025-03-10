@@ -54,6 +54,11 @@ import Breadcrumb from '~/components/Breadcrumb/Breadcrumb.vue'
 import type { Post } from '~/types/posts'
 import type { PaginatedArray } from '~/types/types'
 
+const { t } = useI18n()
+
+useSeoMeta({
+  title: t('Posts'),
+})
 const route = useRoute()
 const page = ref(route.query.page ?? 1)
 

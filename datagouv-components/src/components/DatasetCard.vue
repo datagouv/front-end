@@ -76,13 +76,13 @@
         </h4>
         <div
           v-if="dataset.organization || dataset.owner"
-          class="fr-text--sm fr-m-0 inline-flex"
+          class="fr-text--sm fr-m-0 flex"
         >
           <template v-if="dataset.organization">
-            <span class="fr-mr-1v">
+            <div class="fr-mr-1v">
               <AppLink
                 v-if="organizationUrl"
-                class="fr-link fr-text--sm inline-flex items-center relative z-20"
+                class="fr-link fr-text--sm flex items-center relative z-20"
                 :to="organizationUrl"
               >
                 <OrganizationNameWithCertificate :organization="dataset.organization" />
@@ -91,17 +91,17 @@
                 v-else
                 :organization="dataset.organization"
               />
-            </span>
+            </div>
           </template>
-          <component
-            :is="config.textClamp"
-            v-else-if="config && config.textClamp"
-            class="fr-mr-1v"
-            :auto-resize="true"
-            :text="ownerName"
-            :max-lines="1"
-          />
-          <span class="text-gray-medium dash-before-sm whitespace-nowrap">{{ $t('Updated {date}', { date: formatRelativeIfRecentDate(dataset.last_update) }) }}</span>
+          <div
+            v-else
+            class="fr-mr-1v truncate"
+          >
+            {{ ownerName }}
+          </div>
+          <div class="text-gray-medium dash-before-sm whitespace-nowrap">
+            {{ $t('Updated {date}', { date: formatRelativeIfRecentDate(dataset.last_update, { dateStyle: 'medium' }) }) }}
+          </div>
         </div>
         <div class="mx-0 -mb-1 flex flex-wrap items-center text-sm text-gray-medium">
           <div class="fr-hidden flex-sm dash-after-sm text-gray-500">

@@ -15,12 +15,12 @@
     <input
       :id="inputId"
       v-model.trim="q"
-      class="flex-1 px-4 py-2 bg-gray-lower rounded-tl shadow-input-blue"
+      class="flex-1 px-4 py-2 bg-gray-lower rounded-tl-sm shadow-input-blue"
       type="search"
       :placeholder="$t('Search...')"
     >
     <BrandedButton
-      class="!rounded-none !rounded-tr"
+      class="rounded-none rounded-tr"
       :icon="RiSearch2Line"
       size="lg"
     >
@@ -79,7 +79,7 @@
 </template>
 
 <script setup lang="ts">
-import { BrandedButton } from '@datagouv/components-next'
+import { BrandedButton, OrganizationCard, Pagination } from '@datagouv/components-next'
 import type { Organization } from '@datagouv/components-next'
 import { RiSearch2Line } from '@remixicon/vue'
 import { debouncedRef } from '@vueuse/core'

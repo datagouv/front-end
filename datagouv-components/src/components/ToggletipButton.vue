@@ -2,12 +2,13 @@
   <BrandedButton
     color="secondary-softer"
     icon-only
-    :icon="RiFileInfoLine"
+    :icon="RiInformationLine"
+    size="xs"
     keep-margins-even-without-borders
   />
 </template>
 
 <script setup lang="ts">
-import { RiFileInfoLine } from '@remixicon/vue'
+import { RiInformationLine } from '@remixicon/vue'
 import BrandedButton from './BrandedButton.vue'
 </script>

@@ -5,7 +5,7 @@
   >
     <div
       class="flex-1 flex flex-wrap gap-4"
-      :class="{ 'text-blue-400': isPrimary }"
+      :class="{ 'text-datagouv': isPrimary }"
     >
       <div class="flex-none">
         <NuxtImg

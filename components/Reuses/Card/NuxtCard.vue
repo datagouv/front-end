@@ -1,10 +1,11 @@
 <template>
   <ReuseCard
+    :certifier="config.public.title"
     :reuse
     :style
     :show-description
     :reuse-url="reuse.page"
-    :organization-url="reuse.organization?.page"
+    :organization-url="localePath(`/organizations/${reuse.organization?.slug}`)"
   />
 </template>
 
@@ -19,4 +20,7 @@ withDefaults(defineProps<{
 }>(), {
   showDescription: true,
 })
+
+const localePath = useLocalePath()
+const config = useRuntimeConfig()
 </script>
