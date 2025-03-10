@@ -335,8 +335,8 @@
             id="description-legend"
             class="fr-fieldset__legend"
           >
-            <h2 class="text-sm font-bold uppercase mb-3">
-              {{ t("Contact Point") }}
+            <h2 class="text-sm font-bold uppercase mb-0">
+              {{ harvested ? t("Attributions and Contact points") : t("Contact points") }}
             </h2>
           </legend>
           <LinkedToAccordion
@@ -344,19 +344,28 @@
             :accordion="contactPointAccordionId"
             @blur="touch('contact_points')"
           >
-            <template v-for="(contact_point, index) in form.contact_points">
-              <ContactPointSelect
-                v-if="!contact_point || contact_point.role == 'contact'"
-                :key="(contact_point && 'id' in contact_point) ? contact_point.id : index"
-                v-model="form.contact_points[index]"
-                :organization="form.owned?.organization"
-              />
-            </template>
+            <ContactPointSelect
+              v-for="(contact_point, index) in form.contact_points"
+              :key="contact_point && 'id' in contact_point ? contact_point.id : index"
+              v-model="form.contact_points[index]"
+              class="pt-3"
+              :organization="form.owned?.organization"
+            />
             <ContactPointSelect
               v-if="form.contact_points.length === 0"
               v-model="form.contact_points[0]"
               :organization="form.owned?.organization"
             />
+            <BrandedButton
+              class="mt-3"
+              type="button"
+              color="primary-soft"
+              size="xs"
+              :icon="RiAddLine"
+              @click="form.contact_points.push({ ...defaultContactForm })"
+            >
+              {{ harvested ? t('New Attribution') : t('New Contact') }}
+            </BrandedButton>
           </LinkedToAccordion>
         </fieldset>
         <fieldset
@@ -568,7 +577,7 @@
 <script setup lang="ts">
 import { BrandedButton } from '@datagouv/components-next'
 import { SimpleBanner, type Frequency, type License } from '@datagouv/components-next'
-import { RiStarFill } from '@remixicon/vue'
+import { RiAddLine, RiStarFill } from '@remixicon/vue'
 import { computed } from 'vue'
 import Accordion from '~/components/Accordion/Accordion.vue'
 import AccordionGroup from '~/components/Accordion/AccordionGroup.vue'
@@ -581,6 +590,7 @@ const datasetForm = defineModel<DatasetForm>({ required: true })
 const props = defineProps<{
   submitLabel: string
   type: 'create' | 'update'
+  harvested?: boolean
 }>()
 const emit = defineEmits<{
   previous: []

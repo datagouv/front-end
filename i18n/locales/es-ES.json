@@ -942,5 +942,10 @@
   "No posts": "No posts",
   "{n} users": "{n} users",
   "Not published yet": "Not published yet",
-  "This post is not published yet !": "This post is not published yet !"
+  "This post is not published yet !": "This post is not published yet !",
+  "Choose the attribution with which you want to publish": "Choose the attribution with which you want to publish",
+  "Select an attribution": "Select an attribution",
+  "Attributions": "Attributions",
+  "Role": "Role",
+  "New attribution": "New attribution"
 }

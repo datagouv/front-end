@@ -1,3 +1,4 @@
+import type { Dataservice, Dataset, DatasetV2 } from '@datagouv/components-next'
 import type { HarvesterForm, HarvesterJob, HarvesterSource, HarvestSourceConfig, HarvestSourceFilter } from '~/types/harvesters'
 
 export function getHarvesterAdminUrl(harvester: HarvesterSource) {
@@ -6,6 +7,10 @@ export function getHarvesterAdminUrl(harvester: HarvesterSource) {
 
 export function getHarvesterJobAdminUrl(harvester: HarvesterSource, job: HarvesterJob) {
   return `${getHarvesterAdminUrl(harvester)}/jobs/${job.id}`
+}
+
+export function isHarvested(dataset: Dataservice | Dataset | DatasetV2) {
+  return !!dataset.harvest?.source_id || false
 }
 
 export function toForm(harvester: HarvesterSource): HarvesterForm {
