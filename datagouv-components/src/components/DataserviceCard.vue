@@ -6,11 +6,11 @@
     }"
   >
     <div
-      v-if="dataservice.is_restricted || dataservice.private || dataservice.archived_at"
+      v-if="dataservice.access_type === 'restricted' || dataservice.private || dataservice.archived_at"
       class="absolute top-0 fr-grid-row fr-grid-row--middle fr-mt-n3v fr-ml-n1v"
     >
       <p
-        v-if="dataservice.is_restricted"
+        v-if="dataservice.access_type === 'restricted'"
         class="fr-badge fr-badge--sm fr-badge--mention-grey text-gray-medium mr-2"
       >
         <span
