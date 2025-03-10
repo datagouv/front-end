@@ -434,7 +434,7 @@ function scrollToTop() {
 
 function reloadFilters() {
   for (const key in facets.value) {
-    facets.value[key as keyof Facets] = undefined
+    facets.value[key as keyof Facets] = null
   }
   if (props.organization) {
     facets.value.organization = props.organization
