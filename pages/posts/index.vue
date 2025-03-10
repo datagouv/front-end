@@ -56,7 +56,7 @@ import type { PaginatedArray } from '~/types/types'
 
 const { t } = useI18n()
 
-useHead({
+useSeoMeta({
   title: t('Posts'),
 })
 const route = useRoute()

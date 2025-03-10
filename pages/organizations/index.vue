@@ -29,7 +29,7 @@ import type { PaginatedArray } from '~/types/types'
 
 const { t } = useI18n()
 
-useHead({
+useSeoMeta({
   title: t('Organizations'),
 })
 const route = useRoute()
