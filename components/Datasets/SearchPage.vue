@@ -147,8 +147,8 @@
               </template>
             </SearchableSelect>
             <div
-              v-if="isFiltered"
-              class="mb-6 text-center"
+              v-if="isFiltered || organization"
+              class="pb-6 text-center"
             >
               <BrandedButton
                 v-if="isFiltered"
@@ -158,6 +158,14 @@
                 @click="resetFilters"
               >
                 {{ t('Reset filters') }}
+              </BrandedButton>
+              <BrandedButton
+                v-else-if="organization"
+                :href="$localePath(`/organizations/${organization.slug}/datasets.csv`)"
+                color="secondary"
+                :icon="RiDownloadLine"
+              >
+                {{ t('Download the list as CSV') }}
               </BrandedButton>
             </div>
           </div>
@@ -252,7 +260,7 @@ import { BrandedButton } from '@datagouv/components-next'
 import { getOrganizationTypes, Pagination, OTHER, USER, type DatasetV2, type License, type Organization, type OrganizationTypes, type RegisteredSchema } from '@datagouv/components-next'
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { RiCloseCircleLine } from '@remixicon/vue'
+import { RiCloseCircleLine, RiDownloadLine } from '@remixicon/vue'
 import { computedAsync, debouncedRef, useUrlSearchParams } from '@vueuse/core'
 import SearchInput from '~/components/Search/SearchInput.vue'
 import type { PaginatedArray, SpatialGranularity, SpatialZone, Tag } from '~/types/types'
