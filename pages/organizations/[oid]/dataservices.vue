@@ -3,12 +3,12 @@
     <h2 class="!text-sm !mb-2.5">
       {{ $t('Organization dataservices') }}
     </h2>
-    <DataservicesNuxtSearchPage :organization />
+    <DataservicesSearchPage :organization />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Organization } from '@datagouv/components'
+import type { Organization } from '@datagouv/components-next'
 
 defineProps<{
   organization: Organization

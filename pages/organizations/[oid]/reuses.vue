@@ -22,7 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Organization, Reuse } from '@datagouv/components'
+import { Pagination } from '@datagouv/components-next'
+import type { Organization, Reuse } from '@datagouv/components-next'
 import Card from '~/components/Reuses/Card/NuxtCard.vue'
 import type { PaginatedArray } from '~/types/types'
 

@@ -175,7 +175,7 @@
 </template>
 
 <script setup lang="ts">
-import { Avatar, CopyButton, StatBox, type Organization } from '@datagouv/components'
+import { Avatar, CopyButton, StatBox, type Organization } from '@datagouv/components-next'
 import { RiDownloadLine, RiTeamLine } from '@remixicon/vue'
 
 const props = defineProps<{

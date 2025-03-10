@@ -147,7 +147,7 @@
               </template>
             </SearchableSelect>
             <div
-              v-if="isFiltered || downloadLink"
+              v-if="isFiltered"
               class="mb-6 text-center"
             >
               <BrandedButton
@@ -158,15 +158,6 @@
                 @click="resetFilters"
               >
                 {{ t('Reset filters') }}
-              </BrandedButton>
-              <BrandedButton
-                v-else-if="downloadLink"
-                :icon="RiDownloadLine"
-                color="secondary"
-                class="w-full justify-center"
-                :href="downloadLink"
-              >
-                {{ t('Download list as CSV') }}
               </BrandedButton>
             </div>
           </div>
@@ -240,13 +231,13 @@
               <SearchNoResults
                 v-else-if="!organization && searchResultsStatus !== 'pending'"
                 class="mt-4"
-                :forum-url
+                :forum-url="config.public.forumUrl"
                 @reset-filters="resetForm"
               />
             </div>
             <SearchNoResults
               v-else-if="searchResultsStatus !== 'pending'"
-              :forum-url
+              :forum-url="config.public.forumUrl"
               @reset-filters="resetForm"
             />
           </LoadingBlock>
@@ -261,36 +252,15 @@ import { BrandedButton } from '@datagouv/components-next'
 import { getOrganizationTypes, Pagination, OTHER, USER, type DatasetV2, type License, type Organization, type OrganizationTypes, type RegisteredSchema } from '@datagouv/components-next'
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { RiCloseCircleLine, RiDownloadLine } from '@remixicon/vue'
-import { computedAsync, debouncedRef } from '@vueuse/core'
+import { RiCloseCircleLine } from '@remixicon/vue'
+import { computedAsync, debouncedRef, useUrlSearchParams } from '@vueuse/core'
 import SearchInput from '~/components/Search/SearchInput.vue'
-import type { PaginatedArray, RequestStatus, SpatialGranularity, SpatialZone } from '~/types/types'
-import type { DatasetSearchParams, OrganizationOrSuggest } from '~/types/form'
+import type { PaginatedArray, SpatialGranularity, SpatialZone, Tag } from '~/types/types'
+import type { DatasetSearchParams, OrganizationOrSuggest, OrganizationSuggest } from '~/types/form'
 
-const props = withDefaults(defineProps<{
-  allowedFormats: Array<string> | null
-  allowedFormatsStatus: RequestStatus
-  forumUrl: string
-  licenses: Array<License> | null
-  licensesStatus: RequestStatus
-  organizations: PaginatedArray<Organization> | null
-  organizationsStatus: RequestStatus
-  schemas: Array<RegisteredSchema> | null
-  schemasStatus: RequestStatus
-  searchResults: PaginatedArray<DatasetV2> | null
-  searchResultsStatus: RequestStatus
-  spatialGranularities: Array<SpatialGranularity> | null
-  spatialGranularitiesStatus: RequestStatus
-  suggestOrganizations: (q: string) => Promise<Array<OrganizationOrSuggest>>
-  suggestSpatialCoverages: (q: string) => Promise<Array<SpatialZone>>
-  suggestTags: (q: string) => Promise<Array<string>>
-  downloadLink?: string
+const props = defineProps<{
   organization?: Organization
-  sorts?: Array<{ label: string, order: string, value: string }>
-}>(), {
-  downloadLink: '',
-  sorts: () => ([]),
-})
+}>()
 
 type Facets = {
   organization?: { id: string } | null
@@ -303,11 +273,38 @@ type Facets = {
   schema?: RegisteredSchema | null
 }
 
+const { $api } = useNuxtApp()
 const { t } = useI18n()
 const config = useRuntimeConfig()
 const { toast } = useToast()
 
-const params = defineModel<DatasetSearchParams>('params', { required: true })
+const url = useRequestURL()
+const params = useUrlSearchParams<DatasetSearchParams>('history', {
+  initialValue: Object.fromEntries(url.searchParams.entries()),
+  removeNullishValues: true,
+  removeFalsyValues: true,
+})
+
+const nonFalsyParams = computed(() => {
+  const filteredParams = Object.entries(toValue(params)).filter(([_k, v]) => v)
+  const propsParams = props.organization ? { organization: props.organization.id } : {}
+  return { ...propsParams, ...Object.fromEntries(filteredParams) }
+})
+
+const { data: searchResults, status: searchResultsStatus } = await useAPI<PaginatedArray<DatasetV2>>('/api/2/datasets/search/', {
+  params: nonFalsyParams,
+  lazy: true,
+})
+
+const { data: allowedFormats, status: allowedFormatsStatus } = await useAPI<Array<string>>('/api/1/datasets/extensions/', { lazy: true })
+
+const { data: spatialGranularities, status: spatialGranularitiesStatus } = await useAPI<Array<SpatialGranularity>>('/api/1/spatial/granularities/', { lazy: true })
+
+const { data: schemas, status: schemasStatus } = await useAPI<Array<RegisteredSchema>>('api/1/datasets/schemas/', { lazy: true })
+
+const { data: licenses, status: licensesStatus } = await useAPI<Array<License>>('api/1/datasets/licenses/', { lazy: true })
+
+const { data: organizations, status: organizationsStatus } = await useAPI<PaginatedArray<Organization>>('/api/1/organizations/?sort=-followers', { lazy: true })
 
 const organizationTypes = getOrganizationTypes()
   .filter(type => type.type !== OTHER && type.type !== USER)
@@ -315,19 +312,19 @@ const organizationTypes = getOrganizationTypes()
 /**
  * Search query
  */
-const queryString = ref(params.value.q ?? '')
+const queryString = ref(params.q ?? '')
 
 const deboucedQuery = debouncedRef(queryString, config.public.searchAutocompleteDebounce)
 
 /**
  * Query sort
  */
-const searchSort = ref(params.value.sort ?? '')
+const searchSort = ref(params.sort ?? '')
 
 /**
  * Current page of results
  */
-const currentPage = ref(params.value.page ? parseInt(params.value.page) : 1)
+const currentPage = ref(params.page ? parseInt(params.page) : 1)
 
 /**
  * Search page size
@@ -335,11 +332,11 @@ const currentPage = ref(params.value.page ? parseInt(params.value.page) : 1)
 const pageSize = 20
 
 // Initialize facets from params
-const organizationFromParams = computed(() => props.organizations?.data.find(org => org.id === params.value.organization))
+const organizationFromParams = computed(() => organizations.value?.data.find(org => org.id === params.organization))
 
 const organizationFromSuggest = computedAsync<OrganizationOrSuggest | null>(async () => {
-  if (!props.organization && !organizationFromParams.value && params.value.organization) {
-    const suggested = await props.suggestOrganizations(params.value.organization)
+  if (!props.organization && !organizationFromParams.value && params.organization) {
+    const suggested = await suggestOrganizations(params.organization)
     if (suggested && suggested.length > 0) {
       return suggested[0]
     }
@@ -347,27 +344,27 @@ const organizationFromSuggest = computedAsync<OrganizationOrSuggest | null>(asyn
   return null
 }, null)
 
-const organizationTypeFromParams = organizationTypes.find(type => type.type === params.value.organization_badge) as (Omit<ReturnType<typeof getOrganizationTypes>[number], 'type'> & { type: OrganizationTypes }) | undefined
+const organizationTypeFromParams = organizationTypes.find(type => type.type === params.organization_badge) as (Omit<ReturnType<typeof getOrganizationTypes>[number], 'type'> & { type: OrganizationTypes }) | undefined
 
-const licenseFromParams = computed(() => props.licenses?.find(license => license.id === params.value.license))
+const licenseFromParams = computed(() => licenses.value?.find(license => license.id === params.license))
 
-const schemaFromParams = computed(() => props.schemas?.find(schema => schema.name === params.value.schema))
+const schemaFromParams = computed(() => schemas.value?.find(schema => schema.name === params.schema))
 
 let spatialCoverageFromSuggest: SpatialZone | undefined
-if (params.value.geozone) {
-  const suggested = await props.suggestSpatialCoverages(params.value.geozone)
+if (params.geozone) {
+  const suggested = await suggestSpatialCoverages(params.geozone)
   if (suggested && suggested.length > 0) {
     spatialCoverageFromSuggest = suggested[0]
   }
 }
 
-const granularityFromParams = computed(() => props.spatialGranularities?.find(granularity => granularity.id === params.value.granularity))
+const granularityFromParams = computed(() => spatialGranularities.value?.find(granularity => granularity.id === params.granularity))
 
 const facets = ref<Facets>({
   organization: null,
   organizationType: organizationTypeFromParams,
-  tag: params.value.tag,
-  format: params.value.format,
+  tag: params.tag,
+  format: params.format,
   license: null,
   schema: null,
   geozone: spatialCoverageFromSuggest,
@@ -393,15 +390,43 @@ watch([deboucedQuery, facets], () => {
   currentPage.value = 1
 }, { deep: true })
 
+async function suggestOrganizations(q: string) {
+  return await $api<Array<OrganizationSuggest>>('/api/1/organizations/suggest/', {
+    query: {
+      q,
+      size: 20,
+    },
+  })
+}
+
+async function suggestSpatialCoverages(query: string) {
+  return await $api<Array<SpatialZone>>('/api/1/spatial/zones/suggest/', {
+    query: {
+      q: query,
+      size: 20,
+    },
+  })
+}
+
+async function suggestTags(query: string) {
+  const tags = await $api<Array<Tag>>('/api/1/tags/suggest/', {
+    query: {
+      q: query,
+      size: 20,
+    },
+  })
+  return tags.map(tag => tag.text)
+}
+
 /**
  * Change current page
  */
-const changePage = (page: number) => {
+function changePage(page: number) {
   currentPage.value = page
   scrollToTop()
 }
 
-const scrollToTop = () => {
+function scrollToTop() {
   if (searchRef.value) {
     searchRef.value.scrollIntoView({ behavior: 'smooth' })
   }
@@ -418,11 +443,11 @@ function reloadFilters() {
   searchSort.value = ''
 }
 
-const resetFilters = () => {
+function resetFilters() {
   reloadFilters()
 }
 
-const resetForm = () => {
+function resetForm() {
   queryString.value = ''
   reloadFilters()
 }
@@ -437,6 +462,7 @@ const isFiltered = computed(() => {
     key => key in facets.value && facets.value[key] && (props.organization ? key !== 'organization' : true),
   )
 })
+
 const sortOptions = [
   { label: t('Creation date'), value: '-created' },
   { label: t('Last update'), value: '-last_update' },
@@ -446,26 +472,26 @@ const sortOptions = [
 
 // Update model params
 watchEffect(() => {
-  params.value.page_size = pageSize.toFixed()
+  params.page_size = pageSize.toFixed()
   if (!props.organization) {
-    params.value.organization = facets.value.organization?.id ?? undefined
-    params.value.organization_badge = facets.value.organizationType?.type ?? undefined
+    params.organization = facets.value.organization?.id ?? undefined
+    params.organization_badge = facets.value.organizationType?.type ?? undefined
   }
-  params.value.tag = facets.value.tag
-  params.value.format = facets.value.format ?? undefined
-  params.value.organization_badge = facets.value.organizationType?.type ?? undefined
-  params.value.license = facets.value.license?.id ?? undefined
-  params.value.schema = facets.value.schema?.name ?? undefined
-  params.value.geozone = facets.value.geozone?.id ?? undefined
-  params.value.granularity = facets.value.granularity?.id ?? undefined
-  if (currentPage.value > 1) params.value.page = currentPage.value.toString()
-  params.value.q = deboucedQuery.value ?? undefined
-  params.value.sort = searchSort.value ?? null
+  params.tag = facets.value.tag
+  params.format = facets.value.format ?? undefined
+  params.organization_badge = facets.value.organizationType?.type ?? undefined
+  params.license = facets.value.license?.id ?? undefined
+  params.schema = facets.value.schema?.name ?? undefined
+  params.geozone = facets.value.geozone?.id ?? undefined
+  params.granularity = facets.value.granularity?.id ?? undefined
+  if (currentPage.value > 1) params.page = currentPage.value.toString()
+  params.q = deboucedQuery.value ?? undefined
+  params.sort = searchSort.value ?? null
   return params
 })
 
-watch(() => props.searchResultsStatus, () => {
-  if (props.searchResultsStatus === 'error') {
+watch(searchResultsStatus, () => {
+  if (searchResultsStatus.value === 'error') {
     toast.error(t(`The search request failed`))
   }
 })

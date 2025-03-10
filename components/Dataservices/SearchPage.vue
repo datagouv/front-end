@@ -56,7 +56,7 @@
               ]"
             />
             <div
-              v-if="isFiltered || downloadLink"
+              v-if="isFiltered"
               class="mb-6 text-center"
             >
               <BrandedButton
@@ -68,15 +68,6 @@
                 @click="resetFilters"
               >
                 {{ t('Reset filters') }}
-              </BrandedButton>
-              <BrandedButton
-                v-else-if="downloadLink"
-                :icon="RiDownloadLine"
-                color="secondary"
-                class="w-full justify-center"
-                :href="downloadLink"
-              >
-                {{ t('Download list as CSV') }}
               </BrandedButton>
             </div>
           </div>
@@ -149,7 +140,7 @@
               />
               <SearchNoResults
                 v-else-if="!organization"
-                :forum-url
+                :forum-url="config.public.forumUrl"
                 @reset-filters="resetForm"
               />
             </div>
@@ -158,7 +149,7 @@
               class="mt-4"
             >
               <SearchNoResults
-                :forum-url
+                :forum-url="config.public.forumUrl"
                 @reset-filters="resetForm"
               />
             </div>
@@ -170,57 +161,75 @@
 </template>
 
 <script setup lang="ts">
-import type { Dataservice, Organization } from '@datagouv/components'
+import { BrandedButton, Pagination } from '@datagouv/components-next'
+import type { Dataservice, Organization } from '@datagouv/components-next'
 import { useI18n } from 'vue-i18n'
-import { RiCloseCircleLine, RiDownloadLine } from '@remixicon/vue'
-import { computedAsync, debouncedRef } from '@vueuse/core'
+import { RiCloseCircleLine } from '@remixicon/vue'
+import { computedAsync, debouncedRef, useUrlSearchParams } from '@vueuse/core'
 import SearchInput from '~/components/Search/SearchInput.vue'
-import type { PaginatedArray, RequestStatus } from '~/types/types'
-import type { DataserviceSearchParams, OrganizationOrSuggest } from '~/types/form'
+import type { PaginatedArray } from '~/types/types'
+import type { DataserviceSearchParams, OrganizationOrSuggest, OrganizationSuggest } from '~/types/form'
 import SelectGroup from '~/components/Form/SelectGroup/SelectGroup.vue'
 
-const props = withDefaults(defineProps<{
-  forumUrl: string
-  organizations: PaginatedArray<Organization> | null
-  organizationsStatus: RequestStatus
-  searchResults: PaginatedArray<Dataservice> | null
-  searchResultsStatus: RequestStatus
-  suggestOrganizations: (q: string) => Promise<Array<OrganizationOrSuggest>>
-  downloadLink?: string
-  organization?: Organization
-  sorts?: Array<{ label: string, order: string, value: string }>
-}>(), {
-  downloadLink: '',
-  sorts: () => ([]),
-})
+const props = defineProps<{
+  organization: Organization
+}>()
 
 type Facets = {
   isRestricted?: boolean
   organization?: { id: string } | null
 }
 
+const { $api } = useNuxtApp()
+
+const url = useRequestURL()
 const { t } = useI18n()
 const config = useRuntimeConfig()
 const { toast } = useToast()
 
-const params = defineModel<DataserviceSearchParams>('params', { required: true })
+const params = useUrlSearchParams<DataserviceSearchParams>('history', {
+  initialValue: Object.fromEntries(url.searchParams.entries()),
+  removeNullishValues: true,
+})
+
+const nonFalsyParams = computed(() => {
+  const filteredParams = Object.entries(toValue(params)).filter(([_k, v]) => v !== undefined && v !== '')
+  const propsParams = props.organization ? { organization: props.organization.id } : {}
+  return { ...propsParams, ...Object.fromEntries(filteredParams) }
+})
+
+const { data: searchResults, status: searchResultsStatus } = await useAPI<PaginatedArray<Dataservice>>('/api/2/dataservices/search/', {
+  params: nonFalsyParams,
+  lazy: true,
+})
+
+const { data: organizations, status: organizationsStatus } = await useAPI<PaginatedArray<Organization>>('/api/1/organizations/?sort=-followers', { lazy: true })
+
+async function suggestOrganizations(q: string) {
+  return await $api<Array<OrganizationSuggest>>('/api/1/organizations/suggest/', {
+    query: {
+      q,
+      size: 20,
+    },
+  })
+}
 
 /**
  * Search query
  */
-const queryString = ref(params.value.q ?? '')
+const queryString = ref(params.q ?? '')
 
 const deboucedQuery = debouncedRef(queryString, config.public.searchAutocompleteDebounce)
 
 /**
  * Query sort
  */
-const searchSort = ref(params.value.sort ?? '')
+const searchSort = ref(params.sort ?? '')
 
 /**
  * Current page of results
  */
-const currentPage = ref(params.value.page ? parseInt(params.value.page) : 1)
+const currentPage = ref(params.page ? parseInt(params.page) : 1)
 
 /**
  * Search page size
@@ -228,11 +237,11 @@ const currentPage = ref(params.value.page ? parseInt(params.value.page) : 1)
 const pageSize = 20
 
 // Initialize facets from params
-const organizationFromParams = computed(() => props.organizations?.data.find(org => org.id === params.value.organization))
+const organizationFromParams = computed(() => organizations.value?.data.find(org => org.id === params.organization))
 
 const organizationFromSuggest = computedAsync<OrganizationOrSuggest | null>(async () => {
-  if (!props.organization && !organizationFromParams.value && params.value.organization) {
-    const suggested = await props.suggestOrganizations(params.value.organization)
+  if (!props.organization && !organizationFromParams.value && params.organization) {
+    const suggested = await suggestOrganizations(params.organization)
     if (suggested && suggested.length > 0) {
       return suggested[0]
     }
@@ -242,11 +251,7 @@ const organizationFromSuggest = computedAsync<OrganizationOrSuggest | null>(asyn
 
 const facets = ref<Facets>({
   organization: null,
-  isRestricted: params.value.is_restricted,
-})
-
-watchEffect(() => {
-  facets.value.organization = props.organization ?? organizationFromParams.value ?? organizationFromSuggest.value
+  isRestricted: params.is_restricted,
 })
 
 /**
@@ -264,12 +269,12 @@ watch([deboucedQuery, facets], () => {
 /**
  * Change current page
  */
-const changePage = (page: number) => {
+function changePage(page: number) {
   currentPage.value = page
   scrollToTop()
 }
 
-const scrollToTop = () => {
+function scrollToTop() {
   if (searchRef.value) {
     searchRef.value.scrollIntoView({ behavior: 'smooth' })
   }
@@ -282,11 +287,11 @@ function reloadFilters() {
   searchSort.value = ''
 }
 
-const resetFilters = () => {
+function resetFilters() {
   reloadFilters()
 }
 
-const resetForm = () => {
+function resetForm() {
   queryString.value = ''
   reloadFilters()
   scrollToTop()
@@ -309,21 +314,25 @@ const sortOptions = [
   { label: t('Number of datasets'), value: '-datasets' },
 ]
 
+watchEffect(() => {
+  facets.value.organization = props.organization ?? organizationFromParams.value ?? organizationFromSuggest.value
+})
+
 // Update model params
 watchEffect(() => {
-  params.value.page_size = pageSize.toFixed()
+  params.page_size = pageSize.toFixed()
   if (!props.organization) {
-    params.value.organization = facets.value.organization?.id ?? undefined
+    params.organization = facets.value.organization?.id ?? undefined
   }
-  params.value.is_restricted = facets.value.isRestricted
-  if (currentPage.value > 1) params.value.page = currentPage.value.toString()
-  params.value.q = deboucedQuery.value ?? undefined
-  params.value.sort = searchSort.value ?? null
+  params.is_restricted = facets.value.isRestricted
+  if (currentPage.value > 1) params.page = currentPage.value.toString()
+  params.q = deboucedQuery.value ?? undefined
+  params.sort = searchSort.value ?? null
   return params
 })
 
-watch(() => props.searchResultsStatus, () => {
-  if (props.searchResultsStatus === 'error') {
+watch(searchResultsStatus, () => {
+  if (searchResultsStatus.value === 'error') {
     toast.error(t(`The search request failed`))
   }
 })

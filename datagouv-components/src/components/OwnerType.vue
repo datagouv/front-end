@@ -18,16 +18,16 @@ import OwnerTypeIcon from './OwnerTypeIcon.vue'
 const props = withDefaults(defineProps<{
   type: OrganizationTypes | UserType
   size?: 'base' | 'sm' | 'xs'
-  color?: 'black' | 'grey'
+  color?: 'black' | 'gray'
 }>(), {
   size: 'sm',
-  color: 'grey',
+  color: 'gray',
 })
 
 const colorClass = computed(() => {
   return {
     black: 'text-gray-title',
-    grey: 'text-gray-medium',
+    gray: 'text-gray-medium',
   }[props.color]
 })
 

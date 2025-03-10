@@ -108,6 +108,7 @@ import { formatRelativeIfRecentDate } from '../functions/dates'
 import { summarize } from '../functions/helpers'
 import { getOwnerName } from '../functions/owned'
 import type { Reuse } from '../types/reuses'
+import AppLink from './AppLink.vue'
 import OrganizationNameWithCertificate from './OrganizationNameWithCertificate.vue'
 
 const props = defineProps<{
