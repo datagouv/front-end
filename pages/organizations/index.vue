@@ -27,6 +27,11 @@ import type { LocationQueryValue } from 'vue-router'
 import BreadcrumbItem from '~/components/Breadcrumbs/BreadcrumbItem.vue'
 import type { PaginatedArray } from '~/types/types'
 
+const { t } = useI18n()
+
+useHead({
+  title: t('Organizations'),
+})
 const route = useRoute()
 const q = ref('')
 const sort = ref((route.query.sort as string | null) || undefined)

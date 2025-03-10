@@ -309,9 +309,6 @@ const isFiltered = computed(() => {
 })
 const sortOptions = [
   { label: t('Creation date'), value: '-created' },
-  { label: t('Last update'), value: '-last_update' },
-  { label: t('Number of followers'), value: '-followers' },
-  { label: t('Number of datasets'), value: '-datasets' },
 ]
 
 watchEffect(() => {

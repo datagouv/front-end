@@ -2,8 +2,8 @@
 <template>
   <div class="bg-blue-lightest">
     <div class="container">
-      <div class="flex items-center">
-        <Breadcrumb class="flex-1 !text-gray-title">
+      <div class="flex items-center justify-between">
+        <Breadcrumb>
           <BreadcrumbItem
             to="/"
             :external="true"
@@ -26,13 +26,20 @@
       </div>
     </div>
     <LoadingBlock :status>
-      <div class="container">
+      <div class="container pt-14">
+        <p
+          v-if="organization.deleted"
+          class="fr-badge mb-2 flex gap-1 items-center"
+        >
+          <RiDeleteBinLine class="size-3.5" />
+          {{ $t('Deleted') }}
+        </p>
         <Placeholder
           :src="organization.logo_thumbnail"
           type="organization"
           alt=""
           :size="80"
-          class="bg-white p-1 rounded-sm border border-gray-default object-contain mt-14 mb-2.5"
+          class="bg-white p-1 rounded-sm border border-gray-default object-contain mb-2.5"
         />
         <h1 class="!text-2xl !font-extrabold !mb-2.5">
           <OrganizationNameWithCertificate
@@ -70,6 +77,7 @@
 
 <script setup lang="ts">
 import { OrganizationNameWithCertificate, OwnerType, getOrganizationType, type Organization } from '@datagouv/components-next'
+import { RiDeleteBinLine } from '@remixicon/vue'
 import EditButton from '~/components/BrandedButton/EditButton.vue'
 import BreadcrumbItem from '~/components/Breadcrumbs/BreadcrumbItem.vue'
 import Placeholder from '~/components/Placeholder/Placeholder.vue'
@@ -80,6 +88,10 @@ const me = useMaybeMe()
 
 const url = computed(() => `/api/1/organizations/${route.params.oid}/`)
 const { data: organization, status } = await useAPI<Organization>(url)
+
+useHead({
+  title: organization.value.name,
+})
 
 const type = computed(() => getOrganizationType(organization.value))
 const isMember = computed(() => organization.value.members.some(member => member.user.id === me.value?.id))

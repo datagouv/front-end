@@ -103,7 +103,7 @@
         :text="ownerName"
         :max-lines="1"
       />
-      <span class="dash-before whitespace-nowrap">{{ t('Updated {date}', { date: formatRelativeIfRecentDate(dataservice.metadata_modified_at) }) }}</span>
+      <span class="dash-before whitespace-nowrap">{{ t('Updated {date}', { date: formatRelativeIfRecentDate(dataservice.metadata_modified_at, { dateStyle: 'medium' }) }) }}</span>
     </p>
     <p class="text-sm text-gray-medium mb-0 mt-1">
       <span class="fr-icon-information-line fr-icon--sm text-gray-medium" />
