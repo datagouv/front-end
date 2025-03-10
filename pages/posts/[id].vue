@@ -85,4 +85,7 @@ const route = useRoute()
 const me = useMaybeMe()
 const url = computed(() => `/api/1/posts/${route.params.id}/`)
 const { data: post } = await useAPI<Post>(url)
+useHead({
+  title: post.value.name,
+})
 </script>
