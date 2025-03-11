@@ -109,7 +109,7 @@
           :state="accordionState('access_type')"
         >
           <p class="fr-m-0">
-            {{ $t("Choose the access type (open, open with account or restricted). Select open if the data is open data.") }}
+            {{ $t("Please indicate whether the dataservice is freely accessible or whether a user requires a token to access the data.") }}
           </p>
           <SimpleBanner
             v-if="getFirstWarning('access_type')"

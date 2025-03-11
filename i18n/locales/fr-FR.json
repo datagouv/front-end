@@ -669,7 +669,7 @@
   "An error occured while creating your dataservice.": "Une erreur s'est produite en créant votre API.",
   "A dataservice already exists for this URL.": "Une API existe déjà pour cet URL.",
   "Access token": "Token d'accès",
-  "Please indicate whether the dataservice is freely accessible or whether a user requires a token to access the data.": "Indiquez si l'API requiert ou non un jeton d'accès pour passer un appel.",
+  "Please indicate whether the dataservice is freely accessible or whether a user requires a token to access the data.": "Indiquez le type d'accès de l'API (ouvert, ouvert avec compte ou restreint). Une API est en accès restreint si l'usager doit demander un accès auprès de vos services et que ces derniers peuvent refuser cet accès dans certains cas.",
   "Specify the mean availability of your dataservice. Value should be a percentage.": "Spécifier la disponibilité moyenne de votre API. La valeur doit être un pourcentage.",
   "What is a dataservice?": "Qu'est-ce qu'une API ?",
   "A dataservice is a computer tool that allows a website or software to communicate with another computer and exchange data.": "Une API est un outil informatique qui permet à un site internet ou à un logiciel de communiquer avec un autre ordinateur et échanger de la donnée.",
@@ -957,7 +957,6 @@
   "Open with account": "Ouvert avec compte",
   "Add a link to the machine documentation": "Ajouter un lien vers la documentation machine",
   "Add access to the general technical documentation of the API and indicate the integration steps.": "Ajoutez un accès vers la documentation technique générale de l'API et indiquant les étapes d'intégration.",
-  "Choose the access type (open, open with account or restricted). Select open if the data is open data.": "Indiquez le type d'accès de l'API (ouvert, ouvert avec compte ou restreint). Une API est en accès restreint si l'usager doit demander un accès auprès de vos services et que ces derniers peuvent refuser cet accès dans certains cas.",
   "Dataservice machine description URL": "Lien vers la documentation machine de l'API",
   "Dataservice technical description URL": "Lien vers la documentation technique de l'API"
 }
