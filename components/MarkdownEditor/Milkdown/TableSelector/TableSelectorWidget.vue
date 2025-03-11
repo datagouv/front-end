@@ -1,6 +1,7 @@
 <template>
   <button
     ref="containerRef"
+    type="button"
     :draggable="type !== 'top-left'"
     class="table-selector block fr-p-0 cursor-pointer hover:!bg-primary absolute bg-neutral-300"
     :class="className + ' ' + common"

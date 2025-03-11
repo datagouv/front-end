@@ -64,7 +64,7 @@ export const formatFromNow = (date: Date | string | null) => {
  * Format date relative form now if date is less than a month ago.
  * Otherwise, show a formatted date.
  */
-export const formatRelativeIfRecentDate = (date: Date | string | null) => {
+export const formatRelativeIfRecentDate = (date: Date | string | null, options: Intl.DateTimeFormatOptions = {}) => {
   if (!date) {
     return ''
   }
@@ -79,7 +79,7 @@ export const formatRelativeIfRecentDate = (date: Date | string | null) => {
   dateWithoutTime.setSeconds(0)
   const diff = Math.abs(dateWithoutTime.getTime() - today.getTime())
   if (Math.round(diff / (SECONDS_IN_A_DAY * 30)) >= 1) {
-    return t('on {date}', { date: formatDate(date) })
+    return t('on {date}', { date: formatDate(date, options) })
   }
   return formatFromNow(date)
 }

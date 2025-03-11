@@ -1,7 +1,13 @@
 <template>
-  <p :class="`${colorClass} fr-text--${size} fr-my-0`">
-    <OwnerTypeIcon :type="type" /> {{ name }}
-  </p>
+  <div :class="`${colorClass} flex items-center gap-1`">
+    <OwnerTypeIcon
+      :type="type"
+      class="size-4 -mt-1"
+    />
+    <div :class="sizeClass">
+      {{ name }}
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -11,18 +17,26 @@ import OwnerTypeIcon from './OwnerTypeIcon.vue'
 
 const props = withDefaults(defineProps<{
   type: OrganizationTypes | UserType
-  size?: 'sm' | 'xs'
-  color?: 'black' | 'grey'
+  size?: 'base' | 'sm' | 'xs'
+  color?: 'black' | 'gray'
 }>(), {
   size: 'sm',
-  color: 'grey',
+  color: 'gray',
 })
 
 const colorClass = computed(() => {
   return {
     black: 'text-gray-title',
-    grey: 'text-gray-medium',
+    gray: 'text-gray-medium',
   }[props.color]
+})
+
+const sizeClass = computed(() => {
+  return {
+    base: 'text-base',
+    sm: 'text-sm',
+    xs: 'text-xs',
+  }[props.size]
 })
 
 const name = computed(() => findOrganizationType(props.type).label)
