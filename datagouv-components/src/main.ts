@@ -21,8 +21,11 @@ import DataserviceCard from './components/DataserviceCard.vue'
 import DatasetCard from './components/DatasetCard.vue'
 import DatasetInformationPanel from './components/DatasetInformationPanel.vue'
 import DatasetQuality from './components/DatasetQuality.vue'
+import DatasetQualityInline from './components/DatasetQualityInline.vue'
 import DatasetQualityItem from './components/DatasetQualityItem.vue'
 import DatasetQualityScore from './components/DatasetQualityScore.vue'
+import DatasetQualityTooltipContent from './components/DatasetQualityTooltipContent.vue'
+import OrganizationCard from './components/OrganizationCard.vue'
 import OrganizationNameWithCertificate from './components/OrganizationNameWithCertificate.vue'
 import OwnerType from './components/OwnerType.vue'
 import OwnerTypeIcon from './components/OwnerTypeIcon.vue'
@@ -144,8 +147,11 @@ export {
   DatasetCard,
   DatasetInformationPanel,
   DatasetQuality,
+  DatasetQualityInline,
   DatasetQualityItem,
   DatasetQualityScore,
+  DatasetQualityTooltipContent,
+  OrganizationCard,
   OrganizationNameWithCertificate,
   OwnerType,
   OwnerTypeIcon,

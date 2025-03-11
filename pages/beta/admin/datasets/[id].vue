@@ -38,7 +38,7 @@
                 :score="dataset.quality.score"
               />
               <template #tooltip>
-                <QualityScoreTooltipContent :dataset="dataset" />
+                <DatasetQualityTooltipContent :quality="dataset.quality" />
               </template>
             </Tooltip>
           </div>
@@ -83,21 +83,24 @@
         :links="[
           { href: getDatasetAdminUrl(dataset), label: t('Metadata') },
           { href: `${getDatasetAdminUrl(dataset)}/files`, label: t('Files') },
+          { href: `${getDatasetAdminUrl(dataset)}/discussions`, label: t('Discussions') },
         ]"
       />
 
-      <NuxtPage :page-key="route => route.fullPath" />
+      <NuxtPage
+        :page-key="route => route.fullPath"
+        :dataset
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { BrandedButton } from '@datagouv/components-next'
+import { BrandedButton, DatasetQualityTooltipContent } from '@datagouv/components-next'
 import { DatasetQualityScore, summarize, type Dataset } from '@datagouv/components-next'
 import { RiDownloadLine, RiEyeLine, RiInformationLine, RiLineChartLine, RiPriceTag3Line } from '@remixicon/vue'
 import AdminBreadcrumb from '~/components/Breadcrumbs/AdminBreadcrumb.vue'
 import BreadcrumbItem from '~/components/Breadcrumbs/BreadcrumbItem.vue'
-import QualityScoreTooltipContent from '~/components/dataset/QualityScore/QualityScoreTooltipContent/QualityScoreTooltipContent.vue'
 import TabLinks from '~/components/TabLinks.vue'
 
 const { t } = useI18n()
