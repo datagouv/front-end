@@ -54,7 +54,7 @@
     </ul>
     <div class="fr-grid-row fr-grid-row--right not-enlarged">
       <a
-        :href="'TODO'"
+        :href="config.datasetQualityGuideUrl"
         target="_blank"
         rel="noopener"
         :title="t('Learn more about this indicator - opens a new window')"
@@ -65,7 +65,7 @@
   </template>
   
   <script setup lang="ts">
-  import type { Quality } from '../main'
+  import { useComponentsConfig, type Quality } from '../main'
   import DatasetQualityItem from './DatasetQualityItem.vue'
   import { useI18n } from 'vue-i18n'
   
@@ -74,5 +74,6 @@
   }>()
   
   const { t } = useI18n()
+  const config = useComponentsConfig()
   </script>
   

@@ -58,6 +58,8 @@ export default defineNuxtConfig({
       supportUrl: 'https://support.data.gouv.fr/',
       catalogUrl: 'https://guides.data.gouv.fr/autres-ressources-utiles/catalogage-de-donnees-grist',
 
+      datasetQualityGuideUrl: 'https://guides.data.gouv.fr/publier-des-donnees/guide-qualite/ameliorer-la-qualite-dun-jeu-de-donnees-en-continu/ameliorer-le-score-de-qualite-des-metadonnees',
+
       dataSearchFeedbackFormUrl: 'https://tally.so/r/mDKv1N',
       feedbackFormUrl: 'https://tally.so/r/mOld5R',
       betaAdminFeedbackUrl: 'https://tally.so/r/nP25OB',
