@@ -973,5 +973,11 @@
   "Copy organization ID": "Copy organization ID",
   "Organization ID copied": "Organization ID copied",
   "An error occured while sending your request": "An error occured while sending your request",
+  "This post is not published yet !": "This post is not published yet !",
+  "Choose the attribution with which you want to publish": "Choose the attribution with which you want to publish",
+  "Select an attribution": "Select an attribution",
+  "Attributions": "Attributions",
+  "Role": "Role",
+  "New attribution": "New attribution",
   "": ""
 }
