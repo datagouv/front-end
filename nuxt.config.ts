@@ -58,15 +58,17 @@ export default defineNuxtConfig({
       supportUrl: 'https://support.data.gouv.fr/',
       catalogUrl: 'https://guides.data.gouv.fr/autres-ressources-utiles/catalogage-de-donnees-grist',
 
-      datasetQualityGuideUrl: 'https://guides.data.gouv.fr/publier-des-donnees/guide-qualite/ameliorer-la-qualite-dun-jeu-de-donnees-en-continu/ameliorer-le-score-de-qualite-des-metadonnees',
-
+      datasetPublishingGuideUrl: 'https://guides.data.gouv.fr/publier-des-donnees/guide-qualite/ameliorer-la-qualite-dun-jeu-de-donnees-en-continu/ameliorer-le-score-de-qualite-des-metadonnees',
+      datasetQualityGuideUrl: 'https://guides.data.gouv.fr/publier-des-donnees/guide-data.gouv.fr/jeux-de-donnees/publier-un-jeu-de-donnees',
       dataSearchFeedbackFormUrl: 'https://tally.so/r/mDKv1N',
+      forumUrl: 'https://forum.data.gouv.fr/',
       feedbackFormUrl: 'https://tally.so/r/mOld5R',
       betaAdminFeedbackUrl: 'https://tally.so/r/nP25OB',
       publishingDatasetFeedbackUrl: 'https://tally.so/r/nGo0yO',
       publishingDataserviceFeedbackUrl: 'https://tally.so/r/w2J7lL',
       publishingReuseFeedbackUrl: 'https://tally.so/r/mV98y6',
       publishingHarvesterFeedbackUrl: 'https://tally.so/r/3NMLOQ',
+      reuseGuideUrl: 'https://guides.data.gouv.fr/publier-des-donnees/guide-data.gouv.fr/reutilisations',
       harvesterRequestValidationUrl: 'https://support.data.gouv.fr/help/datagouv/moissonnage#support-tree',
       harvesterPreviewMaxItems: 20, // SHould be the same as `HARVEST_PREVIEW_MAX_ITEMS` in udata
 
@@ -114,6 +116,7 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    '/*/organizations/': { ssr: true },
     '/*/posts/': { ssr: true },
     '/*/posts/**': { ssr: true },
     // Admin dashboard renders only on server-side
