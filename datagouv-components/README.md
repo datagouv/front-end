@@ -1,6 +1,6 @@
 # @datagouv/components
 
-In this document, "the user" is the application using `@datagouv/components` (for example: `front-end` or `udata-front-kit`).
+In this document, "the user" is the application using `@datagouv/components` (for example: `cdata` or `udata-front-kit`).
 
 ## Usage
 
