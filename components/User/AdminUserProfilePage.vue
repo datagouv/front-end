@@ -113,10 +113,10 @@
             <div class="relative">
               <input
                 :id="apiKeyId"
+                type="password"
                 v-model="user.apikey"
                 class="fr-input !pr-8"
                 disabled
-                type="text"
               >
               <div class="absolute right-1 top-1 !mt-0.5 !mr-0.5">
                 <CopyButton
