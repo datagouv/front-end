@@ -315,7 +315,7 @@
 </template>
 
 <script setup lang="ts">
-import { BrandedButton, OwnerType } from '@datagouv/components-next'
+import { BrandedButton, OwnerType, type Badge } from '@datagouv/components-next'
 import { ASSOCIATION, COMPANY, LOCAL_AUTHORITY, PUBLIC_SERVICE, SimpleBanner, type NewOrganization, type Organization, type OrganizationTypes } from '@datagouv/components-next'
 import { url } from '@vuelidate/validators'
 import { computed, reactive, ref, watchEffect } from 'vue'
@@ -345,7 +345,7 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits<{
   previous: []
-  submit: [submittedOrganization: typeof props.organization, file: File | null, newBadges: Array<{ kind: string }>]
+  submit: [submittedOrganization: typeof props.organization, file: File | null, newBadges: Array<Badge>]
 }>()
 
 const legend = 'description-legend'
