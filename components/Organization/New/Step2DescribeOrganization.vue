@@ -263,7 +263,7 @@
           v-if="isGlobalAdmin && 'badges' in organization"
           v-model="newBadges"
           :label="$t('Badges')"
-          :placeholder="$t('Assign badges to the organization…')"
+          :placeholder="$t('Associate badges to the organization…')"
           class="mb-6"
           :options="badges"
           :get-option-id="(badge) => badgesLabels[badge.kind]"
