@@ -110,7 +110,7 @@
 </template>
 
 <script setup lang="ts">
-import { BrandedButton } from '@datagouv/components-next'
+import { BrandedButton, type Badge } from '@datagouv/components-next'
 import { Placeholder, isOrganizationCertified, type NewOrganization, type Organization } from '@datagouv/components-next'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -120,7 +120,7 @@ import AdminBreadcrumb from '~/components/Breadcrumbs/AdminBreadcrumb.vue'
 import BreadcrumbItem from '~/components/Breadcrumbs/BreadcrumbItem.vue'
 import PaddedContainer from '~/components/PaddedContainer/PaddedContainer.vue'
 import DescribeOrganizationFrom from '~/components/Organization/New/Step2DescribeOrganization.vue'
-import { updateOrganization, uploadLogo } from '~/api/organizations'
+import { updateOrganization, updateOrganizationBadges, uploadLogo } from '~/api/organizations'
 
 const props = defineProps<{
   organization: Organization | null
@@ -152,8 +152,12 @@ async function deleteCurrentOrganization() {
   }
 }
 
-async function updateCurrentOrganization(updatedOrganization: NewOrganization | Organization, logo_file: File | null) {
+async function updateCurrentOrganization(updatedOrganization: NewOrganization | Organization, logo_file: File | null, newBadges: Array<Badge> | null) {
   await updateOrganization(updatedOrganization as Organization)
+  if (newBadges && props.organization) {
+    await updateOrganizationBadges(props.organization, newBadges)
+  }
+
   if (logo_file && props.organization) {
     await uploadLogo(props.organization.id, logo_file)
   }
