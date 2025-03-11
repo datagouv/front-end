@@ -53,12 +53,11 @@
 </template>
 
 <script setup lang="ts">
-import { useComponentsConfig, type Quality } from '../main'
+import type { Quality } from '../types/datasets'
 import DatasetQualityItemWarning from './DatasetQualityItemWarning.vue'
 import DatasetQualityScore from './DatasetQualityScore.vue'
 import Toggletip from './Toggletip.vue'
 import DatasetQualityTooltipContent from './DatasetQualityTooltipContent.vue'
-
 
 withDefaults(defineProps<{
   quality: Quality
@@ -66,6 +65,4 @@ withDefaults(defineProps<{
 }>(), {
   showItemWarnings: true,
 })
-
-const config = useComponentsConfig()
 </script>

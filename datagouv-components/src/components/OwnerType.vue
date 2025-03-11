@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { findOrganizationType, type OrganizationTypes, type UserType } from '../main'
+import { findOrganizationType, type OrganizationTypes, type UserType } from '../functions/organizations'
 import OwnerTypeIcon from './OwnerTypeIcon.vue'
 
 const props = withDefaults(defineProps<{
