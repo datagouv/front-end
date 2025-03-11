@@ -1,5 +1,6 @@
 <template>
   <form
+    v-if="!organization || organization.metrics.datasets"
     class="group/form"
     data-input-color="blue"
   >
@@ -253,6 +254,25 @@
       </section>
     </div>
   </form>
+  <div
+    v-else
+    class="flex flex-col items-center lg:pt-12"
+  >
+    <NuxtImg
+      src="/illustrations/schema.svg"
+      width="137"
+      height="117"
+    />
+    <p class="mt-4 mb-5 font-bold text-lg">
+      {{ $t(`This organization hasn't published any datasets yet.`) }}
+    </p>
+    <BrandedButton
+      color="secondary"
+      :href="config.public.datasetPublishingGuideUrl"
+    >
+      {{ $t(`What's a dataset ?`) }}
+    </BrandedButton>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -354,9 +374,9 @@ const organizationFromSuggest = computedAsync<OrganizationOrSuggest | null>(asyn
 
 const organizationTypeFromParams = organizationTypes.find(type => type.type === params.organization_badge) as (Omit<ReturnType<typeof getOrganizationTypes>[number], 'type'> & { type: OrganizationTypes }) | undefined
 
-const licenseFromParams = computed(() => licenses.value?.find(license => license.id === params.license))
+const licenseFromParams = computed(() => licenses.value?.find(license => license.id === params.license) ?? null)
 
-const schemaFromParams = computed(() => schemas.value?.find(schema => schema.name === params.schema))
+const schemaFromParams = computed(() => schemas.value?.find(schema => schema.name === params.schema) ?? null)
 
 let spatialCoverageFromSuggest: SpatialZone | undefined
 if (params.geozone) {

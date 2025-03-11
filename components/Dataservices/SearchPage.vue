@@ -1,5 +1,6 @@
 <template>
   <form
+    v-if="!organization || organization.metrics.dataservices"
     class="group/form"
     data-input-color="blue"
   >
@@ -158,6 +159,19 @@
       </section>
     </div>
   </form>
+  <div
+    v-else
+    class="flex flex-col items-center lg:pt-12"
+  >
+    <NuxtImg
+      src="/illustrations/schema.svg"
+      width="137"
+      height="117"
+    />
+    <p class="mt-4 mb-5 font-bold text-lg">
+      {{ $t(`This organization hasn't published any dataservices yet.`) }}
+    </p>
+  </div>
 </template>
 
 <script setup lang="ts">
