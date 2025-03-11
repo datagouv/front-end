@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { RiPencilLine } from '@remixicon/vue'
-import { useComponentsConfig } from '../../main'
+import { useComponentsConfig } from '../../config'
 import BrandedButton from '../BrandedButton.vue'
 
 type Props = {

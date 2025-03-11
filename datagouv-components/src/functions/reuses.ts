@@ -1,5 +1,5 @@
 import { ofetch } from 'ofetch'
-import { useComponentsConfig } from '../main'
+import { useComponentsConfig } from '../config'
 import type { ReuseType } from '../types/reuses'
 
 let reuseTypesRequest: Array<ReuseType> | null = null

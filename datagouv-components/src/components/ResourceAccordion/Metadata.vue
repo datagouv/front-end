@@ -10,7 +10,7 @@ import { formatDate } from '../../functions/dates'
 import { filesize } from '../../functions/helpers'
 import ExtraAccordion from '../ExtraAccordion.vue'
 import { getResourceTitleId, getResourceLabel } from '../../functions/resources'
-import { useComponentsConfig } from '../../main'
+import { useComponentsConfig } from '../../config'
 
 const props = defineProps<{
   resource: Resource

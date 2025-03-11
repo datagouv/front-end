@@ -77,7 +77,8 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { ContentLoader } from 'vue-content-loader'
-import { summarize, formatDate } from '../main'
+import { formatDate } from '../functions/dates'
+import { summarize } from '../functions/helpers'
 import SmallChart from './SmallChart.vue'
 
 const props = defineProps<{

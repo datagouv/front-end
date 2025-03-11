@@ -18,7 +18,6 @@
 
 <script setup lang="ts">
 import type { Quality } from '../types/datasets'
-import { useComponentsConfig } from '../main'
 import DatasetQualityScore from './DatasetQualityScore.vue'
 import DatasetQualityTooltipContent from './DatasetQualityTooltipContent.vue'
 import Toggletip from './Toggletip.vue'
@@ -26,6 +25,4 @@ import Toggletip from './Toggletip.vue'
 defineProps<{
   quality: Quality
 }>()
-
-const config = useComponentsConfig()
 </script>

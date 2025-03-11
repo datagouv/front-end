@@ -1,7 +1,7 @@
 import type { AxiosResponse } from 'axios'
 import { ofetch } from 'ofetch'
 import type { Resource } from '../types/resources'
-import { useComponentsConfig } from '../main'
+import { useComponentsConfig } from '../config'
 
 /**
  * A schema version.
