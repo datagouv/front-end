@@ -11,7 +11,7 @@
       class="absolute top-0 fr-grid-row fr-grid-row--middle fr-mt-n3v fr-ml-n1v"
     >
       <p
-        v-if="dataservice.is_restricted"
+        v-if="dataservice.access_type === 'restricted'"
         class="fr-badge fr-badge--sm fr-badge--mention-grey text-gray-medium mr-2"
       >
         <span
@@ -160,7 +160,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const { t } = useI18n()
 const ownerName = computed(() => getOwnerName(props.dataservice))
-const showBadge = computed(() => props.dataservice.is_restricted || props.dataservice.private || props.dataservice.archived_at)
+const showBadge = computed(() => dataservice.access_type === 'restricted' || props.dataservice.private || props.dataservice.archived_at)
 
 const config = useComponentsConfig()
 const isTabularApi = computed(() => {
