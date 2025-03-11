@@ -158,13 +158,14 @@
           {{ getFilesCount(dataset) }}
         </td>
         <td>
+          <DatasetQualityInline :quality="dataset.quality" />
           <Tooltip>
             <DatasetQualityScore
               class="w-full"
               :score="dataset.quality.score"
             />
             <template #tooltip>
-              <QualityScoreTooltipContent :dataset="dataset" />
+              <DatasetQualityTooltipContent :quality="dataset.quality" />
             </template>
           </Tooltip>
         </td>
@@ -189,10 +190,9 @@
 </template>
 
 <script setup lang="ts">
-import { summarize, DatasetQualityScore } from '@datagouv/components-next'
+import { summarize, DatasetQualityScore, DatasetQualityInline, DatasetQualityTooltipContent } from '@datagouv/components-next'
 import type { Dataset, DatasetV2 } from '@datagouv/components-next'
 import { useI18n } from 'vue-i18n'
-import QualityScoreTooltipContent from '../../dataset/QualityScore/QualityScoreTooltipContent/QualityScoreTooltipContent.vue'
 import AdminBadge from '../../AdminBadge/AdminBadge.vue'
 import AdminContentWithTooltip from '../../AdminContentWithTooltip/AdminContentWithTooltip.vue'
 import AdminTable from '../Table/AdminTable.vue'
