@@ -158,7 +158,6 @@
           {{ getFilesCount(dataset) }}
         </td>
         <td>
-          <DatasetQualityInline :quality="dataset.quality" />
           <Tooltip>
             <DatasetQualityScore
               class="w-full"
