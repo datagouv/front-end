@@ -8,6 +8,7 @@
     <span
       v-if="copied"
       class="flex items-center"
+      :class="{ 'flex-row-reverse': reverse }"
       style="color: #3558a2;"
     >
       <RiCheckLine class="size-4 inline" />
@@ -19,6 +20,7 @@
     <span
       v-if="!copied"
       class="flex items-center"
+      :class="{ 'flex-row-reverse': reverse }"
     >
       <component
         :is="hideLabel ? RiClipboardLine : RiFileCopyLine"
@@ -41,8 +43,10 @@ const props = withDefaults(defineProps<{
   label: string
   copiedLabel: string
   hideLabel?: boolean
+  reverse?: boolean
 }>(), {
   hideLabel: false,
+  reverse: false,
 })
 
 const copied = ref(false)

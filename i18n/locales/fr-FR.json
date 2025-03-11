@@ -634,6 +634,7 @@
   "Warning: If you erase your API key you risk to loose acces to {site} services": "Attention: Si vous supprimez votre clé d'API vous risquez de perdre l'accès aux services de {site}",
   "Copy API key": "Copier la clé d'API",
   "Regenerate": "Regénérer",
+  "Generate": "Générer",
   "Change e-mail address": "Changer d'adresse email",
   "Change password": "Changer de mot de passe",
   "Yes": "Oui",

@@ -38,7 +38,7 @@
                 :score="dataset.quality.score"
               />
               <template #tooltip>
-                <QualityScoreTooltipContent :dataset="dataset" />
+                <DatasetQualityTooltipContent :quality="dataset.quality" />
               </template>
             </Tooltip>
           </div>
@@ -96,12 +96,11 @@
 </template>
 
 <script setup lang="ts">
-import { BrandedButton } from '@datagouv/components-next'
+import { BrandedButton, DatasetQualityTooltipContent } from '@datagouv/components-next'
 import { DatasetQualityScore, summarize, type Dataset } from '@datagouv/components-next'
 import { RiDownloadLine, RiEyeLine, RiInformationLine, RiLineChartLine, RiPriceTag3Line } from '@remixicon/vue'
 import AdminBreadcrumb from '~/components/Breadcrumbs/AdminBreadcrumb.vue'
 import BreadcrumbItem from '~/components/Breadcrumbs/BreadcrumbItem.vue'
-import QualityScoreTooltipContent from '~/components/dataset/QualityScore/QualityScoreTooltipContent/QualityScoreTooltipContent.vue'
 import TabLinks from '~/components/TabLinks.vue'
 
 const { t } = useI18n()
