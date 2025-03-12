@@ -287,6 +287,7 @@ const props = defineProps<{
 }>()
 
 const me = useMe()
+
 const config = useNuxtApp().$config
 const { toast } = useToast()
 const { t } = useI18n()
@@ -329,7 +330,7 @@ async function updateUser() {
     }
   }
   try {
-    await $api(`/api/1/users/${props.user.id}`, {
+    await $api(me.value.id === props.user.id ? `/api/1/users/me` : `/api/1/users/${props.user.id}`, {
       method: 'PUT',
       body: {
         first_name: form.value.first_name,
