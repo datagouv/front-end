@@ -4,7 +4,7 @@
       v-if="datasetForm"
       v-model="datasetForm"
       type="update"
-      :is-harvested="harvested"
+      :harvested
       :submit-label="t('Save')"
       @submit="save"
     >

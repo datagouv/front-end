@@ -184,9 +184,7 @@ function getRole(role: string) {
 }
 
 const contactsWithNewOption = computed<Array<ContactPointInForm>>(() => {
-  return [
-    ...contacts.value?.data.filter(c => c.role === 'contact') || [],
-    newContactForm.value,
-  ]
+  const attributions = [...contacts.value?.data ?? [], newContactForm.value]
+  return props.showAttributions ? attributions : attributions.filter(c => c.role === 'contact')
 })
 </script>
