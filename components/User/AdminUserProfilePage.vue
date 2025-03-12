@@ -329,7 +329,7 @@ async function updateUser() {
     }
   }
   try {
-    await $api(`/api/1/users/${props.user.id}`, {
+    await $api(me.value.id === props.user.id ? `/api/1/me` : `/api/1/users/${props.user.id}`, {
       method: 'PUT',
       body: {
         first_name: form.value.first_name,
