@@ -287,7 +287,6 @@ const props = defineProps<{
 }>()
 
 const me = useMe()
-
 const config = useNuxtApp().$config
 const { toast } = useToast()
 const { t } = useI18n()
