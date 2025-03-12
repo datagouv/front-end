@@ -4,49 +4,49 @@
   </h5>
   <ul class="list-none pl-0">
     <DatasetQualityItem
-      :passed="dataset.quality.dataset_description_quality"
+      :passed="quality.dataset_description_quality"
       :message-passed="t('Data description filled')"
       :message-failed="t('Data description empty')"
       class="fr-my-1w"
     />
     <DatasetQualityItem
-      :passed="dataset.quality.resources_documentation"
+      :passed="quality.resources_documentation"
       :message-passed="t('Files documented')"
       :message-failed="t('Files documentation missing')"
       class="fr-my-1w"
     />
     <DatasetQualityItem
-      :passed="dataset.quality.license"
+      :passed="quality.license"
       :message-passed="t('License filled')"
       :message-failed="t('No license set')"
       class="fr-my-1w"
     />
     <DatasetQualityItem
-      :passed="dataset.quality.update_frequency && !!dataset.quality.update_fulfilled_in_time"
+      :passed="quality.update_frequency && !!quality.update_fulfilled_in_time"
       :message-passed="t('Update frequency followed')"
-      :message-failed="dataset.quality.update_frequency ? t('Update frequency not followed') : t('Update frequency not set')"
+      :message-failed="quality.update_frequency ? t('Update frequency not followed') : t('Update frequency not set')"
       class="fr-my-1w"
     />
     <DatasetQualityItem
-      :passed="dataset.quality.has_open_format"
+      :passed="quality.has_open_format"
       :message-passed="t('File formats are open')"
       :message-failed="t('File formats are closed')"
       class="fr-my-1w"
     />
     <DatasetQualityItem
-      :passed="dataset.quality.temporal_coverage"
+      :passed="quality.temporal_coverage"
       :message-passed="t('Temporal coverage filled')"
       :message-failed="t('Temporal coverage not set')"
       class="fr-my-1w"
     />
     <DatasetQualityItem
-      :passed="dataset.quality.spatial"
+      :passed="quality.spatial"
       :message-passed="t('Spatial coverage filled')"
       :message-failed="t('Spatial coverage not set')"
       class="fr-my-1w"
     />
     <DatasetQualityItem
-      :passed="dataset.quality.all_resources_available"
+      :passed="quality.all_resources_available"
       :message-passed="t('All files are available')"
       :message-failed="t('Some files are unavailable')"
       class="fr-my-1w"
@@ -54,7 +54,7 @@
   </ul>
   <div class="fr-grid-row fr-grid-row--right not-enlarged">
     <a
-      :href="'TODO'"
+      :href="config.datasetQualityGuideUrl"
       target="_blank"
       rel="noopener"
       :title="t('Learn more about this indicator - opens a new window')"
@@ -65,12 +65,12 @@
 </template>
 
 <script setup lang="ts">
-import type { Dataset, DatasetV2 } from '@datagouv/components-next'
-import { DatasetQualityItem } from '@datagouv/components-next'
 import { useI18n } from 'vue-i18n'
+import type { Quality } from '../types/datasets'
+import DatasetQualityItem from './DatasetQualityItem.vue'
 
 defineProps<{
-  dataset: Dataset | DatasetV2
+  quality: Quality
 }>()
 
 const { t } = useI18n()

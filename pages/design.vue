@@ -82,7 +82,7 @@
 
       <SearchInput />
       <div class="bg-white py-4 px-4 -mx-4">
-        <NuxtSearchPage />
+        <DatasetSearchPage />
       </div>
     </div>
     <div class="space-y-8 py-8 pb-64">
@@ -93,7 +93,7 @@
       <SimpleBanner
         v-for="type in ['primary', 'warning']"
         :key="type"
-        :type
+        :type="(type as 'primary' | 'warning')"
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit vel corporis molestias exercitationem quod ad facilis laborum officiis nesciunt, rem, deserunt illo delectus tempore distinctio natus sed architecto, reiciendis consectetur.
       </SimpleBanner>
@@ -111,7 +111,7 @@
 
 <script setup lang="ts">
 import { DatasetCard, DatasetQuality, ReadMore, ResourceAccordion, SimpleBanner, type Dataset } from '@datagouv/components-next'
-import NuxtSearchPage from '~/components/Search/NuxtSearchPage.vue'
+import DatasetSearchPage from '~/components/Datasets/SearchPage.vue'
 import AdminBadge from '~/design-system/AdminBadge.vue'
 import BannerAction from '~/design-system/BannerAction.vue'
 import BannerNotif from '~/design-system/BannerNotif.vue'

@@ -3,6 +3,7 @@
     <DescribeDataservice
       v-if="dataserviceForm"
       v-model="dataserviceForm"
+      :harvested="harvested"
       type="update"
       @submit="save"
     >
@@ -96,7 +97,7 @@ const loading = ref(false)
 const localePath = useLocalePath()
 
 const url = computed(() => `/api/1/dataservices/${route.params.id}`)
-const { data: dataservice, refresh } = await useAPI<Dataservice>(url, { lazy: true })
+const { data: dataservice, refresh } = await useAPI<Dataservice>(url)
 const dataserviceSubject = computed<Dataservice & LinkToSubject>(() => {
   return {
     ...dataservice.value,
@@ -104,8 +105,10 @@ const dataserviceSubject = computed<Dataservice & LinkToSubject>(() => {
   }
 })
 const dataserviceForm = ref<DataserviceForm | null>(null)
+const harvested = ref(false)
 watchEffect(() => {
   dataserviceForm.value = toForm(dataservice.value)
+  harvested.value = isHarvested(dataservice.value)
 })
 
 async function save() {

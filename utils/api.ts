@@ -1,5 +1,5 @@
 import type { Organization, User } from '@datagouv/components-next'
-import type { UseFetchOptions } from 'nuxt/app'
+import type { NuxtApp, UseFetchOptions } from 'nuxt/app'
 /*
   Example : const { data: datasets } = await useAPI<PaginatedArray<Dataset>>('/api/1/datasets')
 */
@@ -42,4 +42,8 @@ export function useAPI<T, U = T>(
 export function getUserBasedKey(route: string) {
   const me = useMaybeMe()
   return `${me.value ? me.value.id : 'guest'}-${route}`
+}
+
+export function getDataFromSSRPayload(key: string, nuxtApp: NuxtApp) {
+  return nuxtApp.payload.data[key] ? nuxtApp.payload.data[key] : undefined
 }

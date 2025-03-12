@@ -1,4 +1,4 @@
-import { inject, type App, type Component, type InjectionKey, type Plugin } from 'vue'
+import type { App, Plugin } from 'vue'
 import type { Badge, Badges } from './types/badges'
 import type { Dataset, DatasetV2, NewDataset, Quality, Rel } from './types/datasets'
 import type { NewDataservice, Dataservice } from './types/dataservices'
@@ -21,8 +21,11 @@ import DataserviceCard from './components/DataserviceCard.vue'
 import DatasetCard from './components/DatasetCard.vue'
 import DatasetInformationPanel from './components/DatasetInformationPanel.vue'
 import DatasetQuality from './components/DatasetQuality.vue'
+import DatasetQualityInline from './components/DatasetQualityInline.vue'
 import DatasetQualityItem from './components/DatasetQualityItem.vue'
 import DatasetQualityScore from './components/DatasetQualityScore.vue'
+import DatasetQualityTooltipContent from './components/DatasetQualityTooltipContent.vue'
+import OrganizationCard from './components/OrganizationCard.vue'
 import OrganizationNameWithCertificate from './components/OrganizationNameWithCertificate.vue'
 import OwnerType from './components/OwnerType.vue'
 import OwnerTypeIcon from './components/OwnerTypeIcon.vue'
@@ -34,7 +37,8 @@ import ResourceIcon from './components/ResourceAccordion/ResourceIcon.vue'
 import ReuseCard from './components/ReuseCard.vue'
 import SimpleBanner from './components/SimpleBanner.vue'
 import StatBox from './components/StatBox.vue'
-import type { UseFetchFunction } from './functions/api'
+import type { UseFetchFunction } from './functions/api.types'
+import { configKey, useComponentsConfig, type PluginConfig } from './config.js'
 
 export * from './functions/dates'
 export * from './functions/organizations'
@@ -83,31 +87,6 @@ export type {
   WellType,
 }
 
-export type PluginConfig = {
-  name: string // Name of the application (ex: data.gouv.fr)
-  baseUrl: string
-  apiBase: string
-  devApiKey?: string | null
-  staticUrl: string
-  datasetQualityGuideUrl?: string
-  schemaValidataUrl: string
-  schemaDocumentationUrl: string
-  tabularApiUrl?: string
-  tabularApiPageSize?: number
-  tabularAllowRemote?: boolean
-  tabularApiDataserviceId?: string
-  customUseFetch?: UseFetchFunction | null
-  textClamp?: string | Component | null
-  appLink?: Component | null
-  i18n?: {
-    global: {
-      mergeLocaleMessage: (locale: string, messages: unknown) => void
-    }
-  }
-}
-
-export const configKey = Symbol() as InjectionKey<PluginConfig>
-
 // Vue Plugin
 const datagouv: Plugin<PluginConfig> = {
   async install(app: App, options) {
@@ -128,14 +107,9 @@ const datagouv: Plugin<PluginConfig> = {
   },
 }
 
-export function useComponentsConfig(): PluginConfig {
-  const config = inject(configKey)
-  if (!config) throw new Error('Calling `useComponentsConfig` outside @datagouv/components')
-  return config
-}
-
 export {
   datagouv,
+  useComponentsConfig,
   Avatar,
   AvatarWithName,
   BrandedButton,
@@ -144,8 +118,11 @@ export {
   DatasetCard,
   DatasetInformationPanel,
   DatasetQuality,
+  DatasetQualityInline,
   DatasetQualityItem,
   DatasetQualityScore,
+  DatasetQualityTooltipContent,
+  OrganizationCard,
   OrganizationNameWithCertificate,
   OwnerType,
   OwnerTypeIcon,

@@ -94,7 +94,7 @@ export function minLength<T extends string | undefined>(min: number, message: st
   }
 }
 
-export function url<T extends string | undefined>(message: string | null = null): ValidationFunction<T> {
+export function url<T extends string | undefined | null>(message: string | null = null): ValidationFunction<T> {
   return (value: T, key: string, t) => {
     if (!value) return null
     try {

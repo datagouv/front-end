@@ -29,7 +29,7 @@ export type AccordionState = DSFRFormDefaultState | AccordionFunctionalState | D
 
 export type AdminBadgeState = DSFRFormDefaultState | FormFunctionalState | DSFRInfoState
 
-export type AdminBadgeType = 'primary' | 'secondary' | 'warning' | 'danger' | 'success'
+export type AdminBadgeType = 'primary' | 'secondary' | 'warning' | 'danger' | 'success' | 'default'
 
 export type PaginatedArray<T> = {
   data: Array<T>
@@ -192,12 +192,12 @@ export type DataserviceForm = {
   acronym: string
   description: string
   contact_points: Array<NewContactPoint | ContactPoint | null>
-  is_restricted: boolean
-  has_token: boolean
   base_api_url: string
   authorization_request_url: string
-  endpoint_description_url: string
-  business_documentation_url: string
+  machine_documentation_url: string | null
+  technical_documentation_url: string | null
+  business_documentation_url: string | null
+  access_type: 'open' | 'restricted' | 'open_with_account'
   rate_limiting: string
   availability: string
   private: boolean
@@ -213,11 +213,11 @@ export type NewDataserviceForApi = {
   description: string
   datasets?: Array<string>
   contact_points?: Array<string> | null
-  is_restricted: boolean
-  has_token: boolean
+  access_type: 'open' | 'open_with_account' | 'restricted'
   base_api_url: string | null
   authorization_request_url: string | null
-  endpoint_description_url: string | null
+  machine_documentation_url: string | null
+  technical_documentation_url: string | null
   business_documentation_url: string | null
   rate_limiting: string
   availability: number | null

@@ -2,6 +2,13 @@ import type { Organization } from '@datagouv/components-next'
 import type { $Fetch } from 'ofetch'
 import type { ContactPoint, NewContactPoint } from '~/types/types'
 
+export const defaultContactForm = {
+  name: '',
+  email: '',
+  contact_form: '',
+  role: 'contact',
+}
+
 export type ContactType = { id: string, label: string }
 
 export async function newContactPoint(api: $Fetch, organization: Organization, contactPoint: NewContactPoint): Promise<ContactPoint> {

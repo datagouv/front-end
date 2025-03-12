@@ -104,27 +104,29 @@
           :for="apiKeyId"
         >
           {{ $t('API Key') }}
-          <span class="fr-hint-text">
+          <span class="fr-hint-text" v-if="user.apikey">
             {{ $t('Warning: If you erase your API key you risk to loose acces to {site} services', { site: config.public.title }) }}
           </span>
         </label>
         <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
           <div class="fr-col-12 fr-col-sm">
-            <div class="fr-input-wrap relative">
+            <div class="relative">
               <input
                 :id="apiKeyId"
+                type="password"
                 v-model="user.apikey"
-                class="fr-input !pr-12"
+                class="fr-input !pr-8"
                 disabled
-                type="text"
               >
-              <CopyButton
-                v-if="user.apikey"
-                class="absolute right-1 top-1 !mt-0.5 !mr-0.5"
-                :label="$t('Copy API key')"
-                :copied-label="$t('API key copied')"
-                :text="user.apikey"
-              />
+              <div class="absolute right-1 top-1 !mt-0.5 !mr-0.5">
+                <CopyButton
+                  v-if="user.apikey"
+                  :label="$t('Copy API key')"
+                  :copied-label="$t('API key copied')"
+                  :text="user.apikey"
+                  reverse
+                />
+              </div>
             </div>
           </div>
           <div class="fr-col-auto flex gap-4">
@@ -136,10 +138,11 @@
                 :icon="RiRecycleLine"
                 @click="regenerateApiKey"
               >
-                {{ $t('Regenerate') }}
+                <span v-if="user.apikey">{{ $t('Regenerate') }}</span>
+                <span v-else>{{ $t('Generate') }}</span>
               </BrandedButton>
             </div>
-            <div class="flex-none">
+            <div class="flex-none" v-if="user.apikey">
               <BrandedButton
                 color="danger"
                 size="xs"

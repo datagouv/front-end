@@ -124,18 +124,20 @@ function getStatus(dataservice: Dataservice): { label: string, type: AdminBadgeT
   }
 }
 
-function getAccess(dataservice: Dataservice): { label: string, type: AdminBadgeType } {
-  if (dataservice.is_restricted) {
-    return {
-      label: t('Restricted'),
-      type: 'warning',
-    }
-  }
-  else {
-    return {
+function getAccess(dataservice: Dataservice): { label: string, type: AdminBadgeType } | null {
+  return {
+    open: {
       label: t('Open'),
-      type: 'success',
-    }
-  }
+      type: 'success' as AdminBadgeType,
+    },
+    open_with_account: {
+      label: t('Open with account'),
+      type: 'warning' as AdminBadgeType,
+    },
+    restricted: {
+      label: t('Restricted'),
+      type: 'warning' as AdminBadgeType,
+    },
+  }[dataservice.access_type]
 }
 </script>

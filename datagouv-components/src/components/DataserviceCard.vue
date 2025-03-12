@@ -3,14 +3,15 @@
     class="my-4 p-4 border border-gray-default fr-enlarge-link"
     :class="{
       'border-tabular-api': isTabularApi,
+      'mt-6': showBadge,
     }"
   >
     <div
-      v-if="dataservice.is_restricted || dataservice.private || dataservice.archived_at"
+      v-if="showBadge"
       class="absolute top-0 fr-grid-row fr-grid-row--middle fr-mt-n3v fr-ml-n1v"
     >
       <p
-        v-if="dataservice.is_restricted"
+        v-if="dataservice.access_type === 'restricted'"
         class="fr-badge fr-badge--sm fr-badge--mention-grey text-gray-medium mr-2"
       >
         <span
@@ -102,7 +103,7 @@
         :text="ownerName"
         :max-lines="1"
       />
-      <span class="dash-before whitespace-nowrap">{{ t('Updated {date}', { date: formatRelativeIfRecentDate(dataservice.metadata_modified_at) }) }}</span>
+      <span class="dash-before whitespace-nowrap">{{ t('Updated {date}', { date: formatRelativeIfRecentDate(dataservice.metadata_modified_at, { dateStyle: 'medium' }) }) }}</span>
     </p>
     <p class="text-sm text-gray-medium mb-0 mt-1">
       <span class="fr-icon-information-line fr-icon--sm text-gray-medium" />
@@ -121,7 +122,7 @@
       v-if="config.textClamp && description && showDescription"
       class="fr-text--sm fr-mt-1w fr-mb-0 overflow-wrap-anywhere"
       :auto-resize="true"
-      :text="removeMarkdown(dataservice.description)"
+      :text="description"
       :max-lines="2"
     />
   </article>
@@ -131,7 +132,11 @@
 import { computed, ref, watchEffect } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { RouteLocationRaw } from 'vue-router'
-import { getOwnerName, removeMarkdown, formatRelativeIfRecentDate, type Dataservice, useComponentsConfig } from '../main'
+import { useComponentsConfig } from '../config'
+import { formatRelativeIfRecentDate } from '../functions/dates'
+import { removeMarkdown } from '../functions/markdown'
+import { getOwnerName } from '../functions/owned'
+import type { Dataservice } from '../types/dataservices'
 import OrganizationNameWithCertificate from './OrganizationNameWithCertificate.vue'
 import AppLink from './AppLink.vue'
 
@@ -159,6 +164,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const { t } = useI18n()
 const ownerName = computed(() => getOwnerName(props.dataservice))
+const showBadge = computed(() => props.dataservice.access_type === 'restricted' || props.dataservice.private || props.dataservice.archived_at)
 
 const config = useComponentsConfig()
 const isTabularApi = computed(() => {

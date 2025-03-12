@@ -22,11 +22,13 @@
         ref="floating"
         role="tooltip"
         aria-hidden="true"
-        class="drop-shadow bg-white p-2 z-10 mt-2 whitespace-nowrap"
+        class="z-10 pt-2"
         :class="tooltipClass"
         :style="floatingStyles"
       >
-        <slot name="tooltip" />
+        <div class="drop-shadow bg-white p-2 whitespace-nowrap">
+          <slot name="tooltip" />
+        </div>
       </div>
     </ClientOnly>
   </div>
