@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 defineProps<{
-  passed: boolean
+  passed: boolean | null
   messagePassed: string
   messageFailed: string
 }>()

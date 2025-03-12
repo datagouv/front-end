@@ -68,10 +68,12 @@
 import { useI18n } from 'vue-i18n'
 import type { Quality } from '../types/datasets'
 import DatasetQualityItem from './DatasetQualityItem.vue'
+import { useComponentsConfig } from '../config';
 
 defineProps<{
   quality: Quality
 }>()
 
 const { t } = useI18n()
+const config = useComponentsConfig()
 </script>
