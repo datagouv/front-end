@@ -79,7 +79,7 @@
       </div>
       <ul
         v-if="reuse.private || reuse.archived"
-        class="fr-badges-group"
+        class="list-none m-0 p-0 mt-4 px-4 -mb-2"
       >
         <li v-if="reuse.private">
           <p class="fr-badge fr-badge--sm fr-badge--mention-grey text-gray-medium">
