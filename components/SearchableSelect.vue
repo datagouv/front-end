@@ -123,7 +123,7 @@
                     name="option"
                     v-bind="{ option, active: isActive(activeOption, option) as boolean }"
                   >
-                    {{ displayValue(option) }}
+                    {{ displayValue(multiple ? [option] : option) }}
                   </slot>
                 </li>
               </ComboboxOption>
