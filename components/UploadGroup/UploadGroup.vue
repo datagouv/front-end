@@ -30,7 +30,6 @@
         :aria-describedby="ariaDescribedBy"
         :accept="accept"
         :multiple="multiple"
-        :required="required"
         :disabled="disabled"
         @change="change"
       >
