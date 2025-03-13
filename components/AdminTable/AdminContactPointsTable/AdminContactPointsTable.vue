@@ -59,11 +59,12 @@
                 :icon="RiPencilLine"
                 icon-only
                 size="xs"
+                :title="$t('Edit')"
                 keep-margins-even-without-borders
                 v-bind="attrs"
                 v-on="listeners"
               >
-                {{ $t('Transfer') }}
+                {{ $t('Edit') }}
               </BrandedButton>
             </template>
             <div class="space-y-4">
