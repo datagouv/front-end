@@ -16,6 +16,20 @@
       />
     </div>
   </LoadingBlock>
+  <div
+    v-if="status != 'pending' && pageData && !pageData.total"
+    class="flex flex-col items-center"
+  >
+    <nuxt-img
+      src="/illustrations/people.svg"
+      class="h-40"
+    />
+    <p class="font-bold my-3 text-center">
+      {{ t(`You haven't made a contact point yet.`) }}
+      <br>
+      {{ t('You can do so while editing a dataservice or a dataset.') }}
+    </p>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -26,6 +40,8 @@ import type { ContactPoint, PaginatedArray, SortDirection } from '~/types/types'
 const props = defineProps<{
   organization: Organization
 }>()
+
+const { t } = useI18n()
 
 const page = ref(1)
 const pageSize = ref(20)
