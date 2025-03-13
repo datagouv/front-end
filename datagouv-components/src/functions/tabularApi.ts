@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useComponentsConfig, type PluginConfig } from '../main'
+import { useComponentsConfig, type PluginConfig } from '../config'
 
 export type SortConfig = {
   column: string

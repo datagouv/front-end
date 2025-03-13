@@ -4,6 +4,7 @@
       v-if="datasetForm"
       v-model="datasetForm"
       type="update"
+      :harvested
       :submit-label="t('Save')"
       @submit="save"
     >
@@ -112,11 +113,13 @@ const licenses = computed(() => {
 const { data: granularities } = await useAPI<Array<SpatialGranularity>>('/api/1/spatial/granularities/', { lazy: true })
 
 const url = computed(() => `/api/1/datasets/${route.params.id}`)
-const { data: dataset, refresh } = await useAPI<Dataset>(url, { lazy: true })
+const { data: dataset, refresh } = await useAPI<Dataset>(url)
 const datasetForm = ref<DatasetForm | null>(null)
+const harvested = ref(false)
 watchEffect(() => {
   if (dataset.value && licenses.value && frequencies.value && granularities.value) {
     datasetForm.value = toForm(dataset.value, licenses.value, frequencies.value, [], granularities.value)
+    harvested.value = isHarvested(dataset.value)
   }
 })
 

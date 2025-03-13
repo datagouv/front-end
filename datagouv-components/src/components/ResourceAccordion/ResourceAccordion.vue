@@ -244,7 +244,7 @@
                     </a>
                   </span>
                   <span v-else>
-                    <span class="text-blue-400 fr-icon-download-line fr-icon--sm fr-mr-1v fr-mt-1v" />
+                    <span class="text-datagouv fr-icon-download-line fr-icon--sm fr-mr-1v fr-mt-1v" />
                     <a
                       :href="resource.latest"
                       class="fr-link"
@@ -266,7 +266,7 @@
                   </dt>
                   <dd class="text-sm ml-0 mt-0 mb-4 text-gray-medium h-8 flex flex-wrap items-center">
                     <span>
-                      <span class="text-blue-400 fr-icon-download-line fr-icon--sm fr-mr-1v fr-mt-1v" />
+                      <span class="text-datagouv fr-icon-download-line fr-icon--sm fr-mr-1v fr-mt-1v" />
                       <a
                         :href="resource.extras['analysis:parsing:parquet_url']"
                         class="fr-link"
@@ -319,7 +319,8 @@ import TabPanels from '../Tabs/TabPanels.vue'
 import TabPanel from '../Tabs/TabPanel.vue'
 import { trackEvent } from '../../functions/matomo'
 import CopyButton from '../CopyButton.vue'
-import { getOwnerName, useComponentsConfig } from '../../main'
+import { useComponentsConfig } from '../../config'
+import { getOwnerName } from '../../functions/owned'
 import { getResourceFormatIcon, getResourceTitleId } from '../../functions/resources'
 import BrandedButton from '../BrandedButton.vue'
 import Metadata from './Metadata.vue'

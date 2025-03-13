@@ -186,8 +186,8 @@
                 </li>
                 <li>
                   <a
-                    href="https://github.com/datagouv/front-end/"
-                    :title="$t('data.gouv.fr extension: front-end')"
+                    href="https://github.com/datagouv/cdata/"
+                    :title="$t('data.gouv.fr extension: cdata')"
                     class="fr-footer__top-link"
                   >
                     {{ $t('data.gouv.fr front-end') }}

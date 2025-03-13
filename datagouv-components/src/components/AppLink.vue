@@ -23,7 +23,7 @@ import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import type { RouteLocationRaw } from 'vue-router'
-import { useComponentsConfig } from '../main'
+import { useComponentsConfig } from '../config'
 
 const config = useComponentsConfig()
 const { locale } = useI18n()

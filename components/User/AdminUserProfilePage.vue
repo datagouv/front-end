@@ -85,6 +85,17 @@
           alt=""
         />
       </div>
+      <SearchableSelect
+        class="fr-input-group"
+        v-if="isGlobalAdmin"
+        v-model="form.roles"
+        :label="$t('Roles')"
+        :options="allRolesAsString"
+        :placeholder="t('Select a role')"
+        :display-value="(option) => humanJoin(option)"
+        :get-option-id="(option) => option"
+        :multiple="true"
+      />
       <div class="flex justify-end">
         <BrandedButton
           size="xs"
@@ -281,6 +292,7 @@ import { RiDeleteBin6Line, RiEditLine, RiEyeLine, RiRecycleLine, RiSaveLine } fr
 import AdminBreadcrumb from '../Breadcrumbs/AdminBreadcrumb.vue'
 import BreadcrumbItem from '../Breadcrumbs/BreadcrumbItem.vue'
 import { uploadProfilePicture } from '~/api/users'
+import SearchableSelect from '../SearchableSelect.vue'
 
 const props = defineProps<{
   user: User
@@ -299,6 +311,11 @@ const passwordId = useId()
 const loading = ref(false)
 
 const profilePicture = ref<File | null>(null)
+
+const isGlobalAdmin = computed(() => isAdmin(me.value))
+
+const { data: allRoles } = await useAPI<Array<{ name: string }>>('/api/1/users/roles')
+const allRolesAsString = computed(() => (allRoles.value || []).map(r => r.name))
 
 const { form } = useForm(props.user, {}, {})
 watchEffect(() => {
@@ -329,13 +346,14 @@ async function updateUser() {
     }
   }
   try {
-    await $api(`/api/1/users/${props.user.id}`, {
+    await $api(me.value.id === props.user.id ? `/api/1/me` : `/api/1/users/${props.user.id}`, {
       method: 'PUT',
       body: {
         first_name: form.value.first_name,
         last_name: form.value.last_name,
         about: form.value.about,
         website: form.value.website,
+        roles: isGlobalAdmin.value ? form.value.roles : props.user.roles,
       },
     })
     toast.success(t('Profile updated !'))

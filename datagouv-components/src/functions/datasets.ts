@@ -1,4 +1,4 @@
-import { useComponentsConfig } from '../main'
+import { useComponentsConfig } from '../config'
 
 function constructUrl(baseUrl: string, path: string): string {
   const url = new URL(baseUrl)
