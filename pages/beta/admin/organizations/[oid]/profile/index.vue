@@ -72,7 +72,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { RiDeleteBin6Line } from '@remixicon/vue'
-import type { NewOrganization, Organization, BrandedButton, type Badge } from '@datagouv/components-next'
+import type { NewOrganization, Organization, BrandedButton, Badge } from '@datagouv/components-next'
 import AdminLoader from '~/components/AdminLoader/AdminLoader.vue'
 import DescribeOrganizationFrom from '~/components/Organization/New/Step2DescribeOrganization.vue'
 import { updateOrganization, updateOrganizationBadges, uploadLogo } from '~/api/organizations'
