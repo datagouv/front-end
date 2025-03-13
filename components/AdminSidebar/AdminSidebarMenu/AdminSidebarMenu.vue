@@ -199,6 +199,7 @@ const me = useMe()
 const id = useId()
 const { isOpen, open, toggle, unregister } = inject(key) as AccordionRegister
 const { currentUser, currentOrganization } = useCurrentOwned()
+const route = useRoute()
 
 watchEffect(() => {
   if (currentUser.value && props.user && currentUser.value.id === props.user.id) {
@@ -206,6 +207,10 @@ watchEffect(() => {
   }
 
   if (currentOrganization.value && props.organization && currentOrganization.value.id === props.organization.id) {
+    open(id)
+  }
+
+  if (! props.organization && ! props.user && route.name && route.name.toString().startsWith('beta-admin-site')) {
     open(id)
   }
 })
