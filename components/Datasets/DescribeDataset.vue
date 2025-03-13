@@ -350,11 +350,14 @@
               v-model="form.contact_points[index]"
               class="pt-3"
               :organization="form.owned?.organization"
+              :show-attributions="harvested"
             />
             <ContactPointSelect
               v-if="form.contact_points.length === 0"
               v-model="form.contact_points[0]"
+              class="pt-3"
               :organization="form.owned?.organization"
+              :show-attributions="harvested"
             />
             <BrandedButton
               class="mt-3"

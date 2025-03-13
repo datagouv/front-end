@@ -354,11 +354,14 @@
               v-model="form.contact_points[index]"
               class="pt-3"
               :organization="form.owned?.organization"
+              :show-attributions="harvested"
             />
             <ContactPointSelect
               v-if="form.contact_points.length === 0"
               v-model="form.contact_points[0]"
+              class="pt-3"
               :organization="form.owned?.organization"
+              :show-attributions="harvested"
             />
             <BrandedButton
               class="mt-3"
@@ -469,7 +472,7 @@
 </template>
 
 <script setup lang="ts">
-import { SimpleBanner } from '@datagouv/components-next'
+import { BrandedButton, SimpleBanner } from '@datagouv/components-next'
 import { RiAddLine } from '@remixicon/vue'
 import { computed } from 'vue'
 import Accordion from '~/components/Accordion/Accordion.vue'
